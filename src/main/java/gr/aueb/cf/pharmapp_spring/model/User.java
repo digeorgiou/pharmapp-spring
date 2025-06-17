@@ -137,7 +137,4 @@ public class User extends AbstractEntity implements UserDetails {
         contacts.remove(contact);
         contact.setUser(null);
     }
-
-
-
 }

@@ -1,0 +1,271 @@
+/* General Styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar Styles - Matching Dashboard */
+        .navbar {
+            background-color: #b9dae1 !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar-text {
+            color: #343a40;
+            font-weight: 500;
+        }
+
+        /* Main Content Container */
+        .container {
+            flex: 1;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        /* Card Styles - Matching Dashboard */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            color: #343a40;
+            font-weight: 600;
+        }
+
+        /* Form Styles */
+        .form-control {
+            border-radius: 5px;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #b9dae1;
+            box-shadow: 0 0 0 0.25rem rgba(185, 218, 225, 0.25);
+        }
+
+        .input-group-text {
+            background-color: #e9ecef;
+            border-color: #ced4da;
+        }
+
+        /* Button Styles - Matching Dashboard */
+        .btn {
+            border-radius: 5px;
+            padding: 0.5rem 1.25rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+
+        .btn-outline-secondary {
+            color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Alert Styles */
+        .alert {
+            border-radius: 5px;
+            padding: 1rem;
+        }
+
+        .alert-success {
+            background-color: #d1e7dd;
+            border-color: #badbcc;
+            color: #0f5132;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c2c7;
+            color: #842029;
+        }
+
+        /* Validation Error Styles */
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 0.875rem;
+        }
+
+        .is-invalid {
+            border-color: #dc3545;
+        }
+
+        .is-invalid:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+
+        /* Footer Styles - Matching Dashboard */
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .navbar-text {
+                font-size: 1rem;
+            }
+
+            .card {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Animation for form elements */
+        .form-group {
+            transition: all 0.3s ease;
+        }
+
+        /* Icon styles - Matching Dashboard */
+        .bi {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        /* Custom styles for the add-pharmacy page */
+        .add-pharmacy-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Balance card styles - Matching Dashboard */
+        .balance-card {
+            background-color: #b9dae1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .balance-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .positive-balance {
+            color: #198754;
+        }
+
+        .negative-balance {
+            color: #dc3545;
+        }
+
+        /* Sidebar styles - Matching Dashboard */
+        .sidebar {
+            background-color: #e9ecef;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .sidebar .nav-link {
+            color: #495057;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #dee2e6;
+            color: #343a40;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #b9dae1;
+            color: #343a40;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 8px;
+        }
+
+        /* Main content area - Matching Dashboard */
+        .main-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .search-results {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-results .list-group-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .search-results .list-group-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-results .input-group {
+            flex-wrap: nowrap;
+        }
+
+        .search-results .btn-success {
+            white-space: nowrap;
+        }

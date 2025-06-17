@@ -15,6 +15,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,17 +43,19 @@ public class UserService implements IUserService{
 
         if(userRepository.existsByEmail(dto.getEmail())){
             throw new EntityAlreadyExistsException("User",
-                    "Email " + dto.getEmail() + " already exists");
+                    "Το email " + dto.getEmail() + " χρησιμοποιείται ήδη");
         }
 
         if(userRepository.existsByUsername(dto.getUsername())){
             throw new EntityAlreadyExistsException("User",
-                    "Username " + dto.getUsername() + " already exists");
+                    "Το όνομα χρήστη " + dto.getUsername() + " " +
+                            "χρησιμοποιείται ήδη");
         }
 
         User user = mapper.mapUserInsertToModel(dto);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setLastUpdater(user);
 
         User insertedUser = userRepository.save(user);
 
@@ -60,7 +65,7 @@ public class UserService implements IUserService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public UserReadOnlyDTO updateUser(UserUpdateDTO dto) throws EntityNotFoundException, EntityAlreadyExistsException {
 
         User existingUser = userRepository.findById(dto.getId()).orElseThrow(()-> new EntityNotFoundException("User",
@@ -89,7 +94,7 @@ public class UserService implements IUserService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public void deleteUser(Long userId, Long deleterUserId) throws EntityNotFoundException, EntityNotAuthorizedException {
 
         User deleterUser = userRepository.findById(deleterUserId)
@@ -136,6 +141,16 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public Page<UserReadOnlyDTO> getAllUsersPaginated(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<User> userPage = userRepository.findAll(pageable);
+
+        return userPage.map(mapper::mapToUserReadOnlyDTO);
+    }
+
+    @Override
     @Transactional
     public UserReadOnlyDTO getUserByUsername(String username) throws EntityNotFoundException {
         User user = userRepository.findByUsername(username)
@@ -160,6 +175,21 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public Page<PharmacyReadOnlyDTO> getUserPharmaciesPaginated(Long userId, int page, int size) throws EntityNotFoundException{
+
+        User user = userRepository.findById(userId).orElseThrow
+                (() -> new EntityNotFoundException("User",
+                        "User with id " + userId + " not found"));
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Pharmacy> pharmacyPage = pharmacyRepository.findByUserId(userId,
+                pageable);
+
+        return pharmacyPage.map(mapper::mapToPharmacyReadOnlyDTO);
+    }
+
+    @Override
     @Transactional
     public List<ContactReadOnlyDTO> getUserContacts(Long userId) throws EntityNotFoundException {
 
@@ -175,6 +205,23 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public Page<ContactReadOnlyDTO> getUserContactsPaginated(Long userId,
+                                                             int page, int size) throws EntityNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow
+                (() -> new EntityNotFoundException("User",
+                        "User with id " + userId + " not found"));
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<PharmacyContact> contactPage =
+                contactRepository.findByUserId(userId,
+                pageable);
+
+        return contactPage.map(mapper::mapToPharmacyContactReadOnlyDTO);
+    }
+
+    @Override
     @Transactional
     public boolean usernameExists(String username) {
         return userRepository.existsByUsername(username);
@@ -185,4 +232,5 @@ public class UserService implements IUserService{
     public boolean emailExists(String email) {
         return userRepository.existsByEmail(email);
     }
+
 }

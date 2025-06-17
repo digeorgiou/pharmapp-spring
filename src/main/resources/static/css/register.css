@@ -1,0 +1,84 @@
+body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+.navbar {
+            background-color: #b9dae1 !important;
+        }
+
+.register-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 2rem;
+            background-color: #b9dae1;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+.register-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+.register-logo img {
+            height: 80px;
+        }
+
+.form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: auto;
+        }
+
+.auth-links {
+            font-size: 0.9rem;
+        }
+
+.error-message {
+            color: #dc3545;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+.password-strength {
+            height: 5px;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+.password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+.form-text {
+            font-size: 0.85rem;
+        }
+
+.password-match {
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+.valid-feedback, .invalid-feedback {
+            font-size: 0.85rem;
+        }
+
+.invalid-feedback.d-block {
+            display: block !important;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }

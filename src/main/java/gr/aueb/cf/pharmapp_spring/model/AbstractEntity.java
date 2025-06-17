@@ -1,9 +1,6 @@
 package gr.aueb.cf.pharmapp_spring.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +33,9 @@ public class AbstractEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @ManyToOne(fetch=FetchType.LAZY)
     @LastModifiedBy
+    @JoinColumn(name = "last_updater_id")
     private User lastUpdater;
 
     @Column(unique = true, updatable = false, nullable = false, length = 36)

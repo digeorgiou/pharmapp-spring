@@ -39,7 +39,7 @@ public class PharmacyContactService implements IPharmacyContactService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public ContactReadOnlyDTO createContact(ContactInsertDTO dto) throws EntityNotFoundException, EntityAlreadyExistsException {
 
         User user = userRepository.findById(dto.userId()).orElseThrow(()-> new EntityNotFoundException("User",
@@ -70,7 +70,7 @@ public class PharmacyContactService implements IPharmacyContactService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public ContactReadOnlyDTO updateContact(ContactUpdateDTO dto) throws EntityNotFoundException {
 
         PharmacyContact existingContact = contactRepository.findById(dto.id())
@@ -87,7 +87,7 @@ public class PharmacyContactService implements IPharmacyContactService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public void deleteContact(Long contactId) throws EntityNotFoundException {
 
         PharmacyContact contact = contactRepository.findById(contactId)

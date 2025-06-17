@@ -128,7 +128,10 @@ public class Mapper {
                 user.getDeletedAt(),
                 user.getCreatedAt(),
                 user.getUpdatedAt(),
-                user.getLastUpdater().getUsername()
+                user.getLastUpdater().getUsername(),
+                user.getAllPharmacies().stream()
+                        .map(this::mapToPharmacyReadOnlyDTO)
+                        .collect(Collectors.toSet())
         );
     }
 
@@ -137,7 +140,7 @@ public class Mapper {
                 .username(dto.getUsername())
                 .password(dto.getPassword())
                 .email(dto.getEmail())
-                .role(Role.valueOf(dto.getRole()))
+                .role(Role.USER)
                 .isActive(true)
                 .build();
     }
