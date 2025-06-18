@@ -46,30 +46,27 @@
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4">Add New Pharmacy</h3>
 
-                    <!-- Success/Error messages -->
+                    <!-- Success Message -->
                     <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
-                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                    <form th:action="@{/pharmacies/add}" method="POST"
+                          th:object="${pharmacyInsertDTO}">
 
-                    <form th:action="@{/add-pharmacy}" method="POST">
                         <!-- Pharmacy Name Field -->
                         <div class="mb-3">
                             <label for="name" class="form-label">Pharmacy Name</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-shop"></i></span>
-                                <input type="text" class="form-control" th:classappend="${nameMessage != null} ? 'is-invalid' : ''"
-                                       id="name" name="name" required
-                                       th:value="${name}">
+                                <input type="text" class="form-control"
+                                       th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'"
+                                       id="name" th:field="*{name}" required>
                             </div>
-                            <div th:if="${nameMessage}" class="invalid-feedback d-block">
+                            <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback d-block">
                                 <i class="bi bi-exclamation-circle-fill"></i>
-                                <small th:text="${nameMessage}"></small>
+                                <span th:each="error : ${#fields.errors('name')}" th:text="${error}"></span>
                             </div>
                         </div>
 

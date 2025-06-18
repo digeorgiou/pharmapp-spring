@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -24,6 +25,6 @@ public class UserReadOnlyDTO{
         LocalDateTime createdAt;
         LocalDateTime updatedAt;
         String lastUpdater;
-        Set<PharmacyReadOnlyDTO> pharmacies;
+        List<PharmacyReadOnlyDTO> pharmacies;
 
 }

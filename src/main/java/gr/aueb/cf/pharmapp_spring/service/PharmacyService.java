@@ -63,6 +63,8 @@ public class PharmacyService implements IPharmacyService{
 
         Pharmacy pharmacy = mapper.mapPharmacyInsertToModel(dto);
 
+        pharmacy.setLastUpdater(creator);
+
         creator.addPharmacy(pharmacy);
         userRepository.save(creator);
 
@@ -260,6 +262,8 @@ public class PharmacyService implements IPharmacyService{
                             contact.getContactName() : "Contact",
                     contactPharmacy.getName() != null ?
                             contactPharmacy.getName() : "Pharmacy",
+                    pharmacyId,
+                    contactPharmacy.getId(),
                     balance,
                     recentTrades,
                     tradeCount,
@@ -315,6 +319,8 @@ public class PharmacyService implements IPharmacyService{
                             contact.getContactName() : "Contact",
                     contactPharmacy.getName() != null ?
                             contactPharmacy.getName() : "Pharmacy",
+                    pharmacyId,
+                    contactPharmacy.getId(),
                     balance,
                     recentTrades,
                     tradeCount,
@@ -361,4 +367,12 @@ public class PharmacyService implements IPharmacyService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean isPharmacyOwnedByUser(Long pharmacyId, Long userId) throws EntityNotFoundException {
+
+        Pharmacy pharmacy = pharmacyRepository.findById(pharmacyId)
+                .orElseThrow(() -> new EntityNotFoundException("Pharmacy", pharmacyId + " not found"));
+
+        return pharmacy.getUser() != null && pharmacy.getUser().getId().equals(userId);
+    }
 }

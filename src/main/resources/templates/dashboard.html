@@ -44,13 +44,14 @@
                        th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
                        th:text="${pharmacy.name}"
                        class="list-group-item list-group-item-action"
-                       th:classappend="${param.pharmacyId != null and param.pharmacyId == pharmacy.id.toString()} ? 'active' : ''">
+                       th:classappend="${selectedPharmacy != null and selectedPharmacy.id == pharmacy.id} ?
+               'active list-group-item-primary' : ''">
                     </a>
                 </div>
                 <hr>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/add-contact}">
+                        <a class="nav-link" th:href="@{/contacts/add}">
                             <i class="bi bi-person-plus"></i> Add Contact
                         </a>
                     </li>
@@ -128,15 +129,15 @@
                             <div class="flex-grow-0">
                                 <h4 th:text="${balance.contactName != null} ? ${balance.contactName} : 'No contact name'"></h4>
                                 <small class="text-muted" th:text="${balance.pharmacyName != null} ? ${balance.pharmacyName} : 'Unknown pharmacy'"></small>
-                                <h4 th:class="${balance.amount < 0} ? 'text-success mt-1' : (${balance.amount > 0} ? 'text-danger mt-1' : 'mt-1')">
-                                        <span th:if="${balance.amount < 0}">
-                                            ΜΑΣ ΧΡΩΣΤΑΝΕ €<span th:text="${#numbers.formatDecimal(-balance.amount, 1, 2)}"></span>
+                                <h4 th:class="${balance.balance < 0} ? 'text-success mt-1' : (${balance.balance > 0} ? 'text-danger mt-1' : 'mt-1')">
+                                        <span th:if="${balance.balance < 0}">
+                                            ΜΑΣ ΧΡΩΣΤΑΝΕ €<span th:text="${#numbers.formatDecimal(-balance.balance, 1, 2)}"></span>
                                         </span>
-                                    <span th:if="${balance.amount > 0}">
-                                            ΧΡΩΣΤΑΜΕ €<span th:text="${#numbers.formatDecimal(balance.amount, 1, 2)}"></span>
+                                    <span th:if="${balance.balance > 0}">
+                                            ΧΡΩΣΤΑΜΕ €<span th:text="${#numbers.formatDecimal(balance.balance, 1, 2)}"></span>
                                         </span>
-                                    <span th:if="${balance.amount == 0}">
-                                            €<span th:text="${#numbers.formatDecimal(balance.amount, 1, 2)}"></span>
+                                    <span th:if="${balance.balance == 0}">
+                                            €<span th:text="${#numbers.formatDecimal(balance.balance, 1, 2)}"></span>
                                         </span>
                                 </h4>
                             </div>
@@ -146,13 +147,16 @@
                                 <h6 class="flex-grow-0">Πρόσφατες Συναλλαγές:</h6>
                                 <ul class="list-group list-group-flush flex-grow-1 overflow-auto">
                                     <li th:each="trade : ${balance.recentTrades}"
+                                        th:with="outgoing=${trade.giverName == selectedPharmacy.name}"
                                         class="list-group-item p-1"
-                                        th:classappend="${trade.outgoing} ? 'bg-light-red' : 'bg-light-green'">
+                                        th:classappend="${outgoing} ? 'bg-light-red' : 'bg-light-green'">
                                         <small>
-                                            <span th:text="${trade.formattedDate} + ' - ' + ${trade.description}"></span>
+                                            <span
+                                                    th:text="${trade.transactionDate} + ' - ' + ${trade.description}"></span>
                                             <span class="float-end">
-                                                    €<span th:text="${#numbers.formatDecimal(trade.amount, 1, 2)}"></span>
-                                                    <i th:class="${trade.outgoing} ? 'bi bi-arrow-up text-danger' : 'bi bi-arrow-down text-success'"></i>
+                                                    €<span
+                                                    th:text="${#numbers.formatDecimal(trade.amount, 1, 2)}"></span>
+                                                    <i th:class="${outgoing} ? 'bi bi-arrow-up text-danger' : 'bi bi-arrow-down text-success'"></i>
                                                 </span>
                                         </small>
                                     </li>
@@ -160,11 +164,13 @@
                             </div>
 
                             <div class="d-flex justify-content-between mt-3 pt-2 border-top flex-grow-0">
-                                <a th:href="@{/record-trade(giverId=${selectedPharmacy.id}, receiverId=${balance.pharmacyId})}"
+                                <a
+                                        th:href="@{/trades/record(giverId=${selectedPharmacy.id}, receiverId=${balance.contactPharmacyId})}"
                                    class="btn btn-sm btn-outline-primary">
                                     Record Trade
                                 </a>
-                                <a th:href="@{/view-trades(pharmacy1=${selectedPharmacy.id}, pharmacy2=${balance.pharmacyId})}"
+                                <a
+                                        th:href="@{/view-trades(pharmacy1=${selectedPharmacy.id}, pharmacy2=${balance.contactPharmacyId})}"
                                    class="btn btn-sm btn-outline-secondary">
                                     View History
                                 </a>

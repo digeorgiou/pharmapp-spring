@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -43,15 +45,37 @@ public class DashboardController {
             Authentication authentication) {
 
         try {
-            String username = authentication.getName();
-            UserReadOnlyDTO user = userService.getUserByUsername(username);
-            model.addAttribute("user", user);
-        }catch (EntityNotFoundException e){
-            model.addAttribute("error","User not found");
-        }
+            UserReadOnlyDTO user = userService.getUserByUsername(authentication.getName());
 
-        if (pharmacyId != null) {
-            try {
+            List<PharmacyReadOnlyDTO> sortedPharmacies = user.getPharmacies().stream()
+                            .sorted(Comparator.comparing(PharmacyReadOnlyDTO::name))
+                                    .collect(Collectors.toList());
+
+            user.setPharmacies(sortedPharmacies);
+
+            model.addAttribute("user", user);
+
+            // If no pharmacy selected and user has pharmacies, select first one
+            if (pharmacyId == null && !user.getPharmacies().isEmpty()) {
+                pharmacyId = user.getPharmacies().get(0).id();
+            }
+
+
+            // If a pharmacy is selected, verify the user owns it
+            if (pharmacyId != null) {
+                if (!pharmacyService.isPharmacyOwnedByUser(pharmacyId, user.getId())) {
+                    // If user doesn't own the pharmacy, reset to their first pharmacy
+                    if (!user.getPharmacies().isEmpty()) {
+                        pharmacyId = user.getPharmacies().get(0).id();
+                    } else {
+                        pharmacyId = null;
+                    }
+                }
+            }
+
+
+            if (pharmacyId != null) {
+
                 PharmacyReadOnlyDTO selectedPharmacy = pharmacyService.getById(pharmacyId);
                 model.addAttribute("selectedPharmacy", selectedPharmacy);
 
@@ -61,11 +85,15 @@ public class DashboardController {
 
                 model.addAttribute("balanceList", balanceList);
                 model.addAttribute("currentSort", sort);
-            } catch (EntityNotFoundException e) {
-                model.addAttribute("error", "Pharmacy not found");
+
             }
+
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("error", "User not found");
         }
 
+
         return "dashboard";
+
     }
 }

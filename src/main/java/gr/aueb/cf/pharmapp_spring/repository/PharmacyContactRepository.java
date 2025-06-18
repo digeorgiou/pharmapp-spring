@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PharmacyContactRepository extends JpaRepository<PharmacyContact, Long>,
@@ -20,4 +21,7 @@ public interface PharmacyContactRepository extends JpaRepository<PharmacyContact
 
     Page<PharmacyContact> findByUser(User user, Pageable pageable);
     Page<PharmacyContact> findByUserId(Long userId, Pageable pageable);
+
+    Optional<PharmacyContact> findByUserIdAndPharmacyId(Long userId, Long pharmacyId);
+
 }

@@ -7,6 +7,7 @@ import gr.aueb.cf.pharmapp_spring.dto.PharmacyReadOnlyDTO;
 import gr.aueb.cf.pharmapp_spring.dto.TradeRecordInsertDTO;
 import gr.aueb.cf.pharmapp_spring.dto.TradeRecordReadOnlyDTO;
 import gr.aueb.cf.pharmapp_spring.dto.UserReadOnlyDTO;
+import gr.aueb.cf.pharmapp_spring.service.PharmacyContactService;
 import gr.aueb.cf.pharmapp_spring.service.PharmacyService;
 import gr.aueb.cf.pharmapp_spring.service.TradeRecordService;
 import gr.aueb.cf.pharmapp_spring.service.UserService;
@@ -30,13 +31,15 @@ public class TradeController {
     private final TradeRecordService tradeRecordService;
     private final PharmacyService pharmacyService;
     private final UserService userService;
+    private final PharmacyContactService contactService;
 
     public TradeController(TradeRecordService tradeRecordService,
                            PharmacyService pharmacyService,
-                           UserService userService) {
+                           UserService userService, PharmacyContactService contactService) {
         this.tradeRecordService = tradeRecordService;
         this.pharmacyService = pharmacyService;
         this.userService = userService;
+        this.contactService = contactService;
     }
 
     @GetMapping("/record")
@@ -47,12 +50,31 @@ public class TradeController {
             Model model) {
 
         try {
+            UserReadOnlyDTO user =
+                    userService.getUserByUsername(authentication.getName());
+
             PharmacyReadOnlyDTO giverPharmacy = pharmacyService.getById(giverId);
             PharmacyReadOnlyDTO receiverPharmacy = pharmacyService.getById(receiverId);
 
+            String contactName;
+            try {
+                // Try to get the contact name if this is a contact
+                contactName = contactService.getContactName(user.getId(), receiverId);
+            } catch (EntityNotFoundException e) {
+                // Fall back to pharmacy name if no contact exists
+                contactName = receiverPharmacy.name();
+            }
+
             // Get contact names if available
-            String fromContactName = "Your Pharmacy"; // Default
-            String contactName = receiverPharmacy.name(); // Default
+            String fromContactName;
+            try {
+                // Try to get the contact name if this is a contact
+                fromContactName = contactService.getContactName(user.getId(),
+                        giverId);
+            } catch (EntityNotFoundException e) {
+                // Fall back to pharmacy name if no contact exists
+                fromContactName = giverPharmacy.name();
+            }
 
             model.addAttribute("giverPharmacy", giverPharmacy);
             model.addAttribute("receiverPharmacy", receiverPharmacy);
@@ -79,6 +101,9 @@ public class TradeController {
         try {
             UserReadOnlyDTO user = userService.getUserByUsername(username);
 
+            boolean isGiverOwner =
+                    pharmacyService.isPharmacyOwnedByUser(giverId, user.getId());
+
             TradeRecordInsertDTO dto = new TradeRecordInsertDTO(
                     description,
                     amount,
@@ -90,11 +115,14 @@ public class TradeController {
 
             tradeRecordService.createRecord(dto);
             redirectAttributes.addFlashAttribute("successMessage", "Trade recorded successfully");
+
+            Long redirectPharmacyId = isGiverOwner ? giverId : receiverId;
+
+            return "redirect:/dashboard?pharmacyId=" + redirectPharmacyId;
         } catch (EntityNotFoundException | EntityNotAuthorizedException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/dashboard";
         }
-
-        return "redirect:/dashboard?pharmacyId=" + giverId;
     }
 
     @GetMapping("/view")

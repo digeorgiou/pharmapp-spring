@@ -41,6 +41,8 @@ public class ContactController {
 
         String username = authentication.getName();
         model.addAttribute("username", username);
+        model.addAttribute("contactInsertDTO", new ContactInsertDTO(null,
+                null, null));
 
         if (nameSearch != null && !nameSearch.isEmpty()) {
             List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByName(nameSearch);

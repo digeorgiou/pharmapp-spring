@@ -34,4 +34,5 @@ public interface IPharmacyService {
     List<BalanceDTO> getBalanceList(Long pharmacyId, String sortBy) throws EntityNotFoundException;
     Page<BalanceDTO> getBalanceListPaginated(Long pharmacyId, String sortBy,
                                              int page, int size) throws EntityNotFoundException;
+    boolean isPharmacyOwnedByUser(Long pharmacyId, Long userId) throws EntityNotFoundException;
 }

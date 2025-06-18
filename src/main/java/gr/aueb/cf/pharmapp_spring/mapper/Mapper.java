@@ -131,7 +131,7 @@ public class Mapper {
                 user.getLastUpdater().getUsername(),
                 user.getAllPharmacies().stream()
                         .map(this::mapToPharmacyReadOnlyDTO)
-                        .collect(Collectors.toSet())
+                        .collect(Collectors.toList())
         );
     }
 

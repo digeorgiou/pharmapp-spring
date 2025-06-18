@@ -62,7 +62,8 @@
                         <h5>Search Pharmacies</h5>
 
                         <!-- Search by Name Form -->
-                        <form th:action="@{/add-contact}" method="GET" class="mb-3">
+                        <form th:action="@{/contacts/add}" method="GET"
+                              class="mb-3">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="nameSearch"
                                        placeholder="Search by pharmacy name..."
@@ -74,7 +75,7 @@
                         </form>
 
                         <!-- Search by User Form -->
-                        <form th:action="@{/add-contact}" method="GET">
+                        <form th:action="@{/contacts/add}" method="GET">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="userSearch"
                                        placeholder="Search by owner username..."
@@ -98,12 +99,16 @@
                         </h5>
 
                         <div class="list-group">
-                            <form th:each="pharmacy : ${searchResults}" th:action="@{/add-contact}" method="POST" class="list-group-item">
+                            <form th:each="pharmacy : ${searchResults}"
+                                  th:action="@{/contacts/add}" method="POST"
+                                  class="list-group-item">
                                 <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="mb-1" th:text="${pharmacy.name}"></h6>
-                                        <small class="text-muted">Owner: <span th:text="${pharmacy.user.username}"></span></small>
+                                        <small class="text-muted">Owner:
+                                            <span
+                                                    th:text="${pharmacy.ownerUsername}"></span></small>
                                     </div>
                                     <div class="input-group" style="width: 300px;">
                                         <input type="text" class="form-control" name="contactName"

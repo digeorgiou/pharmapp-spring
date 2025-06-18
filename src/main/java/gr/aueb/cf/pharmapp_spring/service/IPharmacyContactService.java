@@ -13,4 +13,5 @@ public interface IPharmacyContactService {
     void deleteContact(Long contactId) throws EntityNotFoundException;
     ContactReadOnlyDTO findById(Long contactId) throws EntityNotFoundException;
     boolean contactExists(Long userId, Long pharmacyId);
+    String getContactName(Long userId, Long pharmacyId) throws EntityNotFoundException;
 }

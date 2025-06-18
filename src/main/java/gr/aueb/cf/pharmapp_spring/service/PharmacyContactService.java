@@ -56,6 +56,8 @@ public class PharmacyContactService implements IPharmacyContactService{
 
         PharmacyContact contact = mapper.mapPharmacyContactInsertToModel(dto);
 
+        contact.setLastUpdater(user);
+
         pharmacy.addContactReference(contact);
         user.addContact(contact);
 
@@ -122,5 +124,15 @@ public class PharmacyContactService implements IPharmacyContactService{
 
         return contactRepository.existsByUserIdAndPharmacyId(userId,
                 pharmacyId);
+    }
+
+    @Override
+    @Transactional
+    public String getContactName(Long userId, Long pharmacyId) throws EntityNotFoundException {
+        PharmacyContact contact = contactRepository.findByUserIdAndPharmacyId(userId, pharmacyId)
+                .orElseThrow(() -> new EntityNotFoundException("Contact",
+                        "Contact for user " + userId + " and pharmacy " + pharmacyId + " not found"));
+
+        return contact.getContactName();
     }
 }
