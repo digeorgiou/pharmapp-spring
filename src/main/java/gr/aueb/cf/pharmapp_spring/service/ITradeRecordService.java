@@ -38,7 +38,8 @@ public interface ITradeRecordService {
             LocalDateTime endDate, int page, int size) throws EntityNotFoundException;
 
     Page<TradeRecordReadOnlyDTO> getTradesForPharmacyPaginated(
-            Long pharmacyId, int page, int size
+            Long pharmacyId, LocalDateTime startDate,
+            LocalDateTime endDate, int page, int size
     )throws EntityNotFoundException;
 
     TradeRecordReadOnlyDTO settleBalance(Long pharmacy1Id, Long pharmacy2Id,

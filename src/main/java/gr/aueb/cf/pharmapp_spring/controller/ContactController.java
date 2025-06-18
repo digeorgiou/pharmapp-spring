@@ -39,24 +39,32 @@ public class ContactController {
             Authentication authentication,
             Model model) {
 
-        String username = authentication.getName();
-        model.addAttribute("username", username);
-        model.addAttribute("contactInsertDTO", new ContactInsertDTO(null,
-                null, null));
+        try {
+            String username = authentication.getName();
 
-        if (nameSearch != null && !nameSearch.isEmpty()) {
-            List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByName(nameSearch);
-            model.addAttribute("searchResults", searchResults);
-            model.addAttribute("searchType", "name");
-            model.addAttribute("nameSearch", nameSearch);
-        } else if (userSearch != null && !userSearch.isEmpty()) {
-            List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByUser(userSearch);
-            model.addAttribute("searchResults", searchResults);
-            model.addAttribute("searchType", "user");
-            model.addAttribute("userSearch", userSearch);
+            UserReadOnlyDTO user = userService.getUserByUsername(username);
+
+            model.addAttribute("user", user);
+            model.addAttribute("username", username);
+            model.addAttribute("contactInsertDTO", new ContactInsertDTO(null,
+                    null, null));
+
+            if (nameSearch != null && !nameSearch.isEmpty()) {
+                List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByName(nameSearch);
+                model.addAttribute("searchResults", searchResults);
+                model.addAttribute("searchType", "name");
+                model.addAttribute("nameSearch", nameSearch);
+            } else if (userSearch != null && !userSearch.isEmpty()) {
+                List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByUser(userSearch);
+                model.addAttribute("searchResults", searchResults);
+                model.addAttribute("searchType", "user");
+                model.addAttribute("userSearch", userSearch);
+            }
+
+            return "add-contact";
+        }catch (EntityNotFoundException e){
+            return "redirect:/dashboard";
         }
-
-        return "add-contact";
     }
 
     @PostMapping("/add")

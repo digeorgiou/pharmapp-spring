@@ -20,11 +20,11 @@ html, body {
             flex-direction: column;
         }
 
-        .row.h-85 {
+        .row.content-row {
             flex: 1;
-            min-height: 0; /* Fix for Firefox */
             margin: 0;
-            overflow-y: auto; /* Add scroll to content if needed */
+            min-height: 0;
+            display: flex;
         }
 
         .sidebar {
@@ -41,9 +41,18 @@ html, body {
 
         footer {
             background-color: #343a40;
-            color: white;
-            padding: 1.5rem 0;
-            flex-shrink: 0;
+                color: white;
+                padding: 1.5rem 0;
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                z-index: 1000;
+                box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 0;
         }
 
         .bg-light-green {
@@ -78,4 +87,21 @@ html, body {
         .list-group-item {
             border-left: none;
             border-right: none;
+        }
+
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            color: white;
+            background-color: #28a745;
+        }
+
+        /* Make buttons in the card footer equal width */
+        .balance-card .btn {
+            flex: 1;
+            margin: 0 2px;
+            white-space: nowrap;
         }

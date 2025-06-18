@@ -13,128 +13,170 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/add-contact.css}">
+    <link rel="stylesheet" th:href="@{/css/newstyles2.css}">
 </head>
 <body>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid d-flex justify-content-between align-items-center ms-3 me-3">
-        <a class="navbar-brand" th:href="@{/dashboard}">
-            <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
-        </a>
-        <div class="position-absolute start-50 translate-middle-x">
-            <span class="navbar-text fw-bold fs-4" style="color: #343a40;">Add New Contact</span>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
-                <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" th:href="@{/logout}">
-                    <i class="bi bi-box-arrow-right"></i> Logout</a></li>
-            </ul>
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between w-100 align-items-center ms-3 me-3">
+            <a class="navbar-brand" th:href="@{/dashboard}">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
+            </a>
+            <div class="position-absolute start-50 translate-middle-x">
+                <span class="navbar-text fw-bold fs-4"
+                      style="color: #343a40;">Add contact</span>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">
+                        <i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h3 class="card-title text-center mb-4">Add Pharmacy Contact</h3>
-
-                    <!-- Success/Error messages -->
-                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-
-                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-
-                    <!-- Search Forms -->
-                    <div class="mb-4">
-                        <h5>Search Pharmacies</h5>
-
-                        <!-- Search by Name Form -->
-                        <form th:action="@{/contacts/add}" method="GET"
-                              class="mb-3">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="nameSearch"
-                                       placeholder="Search by pharmacy name..."
-                                       th:value="${nameSearch}">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="bi bi-search"></i> Search Name
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- Search by User Form -->
-                        <form th:action="@{/contacts/add}" method="GET">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="userSearch"
-                                       placeholder="Search by owner username..."
-                                       th:value="${userSearch}">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="bi bi-search"></i> Search Owner
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Search Results -->
-                    <div th:if="${not #lists.isEmpty(searchResults)}" class="search-results">
-                        <h5 class="mb-3">
-                                <span th:if="${searchType == 'name'}">
-                                    Pharmacies matching name: "<span th:text="${nameSearch}"></span>"
-                                </span>
-                            <span th:if="${searchType == 'user'}">
-                                    Pharmacies owned by users matching: "<span th:text="${userSearch}"></span>"
-                                </span>
-                        </h5>
-
-                        <div class="list-group">
-                            <form th:each="pharmacy : ${searchResults}"
-                                  th:action="@{/contacts/add}" method="POST"
-                                  class="list-group-item">
-                                <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="mb-1" th:text="${pharmacy.name}"></h6>
-                                        <small class="text-muted">Owner:
-                                            <span
-                                                    th:text="${pharmacy.ownerUsername}"></span></small>
-                                    </div>
-                                    <div class="input-group" style="width: 300px;">
-                                        <input type="text" class="form-control" name="contactName"
-                                               placeholder="Contact name" required>
-                                        <button class="btn btn-success" type="submit">
-                                            <i class="bi bi-plus-circle"></i> Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="d-grid gap-2 mt-4">
-                        <a th:href="@{/dashboard}" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left"></i> Back to Dashboard
+<div class="main-content-wrapper">
+    <div class="container-fluid px-0">
+        <div class="row content-row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar">
+                <div class="sidebar-sticky pt-3">
+                    <h5 class="px-3">My Pharmacies</h5>
+                    <div class="list-group list-group-flush mb-3">
+                        <a th:each="pharmacy : ${user.pharmacies}"
+                           th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
+                           th:text="${pharmacy.name}"
+                           class="list-group-item list-group-item-action">
                         </a>
                     </div>
+                    <hr>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/contacts/add}">
+                                <i class="bi bi-person-plus"></i> Add Contact
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/trades/view}">
+                                <i class="bi bi-list-check"></i> View Trades
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/pharmacies/add}">
+                                <i class="bi bi-shop"></i> Add Pharmacy
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
+                <div class="col-md-9 col-lg-10 main-content">
+                    <div class="container mt-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 col-lg-6">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-center mb-4">Add Pharmacy Contact</h3>
+
+                                        <!-- Success/Error messages -->
+                                        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+
+                                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+
+                                        <!-- Search Forms -->
+                                        <div class="mb-4">
+                                            <h5>Search Pharmacies</h5>
+
+                                            <!-- Search by Name Form -->
+                                            <form th:action="@{/contacts/add}" method="GET"
+                                                  class="mb-3">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="nameSearch"
+                                                           placeholder="Search by pharmacy name..."
+                                                           th:value="${nameSearch}">
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <i class="bi bi-search"></i> Search Name
+                                                    </button>
+                                                </div>
+                                            </form>
+
+                                            <!-- Search by User Form -->
+                                            <form th:action="@{/contacts/add}" method="GET">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="userSearch"
+                                                           placeholder="Search by owner username..."
+                                                           th:value="${userSearch}">
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <i class="bi bi-search"></i> Search Owner
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!-- Search Results -->
+                                        <div th:if="${not #lists.isEmpty(searchResults)}" class="search-results">
+                                            <h5 class="mb-3">
+                                                <span th:if="${searchType == 'name'}">
+                                                    Pharmacies matching name: "<span th:text="${nameSearch}"></span>"
+                                                </span>
+                                                <span th:if="${searchType == 'user'}">
+                                                    Pharmacies owned by users matching: "<span th:text="${userSearch}"></span>"
+                                                </span>
+                                            </h5>
+
+                                            <div class="list-group">
+                                                <form th:each="pharmacy : ${searchResults}"
+                                                      th:action="@{/contacts/add}" method="POST"
+                                                      class="list-group-item">
+                                                    <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <h6 class="mb-1" th:text="${pharmacy.name}"></h6>
+                                                            <small class="text-muted">Owner:
+                                                                <span th:text="${pharmacy.ownerUsername}"></span></small>
+                                                        </div>
+                                                        <div class="input-group" style="width: 300px;">
+                                                            <input type="text" class="form-control" name="contactName"
+                                                                   placeholder="Contact name" required>
+                                                            <button class="btn btn-success" type="submit">
+                                                                <i class="bi bi-plus-circle"></i> Add
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2 mt-4">
+                                            <a th:href="@{/dashboard}" class="btn btn-outline-secondary">
+                                                <i class="bi bi-arrow-left"></i> Back to Dashboard
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
 
 <!-- Footer -->
-<footer class="mt-auto">
+<footer>
     <div class="container text-center">
         <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
     </div>

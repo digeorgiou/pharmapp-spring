@@ -19,8 +19,6 @@ public interface TradeRecordRepository extends JpaRepository<TradeRecord,
 
 
     List<TradeRecord> findByGiverIdOrReceiverIdOrderByTransactionDateDesc(Long giverId, Long receiverId, Pageable pageable);
-    Page<TradeRecord> findByGiverIdOrReceiverId(Long giverId, Long receiverId
-            , Pageable pageable);
 
     List<TradeRecord> findByGiverIdAndReceiverIdAndTransactionDateBetween(Long giverId, Long receiverId, LocalDateTime startDate, LocalDateTime endDate);
     Page<TradeRecord> findByGiverIdAndReceiverIdAndTransactionDateBetween(Long giverId, Long receiverId, LocalDateTime startDate, LocalDateTime endDate, PageRequest pageRequest);
@@ -34,5 +32,22 @@ public interface TradeRecordRepository extends JpaRepository<TradeRecord,
 
     List<TradeRecord> findByGiverIdAndReceiverIdOrderByTransactionDateDesc(
             Long giverId, Long receiverId, Pageable pageable);
+
+    Page<TradeRecord> findByGiverIdOrReceiverIdAndTransactionDateBetween(
+            Long giverId,
+            Long receiverId,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            Pageable pageable
+            );
+
+    @Query("SELECT t FROM TradeRecord t WHERE (t.giver.id = :giverId OR t.receiver.id = :receiverId) AND t.transactionDate BETWEEN :startDate AND :endDate")
+    Page<TradeRecord> findTradesBetweenPharmaciesAndDateRange(
+            @Param("giverId") Long giverId,
+            @Param("receiverId") Long receiverId,
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate,
+            Pageable pageable
+    );
 
 }

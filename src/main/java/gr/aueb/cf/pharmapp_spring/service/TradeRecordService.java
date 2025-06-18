@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -306,22 +307,26 @@ public class TradeRecordService implements ITradeRecordService{
                 .orElseThrow(() -> new EntityNotFoundException("Pharmacy",
                         "Pharmacy with id " + pharmacy2Id + " was not found"));
 
-        PageRequest pageable = PageRequest.of(page,size);
+        LocalDateTime effectiveStartDate = startDate != null ? startDate : LocalDateTime.of(1970, 1, 1, 0, 0);
+        LocalDateTime effectiveEndDate = endDate != null ? endDate : LocalDateTime.now();
+
+        PageRequest pageable = PageRequest.of(page,size, Sort.by(
+                "transactionDate").descending());
 
         // Get trades in both directions within date range
         Page<TradeRecord> direction1 =
                 tradeRecordRepository.findByGiverIdAndReceiverIdAndTransactionDateBetween(
-                pharmacy1Id, pharmacy2Id, startDate, endDate, pageable);
+                pharmacy1Id, pharmacy2Id, effectiveStartDate, effectiveEndDate, pageable);
 
         Page<TradeRecord> direction2 =
                 tradeRecordRepository.findByGiverIdAndReceiverIdAndTransactionDateBetween(
-                pharmacy2Id, pharmacy1Id, startDate, endDate, pageable);
+                pharmacy2Id, pharmacy1Id, effectiveStartDate, effectiveEndDate, pageable);
 
         List<TradeRecord> allRecords = new ArrayList<>();
         allRecords.addAll(direction1.getContent());
         allRecords.addAll(direction2.getContent());
 
-        allRecords.sort((r1,r2)-> r2.getTransactionDate().compareTo(r1.getTransactionDate()));
+        allRecords.sort(Comparator.comparing(TradeRecord::getTransactionDate).reversed());
 
         return new PageImpl<>(
                 allRecords.stream()
@@ -408,18 +413,32 @@ public class TradeRecordService implements ITradeRecordService{
 
     @Override
     @Transactional
-    public Page<TradeRecordReadOnlyDTO> getTradesForPharmacyPaginated(Long pharmacyId, int page, int size) throws EntityNotFoundException {
+    public Page<TradeRecordReadOnlyDTO> getTradesForPharmacyPaginated(Long pharmacyId,
+                                                                      LocalDateTime startDate,
+                                                                      LocalDateTime endDate,
+                                                                      int page,
+                                                                      int size
+    ) throws EntityNotFoundException {
 
         pharmacyRepository.findById(pharmacyId)
                 .orElseThrow(() -> new EntityNotFoundException("Pharmacy",
                         "Pharmacy with id " + pharmacyId + " was not found"));
 
-        PageRequest pageable = PageRequest.of(page, size);
+        LocalDateTime effectiveStartDate = startDate != null ? startDate : LocalDateTime.of(1970, 1, 1, 0, 0);
+        LocalDateTime effectiveEndDate = endDate != null ? endDate : LocalDateTime.now();
 
-        Page<TradeRecord> tradeRecordPage = tradeRecordRepository
-                .findByGiverIdOrReceiverId(pharmacyId, pharmacyId, pageable);
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("transactionDate").descending());
 
-        return tradeRecordPage.map(mapper::mapToTradeRecordReadOnlyDTO);
+        Page<TradeRecord> tradesPage = tradeRecordRepository
+                .findTradesBetweenPharmaciesAndDateRange(
+                        pharmacyId,
+                        pharmacyId,
+                        effectiveStartDate,
+                        effectiveEndDate,
+                        pageable
+                );
+
+        return tradesPage.map(mapper::mapToTradeRecordReadOnlyDTO);
     }
 
     @Override

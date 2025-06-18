@@ -46,6 +46,7 @@ public class PharmacyController {
             UserReadOnlyDTO user = userService.getUserByUsername(username);
             model.addAttribute("pharmacyInsertDTO", new PharmacyInsertDTO(user.getId(),
                     null));
+            model.addAttribute("user", user);
             return "add-pharmacy";
         } catch (EntityNotFoundException e){
             LOGGER.error("User not found while trying to show add pharmacy " +

@@ -68,6 +68,7 @@ public class Mapper {
                 pharmacyContact.getId(),
                 pharmacyContact.getUser().getUsername(),
                 pharmacyContact.getContactName(),
+                pharmacyContact.getPharmacy().getId(),
                 pharmacyContact.getPharmacy().getName(),
                 pharmacyContact.getCreatedAt(),
                 pharmacyContact.getUpdatedAt(),

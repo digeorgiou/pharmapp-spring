@@ -3,14 +3,14 @@ package gr.aueb.cf.pharmapp_spring.controller;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityInvalidArgumentException;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityNotAuthorizedException;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityNotFoundException;
-import gr.aueb.cf.pharmapp_spring.dto.PharmacyReadOnlyDTO;
-import gr.aueb.cf.pharmapp_spring.dto.TradeRecordInsertDTO;
-import gr.aueb.cf.pharmapp_spring.dto.TradeRecordReadOnlyDTO;
-import gr.aueb.cf.pharmapp_spring.dto.UserReadOnlyDTO;
+import gr.aueb.cf.pharmapp_spring.dto.*;
 import gr.aueb.cf.pharmapp_spring.service.PharmacyContactService;
 import gr.aueb.cf.pharmapp_spring.service.PharmacyService;
 import gr.aueb.cf.pharmapp_spring.service.TradeRecordService;
 import gr.aueb.cf.pharmapp_spring.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RequestMapping("/trades")
 public class TradeController {
+
+    private static final int DEFAULT_PAGE_SIZE = 10;
 
     private final TradeRecordService tradeRecordService;
     private final PharmacyService pharmacyService;
@@ -127,15 +130,69 @@ public class TradeController {
 
     @GetMapping("/view")
     public String viewTrades(
-            @RequestParam Long pharmacy1,
-            @RequestParam Long pharmacy2,
+            @RequestParam(required = false) Long pharmacy1,
+            @RequestParam(required = false) Long pharmacy2,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Authentication authentication,
             Model model) {
 
         try {
-            List<TradeRecordReadOnlyDTO> trades = tradeRecordService.getTradesBetweenPharmacies(
-                    pharmacy1, pharmacy2, null, null);
+            UserReadOnlyDTO user = userService.getUserByUsername(authentication.getName());
+            model.addAttribute("user", user);
 
-            model.addAttribute("trades", trades);
+            // Get user's contacts for the dropdown
+            List<ContactReadOnlyDTO> contacts =
+                    userService.getUserContacts(user.getId());
+            model.addAttribute("contacts", contacts);
+
+            if (pharmacy1 != null) {
+                // Get pharmacy1 details
+                PharmacyReadOnlyDTO pharmacy1DTO = pharmacyService.getById(pharmacy1);
+                model.addAttribute("pharmacy1", pharmacy1);
+                model.addAttribute("pharmacy1Name", pharmacy1DTO.name());
+
+                // Convert LocalDate to LocalDateTime (let service handle nulls)
+                LocalDateTime startDateTime = startDate != null ? startDate.atStartOfDay() : null;
+                LocalDateTime endDateTime = endDate != null ?
+                        endDate.atTime(23, 59, 59) : null;
+
+                if (pharmacy2 != null) {
+                    // Get trades between two specific pharmacies
+                    PharmacyReadOnlyDTO pharmacy2DTO = pharmacyService.getById(pharmacy2);
+                    model.addAttribute("pharmacy2", pharmacy2);
+                    model.addAttribute("pharmacy2Name", pharmacy2DTO.name());
+
+                    Page<TradeRecordReadOnlyDTO> tradesPage = tradeRecordService.getTradesBetweenPharmaciesPaginated(
+                            pharmacy1, pharmacy2, startDateTime, endDateTime, page, size);
+
+                    model.addAttribute("trades", tradesPage.getContent());
+                    model.addAttribute("currentPage", tradesPage.getNumber());
+                    model.addAttribute("totalPages", tradesPage.getTotalPages());
+                    model.addAttribute("pageSize", size);
+
+                    Integer tradeCount = tradeRecordService.getTradeCountBetweenPharmacies(pharmacy1, pharmacy2);
+                    Double balance = tradeRecordService.calculateBalanceBetweenPharmacies(pharmacy1, pharmacy2);
+                    model.addAttribute("tradeCount", tradeCount);
+                    model.addAttribute("balance", balance);
+                } else {
+                    Page<TradeRecordReadOnlyDTO> tradesPage = tradeRecordService.getTradesForPharmacyPaginated(
+                            pharmacy1, startDateTime, endDateTime, page, size);
+
+                    model.addAttribute("trades", tradesPage.getContent());
+                    model.addAttribute("currentPage", tradesPage.getNumber());
+                    model.addAttribute("totalPages", tradesPage.getTotalPages());
+                    model.addAttribute("totalItems", tradesPage.getTotalElements());
+                    model.addAttribute("pageSize", size);
+                }
+            }
+
+            // Add date filters to model
+            model.addAttribute("startDate", startDate);
+            model.addAttribute("endDate", endDate);
+
             return "view-trades";
         } catch (EntityNotFoundException e) {
             return "redirect:/dashboard";
@@ -146,6 +203,7 @@ public class TradeController {
     public String settleBalance(
             @RequestParam Long pharmacy1,
             @RequestParam Long pharmacy2,
+            @RequestParam(required = false) String description,
             Authentication authentication,
             RedirectAttributes redirectAttributes) {
 
@@ -153,13 +211,31 @@ public class TradeController {
         try {
             UserReadOnlyDTO user = userService.getUserByUsername(username);
 
-            tradeRecordService.settleBalance(pharmacy1, pharmacy2, user.getId(), "Balance settlement");
-            redirectAttributes.addFlashAttribute("successMessage", "Balance settled successfully");
-        } catch (EntityNotFoundException | EntityNotAuthorizedException |
-                 EntityInvalidArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            // Get current balance before settling
+            double balance = tradeRecordService.calculateBalanceBetweenPharmacies(pharmacy1, pharmacy2);
+
+            // Perform the settlement
+            TradeRecordReadOnlyDTO settlement = tradeRecordService.settleBalance(
+                    pharmacy1, pharmacy2, user.getId(),
+                    description != null ? description : "Balance settlement");
+
+            // Determine the message based on the original balance
+            String message;
+            if (balance > 0) {
+                message = String.format("Settled balance of €%.2f successfully", balance);
+            } else {
+                message = String.format("Settled balance of €%.2f successfully", -balance);
+            }
+
+            redirectAttributes.addFlashAttribute("successMessage", message);
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", "One of the pharmacies was not found");
+        } catch (EntityNotAuthorizedException e) {
+            redirectAttributes.addFlashAttribute("error", "You are not authorized to settle this balance");
+        } catch (EntityInvalidArgumentException e) {
+            redirectAttributes.addFlashAttribute("info", "No balance to settle: " + e.getMessage());
         }
 
-        return "redirect:/dashboard?pharmacyId=" + pharmacy1;
+        return "redirect:/trades/view?pharmacy1=" + pharmacy1 + "&pharmacy2=" + pharmacy2;
     }
 }

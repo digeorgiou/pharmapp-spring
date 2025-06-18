@@ -7,6 +7,7 @@ public record ContactReadOnlyDTO(
         Long id,
         String username,
         String contactName,
+        Long pharmacyId,
         String pharmacyName,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
