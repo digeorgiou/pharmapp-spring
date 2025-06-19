@@ -3,6 +3,7 @@ package gr.aueb.cf.pharmapp_spring.controller;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityAlreadyExistsException;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityNotFoundException;
 import gr.aueb.cf.pharmapp_spring.dto.ContactInsertDTO;
+import gr.aueb.cf.pharmapp_spring.dto.ContactReadOnlyDTO;
 import gr.aueb.cf.pharmapp_spring.dto.PharmacyReadOnlyDTO;
 import gr.aueb.cf.pharmapp_spring.dto.UserReadOnlyDTO;
 import gr.aueb.cf.pharmapp_spring.service.PharmacyContactService;
@@ -85,14 +86,17 @@ public class ContactController {
                     contactName
             );
 
-            contactService.createContact(dto);
+            ContactReadOnlyDTO contact = contactService.createContact(dto);
             redirectAttributes.addFlashAttribute("successMessage",
                     "Contact with " + pharmacy.name() + " added successfully!");
+            redirectAttributes.addFlashAttribute("pharmacy",pharmacy);
+            redirectAttributes.addFlashAttribute("user", user);
+            redirectAttributes.addFlashAttribute("contact", contact);
+            return "redirect:/contacts/add-success";
         } catch (EntityNotFoundException | EntityAlreadyExistsException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/dashboard";
         }
-
-        return "redirect:/dashboard";
     }
 
     @GetMapping("/{id}/delete")
@@ -112,5 +116,11 @@ public class ContactController {
         }
 
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/add-success")
+    public String showAddContactSuccess(
+            Model model) {
+            return "add-contact-success";
     }
 }

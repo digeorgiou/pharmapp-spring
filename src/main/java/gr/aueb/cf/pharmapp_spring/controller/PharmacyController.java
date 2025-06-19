@@ -67,7 +67,16 @@ public class PharmacyController {
             Model model) {
 
         if(bindingResult.hasErrors()){
-            return "add-pharmacy";
+
+            String username = authentication.getName();
+            try{
+                UserReadOnlyDTO user = userService.getUserByUsername(username);
+                model.addAttribute("user", user);
+                return "add-pharmacy";
+            } catch (EntityNotFoundException e) {
+                redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
+                return "redirect:/logout";
+            }
         }
 
         try{
@@ -80,7 +89,9 @@ public class PharmacyController {
 
             redirectAttributes.addFlashAttribute("successMessage", "Pharmacy " + pharmacy.name()
             + " created successfully!");
-            return "redirect:/dashboard";
+            redirectAttributes.addFlashAttribute("pharmacy", pharmacy);
+            redirectAttributes.addFlashAttribute("user", user);
+            return "redirect:/pharmacies/add-success";
 
         }   catch (EntityNotFoundException e) {
             redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
@@ -88,7 +99,15 @@ public class PharmacyController {
 
         }   catch (EntityAlreadyExistsException e) {
             bindingResult.rejectValue("name", "pharmacy.exists", e.getMessage());
-            return "add-pharmacy";
+            String username = authentication.getName();
+            try{
+                UserReadOnlyDTO user = userService.getUserByUsername(username);
+                model.addAttribute("user", user);
+                return "add-pharmacy";
+            } catch (EntityNotFoundException ex) {
+                redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
+                return "redirect:/logout";
+            }
         }
 
     }
@@ -111,5 +130,11 @@ public class PharmacyController {
 
         return "redirect:/dashboard";
     }
+
+    @GetMapping("/add-success")
+    public String showAddPharmacySuccess(Model model, Authentication authentication) {
+        return "add-pharmacy-success";
+    }
+
 
 }

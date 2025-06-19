@@ -8,6 +8,7 @@ import gr.aueb.cf.pharmapp_spring.model.TradeRecord;
 import gr.aueb.cf.pharmapp_spring.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,6 +132,7 @@ public class Mapper {
                 user.getUpdatedAt(),
                 user.getLastUpdater().getUsername(),
                 user.getAllPharmacies().stream()
+                        .sorted(Comparator.comparing(pharmacy -> pharmacy.getName().toLowerCase()))
                         .map(this::mapToPharmacyReadOnlyDTO)
                         .collect(Collectors.toList())
         );

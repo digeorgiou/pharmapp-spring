@@ -78,7 +78,6 @@ public class TradeController {
                 // Fall back to pharmacy name if no contact exists
                 fromContactName = giverPharmacy.name();
             }
-
             model.addAttribute("giverPharmacy", giverPharmacy);
             model.addAttribute("receiverPharmacy", receiverPharmacy);
             model.addAttribute("fromContactName", fromContactName);
@@ -103,9 +102,33 @@ public class TradeController {
         String username = authentication.getName();
         try {
             UserReadOnlyDTO user = userService.getUserByUsername(username);
+            PharmacyReadOnlyDTO giverPharmacy = pharmacyService.getById(giverId);
+            PharmacyReadOnlyDTO receiverPharmacy = pharmacyService.getById(receiverId);
 
             boolean isGiverOwner =
                     pharmacyService.isPharmacyOwnedByUser(giverId, user.getId());
+
+            String contactName;
+            try {
+                // Try to get the contact name if this is a contact
+                contactName = contactService.getContactName(user.getId(), receiverId);
+            } catch (EntityNotFoundException e) {
+                // Fall back to pharmacy name if no contact exists
+                contactName = receiverPharmacy.name();
+            }
+
+            // Get contact names if available
+            String fromContactName;
+            try {
+                // Try to get the contact name if this is a contact
+                fromContactName = contactService.getContactName(user.getId(),
+                        giverId);
+            } catch (EntityNotFoundException e) {
+                // Fall back to pharmacy name if no contact exists
+                fromContactName = giverPharmacy.name();
+            }
+
+
 
             TradeRecordInsertDTO dto = new TradeRecordInsertDTO(
                     description,
@@ -116,12 +139,19 @@ public class TradeController {
                     user.getId()
             );
 
-            tradeRecordService.createRecord(dto);
+            TradeRecordReadOnlyDTO trade = tradeRecordService.createRecord(dto);
             redirectAttributes.addFlashAttribute("successMessage", "Trade recorded successfully");
+            redirectAttributes.addFlashAttribute("trade", trade);
+            redirectAttributes.addFlashAttribute("fromContactName", fromContactName);
+            redirectAttributes.addFlashAttribute("contactName", contactName);
+            redirectAttributes.addFlashAttribute("giverPharmacyId", giverId);
+            redirectAttributes.addFlashAttribute("receiverPharmacyId",
+                    receiverId);
+
 
             Long redirectPharmacyId = isGiverOwner ? giverId : receiverId;
 
-            return "redirect:/dashboard?pharmacyId=" + redirectPharmacyId;
+            return "redirect:/trades/record-success";
         } catch (EntityNotFoundException | EntityNotAuthorizedException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/dashboard";
@@ -237,5 +267,10 @@ public class TradeController {
         }
 
         return "redirect:/trades/view?pharmacy1=" + pharmacy1 + "&pharmacy2=" + pharmacy2;
+    }
+
+    @GetMapping("/record-success")
+    public String showTradeRecordSuccess(){
+        return "record-trade-success";
     }
 }

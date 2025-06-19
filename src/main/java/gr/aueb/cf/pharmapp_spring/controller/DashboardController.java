@@ -47,52 +47,38 @@ public class DashboardController {
         try {
             UserReadOnlyDTO user = userService.getUserByUsername(authentication.getName());
 
-            List<PharmacyReadOnlyDTO> sortedPharmacies = user.getPharmacies().stream()
-                            .sorted(Comparator.comparing(PharmacyReadOnlyDTO::name))
-                                    .collect(Collectors.toList());
-
-            user.setPharmacies(sortedPharmacies);
-
             model.addAttribute("user", user);
 
-            // If no pharmacy selected and user has pharmacies, select first one
-            if (pharmacyId == null && !user.getPharmacies().isEmpty()) {
-                pharmacyId = user.getPharmacies().get(0).id();
-            }
+            // Only proceed with pharmacy selection if user has pharmacies
+            if (user.getPharmacies() != null && !user.getPharmacies().isEmpty()) {
+                // If no pharmacy selected, select first one
+                if (pharmacyId == null) {
+                    pharmacyId = user.getPharmacies().get(0).id();
+                }
 
+                // Verify the user owns the selected pharmacy
+                if (pharmacyId != null && pharmacyService.isPharmacyOwnedByUser(pharmacyId, user.getId())) {
+                    PharmacyReadOnlyDTO selectedPharmacy = pharmacyService.getById(pharmacyId);
+                    model.addAttribute("selectedPharmacy", selectedPharmacy);
 
-            // If a pharmacy is selected, verify the user owns it
-            if (pharmacyId != null) {
-                if (!pharmacyService.isPharmacyOwnedByUser(pharmacyId, user.getId())) {
-                    // If user doesn't own the pharmacy, reset to their first pharmacy
-                    if (!user.getPharmacies().isEmpty()) {
-                        pharmacyId = user.getPharmacies().get(0).id();
-                    } else {
-                        pharmacyId = null;
-                    }
+                    // Get balance list with optional search and sort
+                    List<BalanceDTO> balanceList = pharmacyService.getBalanceList(pharmacyId, sort);
+                    model.addAttribute("balanceList", balanceList);
+                    model.addAttribute("currentSort", sort);
+                } else {
+                    // If invalid pharmacy selected, reset to first pharmacy
+                    pharmacyId = user.getPharmacies().get(0).id();
+                    PharmacyReadOnlyDTO selectedPharmacy = pharmacyService.getById(pharmacyId);
+                    model.addAttribute("selectedPharmacy", selectedPharmacy);
+
+                    List<BalanceDTO> balanceList = pharmacyService.getBalanceList(pharmacyId, sort);
+                    model.addAttribute("balanceList", balanceList);
+                    model.addAttribute("currentSort", sort);
                 }
             }
-
-
-            if (pharmacyId != null) {
-
-                PharmacyReadOnlyDTO selectedPharmacy = pharmacyService.getById(pharmacyId);
-                model.addAttribute("selectedPharmacy", selectedPharmacy);
-
-                // Get balance list with optional search and sort
-                List<BalanceDTO> balanceList = pharmacyService.getBalanceList(pharmacyId, sort);
-
-
-                model.addAttribute("balanceList", balanceList);
-                model.addAttribute("currentSort", sort);
-
-            }
-
         } catch (EntityNotFoundException e) {
             model.addAttribute("error", "User not found");
         }
-
-
         return "dashboard";
 
     }

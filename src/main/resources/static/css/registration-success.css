@@ -1,57 +1,63 @@
 body {
-            background-color: #f8f9fa;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        .navbar {
-            background-color: #b9dae1 !important;
-        }
+.navbar {
+    background-color: #b9dae1 !important;
+}
 
-        .success-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 2rem;
-            background-color: #b9dae1;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
+.success-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+    background-color: #b9dae1;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
 
-        .success-icon {
-            font-size: 4rem;
-            color: #28a745;
-            margin-bottom: 1.5rem;
-        }
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1.5rem;
+}
 
-        .user-details {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: left;
-        }
+.details-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: left;
+}
 
-        .detail-row {
-            display: flex;
-            margin-bottom: 0.5rem;
-        }
+.detail-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
 
-        .detail-label {
-            font-weight: 600;
-            min-width: 120px;
-        }
+.detail-label {
+    font-weight: 600;
+    min-width: 120px;
+}
 
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 1.5rem 0;
-            margin-top: auto;
-        }
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-        .auth-links {
-            font-size: 0.9rem;
-        }
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+.auth-links {
+    font-size: 0.9rem;
+}

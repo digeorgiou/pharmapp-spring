@@ -273,6 +273,7 @@ body {
 }
 
 /* ===== MAIN CONTENT AREAS ===== */
+
 .main-content {
     padding: 20px;
     background-color: white;
@@ -281,7 +282,6 @@ body {
     overflow-y: auto;
     flex: 1;
     min-height: 0;
-    margin-bottom: 20px; /* Extra space above footer */
 }
 
 .main-content-wrapper {
@@ -311,7 +311,7 @@ footer p {
 
 /* Add padding to body to account for fixed footer */
 body {
-    padding-bottom: 80px; /* Adjust this value based on your footer height */
+    padding-bottom: 70px; /* Adjust this value based on your footer height */
 }
 
 /* Make sure footer is always visible at bottom */

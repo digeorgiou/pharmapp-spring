@@ -25,7 +25,7 @@
             </a>
             <div class="position-absolute start-50 translate-middle-x">
                 <span class="navbar-text fw-bold fs-4"
-                      style="color: #343a40;">Προσθήκη νέου φαρμακείου</span>
+                      style="color: #343a40;">Προσθήκη Νέου Φαρμακείου</span>
             </div>
             <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
@@ -48,7 +48,7 @@
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 sidebar">
                 <div class="sidebar-sticky pt-3">
-                    <h5 class="px-3">My Pharmacies</h5>
+                    <h5 class="px-3">Τα φαρμακεία μου</h5>
                     <div class="list-group list-group-flush mb-3">
                         <a th:each="pharmacy : ${user.pharmacies}"
                            th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
@@ -60,17 +60,19 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/contacts/add}">
-                                <i class="bi bi-person-plus"></i> Add Contact
+                                <i class="bi bi-person-plus"></i> Προσθήκη
+                                Επαφής
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/trades/view}">
-                                <i class="bi bi-list-check"></i> View Trades
+                                <i class="bi bi-list-check"></i> Προβολή
+                                Ανταλλαγών
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  active" th:href="@{/pharmacies/add}">
-                                <i class="bi bi-shop"></i> Add Pharmacy
+                                <i class="bi bi-shop"></i> Προσθήκη Φαρμακείου
                             </a>
                         </li>
                     </ul>
@@ -82,7 +84,9 @@
                         <div class="col-md-8 col-lg-6">
                             <div class="card shadow-sm">
                                 <div class="card-body">
-                                    <h3 class="card-title text-center mb-4">Add New Pharmacy</h3>
+                                    <h3
+                                            class="card-title text-center mb-4">Προσθήκη Νέου Φαρμακείου
+                                    </h3>
 
                                     <!-- Success Message -->
                                     <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -95,7 +99,9 @@
 
                                         <!-- Pharmacy Name Field -->
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Pharmacy Name</label>
+                                            <label for="name"
+                                                   class="form-label">Όνομα φαρμακείου
+                                            </label>
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-shop"></i></span>
                                                 <input type="text" class="form-control"
@@ -110,11 +116,15 @@
 
                                         <!-- Submit Button -->
                                         <div class="d-grid gap-2 mt-4">
-                                            <button type="submit" class="btn btn-primary btn-lg">
-                                                <i class="bi bi-plus-circle"></i> Add Pharmacy
+                                            <button type="submit"
+                                                    class="btn btn-success btn-lg">
+                                                <i
+                                                        class="bi bi-plus-circle"></i> Προσθήκη
                                             </button>
-                                            <a th:href="@{/dashboard}" class="btn btn-outline-secondary">
-                                                <i class="bi bi-arrow-left"></i> Back to Dashboard
+                                            <a th:href="@{/dashboard}"
+                                               class="btn btn-lg btn-outline-secondary">
+                                                <i
+                                                        class="bi bi-arrow-left"></i> Επιστροφή στην Αρχική
                                             </a>
                                         </div>
                                     </form>
