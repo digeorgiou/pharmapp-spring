@@ -8,18 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <!-- Consolidated CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <div class="wrapper">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" style="background-color: #b9dae1;">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo">
             </a>
-
             <div class="ms-auto">
                 <a th:href="@{/login}" class="btn btn-primary btn-login">Log In</a>
             </div>
@@ -34,17 +33,17 @@
                 <h2 class="display-4 fw-bold mb-4">Διαχείριση ανταλλαγών φαρμακείων</h2>
                 <p class="lead mb-5">Ασφαλής πλατφόρμα για την καθημερινη διαχείριση ανταλλαγών μεταξύ φαρμακείων</p>
                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                    <a th:href="@{/login}" class="btn btn-primary btn-lg px-5 gap-4">Είσοδος</a>
-                    <a href="#features" class="btn btn-outline-light btn-lg px-2">Μάθετε περισσότερα</a>
+                    <a th:href="@{/login}" class="btn btn-primary btn-lg px-5">Είσοδος</a>
+                    <a href="#features" class="btn btn-outline-light btn-lg px-4">Μάθετε περισσότερα</a>
                 </div>
             </div>
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="py-4">
+        <section id="features" class="py-3 bg-light">
             <div class="container">
-                <h2 class="text-center mb-4">Βασικές Λειτουργείες</h2>
-                <div class="row g-3">
+                <h2 class="text-center mb-5">Βασικές Λειτουργείες</h2>
+                <div class="row g-4">
                     <div class="col-md-4">
                         <div class="card h-100 border-0 shadow-sm">
                             <div class="card-body text-center">
@@ -52,7 +51,7 @@
                                     <i class="bi bi-arrow-left-right"></i>
                                 </div>
                                 <h3 class="h4">Διαχείριση ανταλλαγών</h3>
-                                <p>Κρατείστε εύκολα πλήρες ιστορικό των ανταλλαγών σας</p>
+                                <p class="text-muted">Κρατείστε εύκολα πλήρες ιστορικό των ανταλλαγών σας</p>
                             </div>
                         </div>
                     </div>
@@ -63,7 +62,7 @@
                                     <i class="bi bi-shield-lock"></i>
                                 </div>
                                 <h3 class="h4">Ασφαλής Πλατφόρμα</h3>
-                                <p>Η Role-based πρόσβαση εξασφαλίζει την ασφάλεια των δεδομένων σας</p>
+                                <p class="text-muted">Η Role-based πρόσβαση εξασφαλίζει την ασφάλεια των δεδομένων σας</p>
                             </div>
                         </div>
                     </div>
@@ -74,7 +73,7 @@
                                     <i class="bi bi-graph-up"></i>
                                 </div>
                                 <h3 class="h4">Balance Tracking</h3>
-                                <p>Υπολογίζεται αυτόματα το τρέχων υπόλοιπο μεταξύ δυο συνεργατών</p>
+                                <p class="text-muted">Υπολογίζεται αυτόματα το τρέχων υπόλοιπο μεταξύ δυο συνεργατών</p>
                             </div>
                         </div>
                     </div>
@@ -84,7 +83,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center">
+    <footer class="text-center mt-auto">
         <div class="container">
             <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
         </div>

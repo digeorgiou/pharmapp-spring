@@ -1780,3 +1780,960 @@ org.thymeleaf.exceptions.TemplateProcessingException: Could not bind form errors
 2025-06-20 13:07:39 INFO  - Started PharmApplication in 5.88 seconds (process running for 6.184)
 2025-06-20 13:07:40 INFO  - Initializing Servlet 'dispatcherServlet'
 2025-06-20 13:07:40 INFO  - Completed initialization in 1 ms
+2025-06-20 13:50:21 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 13:50:21 INFO  - Starting PharmApplication using Java 17.0.13 with PID 4048 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 13:50:21 INFO  - The following 1 profile is active: "test"
+2025-06-20 13:50:22 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 13:50:22 INFO  - Finished Spring Data repository scanning in 54 ms. Found 4 JPA repository interfaces.
+2025-06-20 13:50:23 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 13:50:23 INFO  - Root WebApplicationContext: initialization completed in 1569 ms
+2025-06-20 13:50:23 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 13:50:23 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 13:50:24 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 13:50:24 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 13:50:24 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 13:50:25 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 13:50:25 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 13:50:26 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 13:50:26 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 13:50:26 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 13:50:26 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 13:50:26 INFO  - Adding welcome page template: index
+2025-06-20 13:50:27 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 13:50:27 INFO  - Started PharmApplication in 5.995 seconds (process running for 6.367)
+2025-06-20 13:50:30 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 13:50:30 INFO  - Completed initialization in 1 ms
+2025-06-20 13:59:12 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 13:59:12 INFO  - Starting PharmApplication using Java 17.0.13 with PID 11588 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 13:59:12 INFO  - The following 1 profile is active: "test"
+2025-06-20 13:59:13 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 13:59:13 INFO  - Finished Spring Data repository scanning in 56 ms. Found 4 JPA repository interfaces.
+2025-06-20 13:59:14 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 13:59:14 INFO  - Root WebApplicationContext: initialization completed in 1775 ms
+2025-06-20 13:59:14 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 13:59:14 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 13:59:14 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 13:59:15 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 13:59:15 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 13:59:16 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 13:59:16 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 13:59:16 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 13:59:17 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 13:59:17 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 13:59:17 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 13:59:17 INFO  - Adding welcome page template: index
+2025-06-20 13:59:17 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 13:59:17 INFO  - Started PharmApplication in 6.024 seconds (process running for 6.415)
+2025-06-20 13:59:18 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 13:59:18 INFO  - Completed initialization in 0 ms
+2025-06-20 14:02:25 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:02:25 INFO  - Starting PharmApplication using Java 17.0.13 with PID 20996 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:02:25 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:02:25 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:02:25 INFO  - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:02:26 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:02:26 INFO  - Root WebApplicationContext: initialization completed in 1359 ms
+2025-06-20 14:02:26 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:02:26 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:02:27 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:02:27 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:02:27 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:02:28 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:02:28 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:02:28 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:02:29 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:02:29 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:02:29 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:02:29 INFO  - Adding welcome page template: index
+2025-06-20 14:02:30 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:02:30 INFO  - Started PharmApplication in 5.364 seconds (process running for 5.717)
+2025-06-20 14:02:30 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:02:30 INFO  - Completed initialization in 1 ms
+2025-06-20 14:10:07 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:10:07 INFO  - Starting PharmApplication using Java 17.0.13 with PID 6328 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:10:07 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:10:08 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:10:08 INFO  - Finished Spring Data repository scanning in 52 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:10:08 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:10:09 INFO  - Root WebApplicationContext: initialization completed in 1260 ms
+2025-06-20 14:10:09 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:10:09 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:10:09 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:10:09 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:10:09 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:10:10 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:10:11 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:10:11 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:10:12 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:10:12 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:10:12 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:10:12 INFO  - Adding welcome page template: index
+2025-06-20 14:10:12 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:10:12 INFO  - Started PharmApplication in 5.32 seconds (process running for 5.623)
+2025-06-20 14:10:17 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:10:17 INFO  - Completed initialization in 1 ms
+2025-06-20 14:12:29 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:12:29 INFO  - Starting PharmApplication using Java 17.0.13 with PID 24380 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:12:29 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:12:30 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:12:30 INFO  - Finished Spring Data repository scanning in 50 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:12:31 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:12:31 INFO  - Root WebApplicationContext: initialization completed in 1283 ms
+2025-06-20 14:12:31 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:12:31 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:12:31 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:12:31 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:12:31 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:12:32 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:12:32 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:12:33 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:12:33 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:12:33 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:12:33 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:12:33 INFO  - Adding welcome page template: index
+2025-06-20 14:12:34 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:12:34 INFO  - Started PharmApplication in 5.282 seconds (process running for 6.305)
+2025-06-20 14:12:35 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:12:35 INFO  - Completed initialization in 2 ms
+2025-06-20 14:12:42 ERROR - [THYMELEAF][http-nio-8080-exec-9] Exception processing template "view-trades": Could not parse as expression: "${trade.giverName == pharmacy1Name and !trade.deletedByGiver and !trade.deletedByReceiver} ? 'trade-card-outgoing bg-light-red' : '',
+                                        ${trade.giverName != pharmacy1Name and !trade.deletedByGiver and !trade.deletedByReceiver} ? 'trade-card-outgoing bg-light-green' : ''" (template: "view-trades" - line 265, col 42)
+org.thymeleaf.exceptions.TemplateProcessingException: Could not parse as expression: "${trade.giverName == pharmacy1Name and !trade.deletedByGiver and !trade.deletedByReceiver} ? 'trade-card-outgoing bg-light-red' : '',
+                                        ${trade.giverName != pharmacy1Name and !trade.deletedByGiver and !trade.deletedByReceiver} ? 'trade-card-outgoing bg-light-green' : ''" (template: "view-trades" - line 265, col 42)
+	at org.thymeleaf.standard.expression.StandardExpressionParser.parseExpression(StandardExpressionParser.java:131)
+	at org.thymeleaf.standard.expression.StandardExpressionParser.parseExpression(StandardExpressionParser.java:62)
+	at org.thymeleaf.standard.expression.StandardExpressionParser.parseExpression(StandardExpressionParser.java:44)
+	at org.thymeleaf.engine.EngineEventUtils.parseAttributeExpression(EngineEventUtils.java:220)
+	at org.thymeleaf.engine.EngineEventUtils.computeAttributeExpression(EngineEventUtils.java:207)
+	at org.thymeleaf.standard.processor.AbstractStandardExpressionAttributeTagProcessor.doProcess(AbstractStandardExpressionAttributeTagProcessor.java:125)
+	at org.thymeleaf.processor.element.AbstractAttributeTagProcessor.doProcess(AbstractAttributeTagProcessor.java:74)
+	at org.thymeleaf.processor.element.AbstractElementTagProcessor.process(AbstractElementTagProcessor.java:95)
+	at org.thymeleaf.util.ProcessorConfigurationUtils$ElementTagProcessorWrapper.process(ProcessorConfigurationUtils.java:633)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleOpenElement(ProcessorTemplateHandler.java:1314)
+	at org.thymeleaf.engine.OpenElementTag.beHandled(OpenElementTag.java:205)
+	at org.thymeleaf.engine.Model.process(Model.java:282)
+	at org.thymeleaf.engine.Model.process(Model.java:290)
+	at org.thymeleaf.engine.IteratedGatheringModelProcessable.processIterationModel(IteratedGatheringModelProcessable.java:368)
+	at org.thymeleaf.engine.IteratedGatheringModelProcessable.process(IteratedGatheringModelProcessable.java:222)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleCloseElement(ProcessorTemplateHandler.java:1640)
+	at org.thymeleaf.engine.CloseElementTag.beHandled(CloseElementTag.java:139)
+	at org.thymeleaf.engine.TemplateModel.process(TemplateModel.java:136)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:592)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1103)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1077)
+	at org.thymeleaf.spring6.view.ThymeleafView.renderFragment(ThymeleafView.java:372)
+	at org.thymeleaf.spring6.view.ThymeleafView.render(ThymeleafView.java:192)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1437)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1168)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:181)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2025-06-20 14:23:01 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:23:01 INFO  - Starting PharmApplication using Java 17.0.13 with PID 21416 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:23:01 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:23:02 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:23:02 INFO  - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:23:02 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:23:03 INFO  - Root WebApplicationContext: initialization completed in 1378 ms
+2025-06-20 14:23:03 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:23:03 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:23:03 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:23:03 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:23:03 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:23:04 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:23:05 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:23:05 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:23:05 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:23:05 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:23:05 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:23:06 INFO  - Adding welcome page template: index
+2025-06-20 14:23:06 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:23:06 INFO  - Started PharmApplication in 5.448 seconds (process running for 5.73)
+2025-06-20 14:23:21 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:23:21 INFO  - Completed initialization in 0 ms
+2025-06-20 14:28:54 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:28:55 INFO  - Starting PharmApplication using Java 17.0.13 with PID 20380 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:28:55 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:28:55 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:28:55 INFO  - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:28:56 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:28:56 INFO  - Root WebApplicationContext: initialization completed in 1843 ms
+2025-06-20 14:28:57 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:28:57 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:28:57 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:28:57 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:28:57 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:28:59 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:28:59 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:28:59 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:29:00 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:29:00 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:29:00 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:29:00 INFO  - Adding welcome page template: index
+2025-06-20 14:29:00 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:29:00 INFO  - Started PharmApplication in 6.094 seconds (process running for 6.373)
+2025-06-20 14:29:00 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:29:00 INFO  - Completed initialization in 1 ms
+2025-06-20 14:30:33 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:30:33 INFO  - Starting PharmApplication using Java 17.0.13 with PID 5592 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:30:33 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:30:34 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:30:34 INFO  - Finished Spring Data repository scanning in 50 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:30:35 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:30:35 INFO  - Root WebApplicationContext: initialization completed in 1360 ms
+2025-06-20 14:30:35 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:30:35 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:30:35 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:30:36 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:30:36 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:30:37 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:30:37 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:30:37 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:30:38 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:30:38 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:30:38 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:30:38 INFO  - Adding welcome page template: index
+2025-06-20 14:30:38 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:30:38 INFO  - Started PharmApplication in 5.136 seconds (process running for 5.42)
+2025-06-20 14:30:42 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:30:42 INFO  - Completed initialization in 1 ms
+2025-06-20 14:32:25 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:32:25 INFO  - Starting PharmApplication using Java 17.0.13 with PID 13948 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:32:25 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:32:25 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:32:25 INFO  - Finished Spring Data repository scanning in 60 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:32:26 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:32:26 INFO  - Root WebApplicationContext: initialization completed in 1467 ms
+2025-06-20 14:32:26 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:32:26 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:32:27 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:32:27 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:32:27 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:32:28 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:32:28 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:32:28 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:32:29 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:32:29 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:32:29 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:32:29 INFO  - Adding welcome page template: index
+2025-06-20 14:32:29 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:32:29 INFO  - Started PharmApplication in 5.385 seconds (process running for 5.698)
+2025-06-20 14:32:29 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:32:29 INFO  - Completed initialization in 1 ms
+2025-06-20 14:34:43 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:34:43 INFO  - Starting PharmApplication using Java 17.0.13 with PID 16280 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:34:43 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:34:44 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:34:44 INFO  - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:34:44 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:34:45 INFO  - Root WebApplicationContext: initialization completed in 1270 ms
+2025-06-20 14:34:45 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:34:45 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:34:45 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:34:45 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:34:45 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:34:46 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:34:46 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:34:47 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:34:47 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:34:47 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:34:47 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:34:47 INFO  - Adding welcome page template: index
+2025-06-20 14:34:48 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:34:48 INFO  - Started PharmApplication in 5.185 seconds (process running for 5.47)
+2025-06-20 14:34:53 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:34:53 INFO  - Completed initialization in 1 ms
+2025-06-20 14:45:05 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:45:05 INFO  - Starting PharmApplication using Java 17.0.13 with PID 10500 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:45:05 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:45:05 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:45:06 INFO  - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:45:06 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:45:06 INFO  - Root WebApplicationContext: initialization completed in 1315 ms
+2025-06-20 14:45:06 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:45:06 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:45:07 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:45:07 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:45:07 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:45:08 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:45:08 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:45:08 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:45:09 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:45:09 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:45:09 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:45:09 INFO  - Adding welcome page template: index
+2025-06-20 14:45:10 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:45:10 INFO  - Started PharmApplication in 5.419 seconds (process running for 5.731)
+2025-06-20 14:45:10 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:45:10 INFO  - Completed initialization in 1 ms
+2025-06-20 14:47:03 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:47:03 INFO  - Starting PharmApplication using Java 17.0.13 with PID 25740 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:47:03 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:47:04 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:47:04 INFO  - Finished Spring Data repository scanning in 54 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:47:04 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:47:05 INFO  - Root WebApplicationContext: initialization completed in 1349 ms
+2025-06-20 14:47:05 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:47:05 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:47:05 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:47:05 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:47:05 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:47:06 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:47:06 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:47:07 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:47:07 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:47:07 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:47:07 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:47:07 INFO  - Adding welcome page template: index
+2025-06-20 14:47:08 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:47:08 INFO  - Started PharmApplication in 5.207 seconds (process running for 5.497)
+2025-06-20 14:47:08 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:47:08 INFO  - Completed initialization in 1 ms
+2025-06-20 14:50:19 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:50:19 INFO  - Starting PharmApplication using Java 17.0.13 with PID 1392 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:50:19 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:50:20 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:50:20 INFO  - Finished Spring Data repository scanning in 54 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:50:21 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:50:21 INFO  - Root WebApplicationContext: initialization completed in 1303 ms
+2025-06-20 14:50:21 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:50:21 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:50:21 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:50:21 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:50:21 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:50:22 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:50:23 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:50:23 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:50:24 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:50:24 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:50:24 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:50:24 INFO  - Adding welcome page template: index
+2025-06-20 14:50:24 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:50:24 INFO  - Started PharmApplication in 5.348 seconds (process running for 5.739)
+2025-06-20 14:50:29 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:50:29 INFO  - Completed initialization in 1 ms
+2025-06-20 14:53:07 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 14:53:08 INFO  - Starting PharmApplication using Java 17.0.13 with PID 20696 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 14:53:08 INFO  - The following 1 profile is active: "test"
+2025-06-20 14:53:08 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 14:53:08 INFO  - Finished Spring Data repository scanning in 50 ms. Found 4 JPA repository interfaces.
+2025-06-20 14:53:09 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 14:53:09 INFO  - Root WebApplicationContext: initialization completed in 1330 ms
+2025-06-20 14:53:09 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 14:53:09 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 14:53:09 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 14:53:10 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 14:53:10 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 14:53:11 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 14:53:11 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 14:53:11 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 14:53:12 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 14:53:12 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 14:53:12 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 14:53:12 INFO  - Adding welcome page template: index
+2025-06-20 14:53:12 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 14:53:12 INFO  - Started PharmApplication in 5.513 seconds (process running for 5.82)
+2025-06-20 14:53:13 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 14:53:13 INFO  - Completed initialization in 1 ms
+2025-06-20 14:57:03 INFO  - Contact created with ID: 13
+2025-06-20 15:35:45 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:35:45 INFO  - Starting PharmApplication using Java 17.0.13 with PID 22332 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:35:45 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:35:46 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:35:46 INFO  - Finished Spring Data repository scanning in 63 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:35:47 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:35:47 INFO  - Root WebApplicationContext: initialization completed in 1444 ms
+2025-06-20 15:35:47 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:35:47 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:35:47 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:35:48 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:35:48 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:35:49 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:35:49 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:35:49 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:35:50 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:35:50 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:35:50 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:35:50 INFO  - Adding welcome page template: index
+2025-06-20 15:35:50 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:35:50 INFO  - Started PharmApplication in 5.476 seconds (process running for 5.807)
+2025-06-20 15:35:50 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:35:50 INFO  - Completed initialization in 1 ms
+2025-06-20 15:39:57 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:39:57 INFO  - Starting PharmApplication using Java 17.0.13 with PID 16804 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:39:57 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:39:58 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:39:58 INFO  - Finished Spring Data repository scanning in 52 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:39:59 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:39:59 INFO  - Root WebApplicationContext: initialization completed in 1363 ms
+2025-06-20 15:39:59 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:39:59 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:39:59 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:40:00 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:40:00 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:40:01 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:40:01 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:40:01 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:40:02 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:40:02 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:40:02 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:40:02 INFO  - Adding welcome page template: index
+2025-06-20 15:40:02 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:40:02 INFO  - Started PharmApplication in 5.271 seconds (process running for 5.582)
+2025-06-20 15:40:02 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:40:02 INFO  - Completed initialization in 0 ms
+2025-06-20 15:40:51 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:40:51 INFO  - Starting PharmApplication using Java 17.0.13 with PID 9644 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:40:51 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:40:51 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:40:51 INFO  - Finished Spring Data repository scanning in 52 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:40:52 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:40:52 INFO  - Root WebApplicationContext: initialization completed in 1260 ms
+2025-06-20 15:40:52 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:40:52 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:40:52 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:40:53 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:40:53 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:40:54 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:40:54 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:40:54 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:40:55 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:40:55 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:40:55 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:40:55 INFO  - Adding welcome page template: index
+2025-06-20 15:40:55 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:40:55 INFO  - Started PharmApplication in 5.056 seconds (process running for 5.385)
+2025-06-20 15:40:57 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:40:57 INFO  - Completed initialization in 1 ms
+2025-06-20 15:52:35 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:52:35 INFO  - Starting PharmApplication using Java 17.0.13 with PID 19776 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:52:35 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:52:35 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:52:35 INFO  - Finished Spring Data repository scanning in 60 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:52:36 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:52:36 INFO  - Root WebApplicationContext: initialization completed in 1645 ms
+2025-06-20 15:52:37 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:52:37 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:52:38 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:52:38 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:52:38 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:52:39 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:52:39 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:52:39 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:52:40 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:52:40 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:52:40 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:52:40 INFO  - Adding welcome page template: index
+2025-06-20 15:52:41 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:52:41 INFO  - Started PharmApplication in 6.535 seconds (process running for 6.85)
+2025-06-20 15:53:15 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:53:15 INFO  - Completed initialization in 1 ms
+2025-06-20 15:54:21 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:54:21 INFO  - Starting PharmApplication using Java 17.0.13 with PID 26220 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:54:21 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:54:21 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:54:21 INFO  - Finished Spring Data repository scanning in 57 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:54:22 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:54:22 INFO  - Root WebApplicationContext: initialization completed in 1446 ms
+2025-06-20 15:54:22 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:54:22 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:54:23 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:54:24 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:54:24 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:54:25 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:54:25 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:54:25 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:54:26 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:54:26 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:54:26 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:54:26 INFO  - Adding welcome page template: index
+2025-06-20 15:54:26 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:54:26 INFO  - Started PharmApplication in 5.929 seconds (process running for 6.214)
+2025-06-20 15:54:31 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:54:31 INFO  - Completed initialization in 1 ms
+2025-06-20 15:58:21 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:58:21 INFO  - Starting PharmApplication using Java 17.0.13 with PID 18252 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:58:21 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:58:22 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:58:22 INFO  - Finished Spring Data repository scanning in 49 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:58:23 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:58:23 INFO  - Root WebApplicationContext: initialization completed in 1386 ms
+2025-06-20 15:58:23 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:58:23 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:58:23 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:58:23 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:58:23 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:58:24 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:58:24 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:58:25 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:58:25 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:58:25 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:58:25 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:58:26 INFO  - Adding welcome page template: index
+2025-06-20 15:58:26 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:58:26 INFO  - Started PharmApplication in 5.496 seconds (process running for 5.793)
+2025-06-20 15:58:26 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:58:26 INFO  - Completed initialization in 1 ms
+2025-06-20 15:59:39 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 15:59:39 INFO  - Starting PharmApplication using Java 17.0.13 with PID 17740 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 15:59:39 INFO  - The following 1 profile is active: "test"
+2025-06-20 15:59:39 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 15:59:39 INFO  - Finished Spring Data repository scanning in 53 ms. Found 4 JPA repository interfaces.
+2025-06-20 15:59:40 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 15:59:40 INFO  - Root WebApplicationContext: initialization completed in 1367 ms
+2025-06-20 15:59:40 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 15:59:40 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 15:59:41 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 15:59:41 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 15:59:41 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 15:59:42 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 15:59:42 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 15:59:42 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 15:59:43 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 15:59:43 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 15:59:43 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 15:59:43 INFO  - Adding welcome page template: index
+2025-06-20 15:59:43 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 15:59:43 INFO  - Started PharmApplication in 5.117 seconds (process running for 5.447)
+2025-06-20 15:59:43 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 15:59:43 INFO  - Completed initialization in 0 ms
+2025-06-20 16:03:50 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:03:50 INFO  - Starting PharmApplication using Java 17.0.13 with PID 7272 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:03:50 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:03:51 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:03:51 INFO  - Finished Spring Data repository scanning in 181 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:03:52 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:03:52 INFO  - Root WebApplicationContext: initialization completed in 1913 ms
+2025-06-20 16:03:52 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:03:52 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:03:53 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:03:53 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:03:53 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:03:54 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:03:54 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:03:54 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:03:55 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:03:55 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:03:55 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:03:55 INFO  - Adding welcome page template: index
+2025-06-20 16:03:55 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:03:55 INFO  - Started PharmApplication in 5.9 seconds (process running for 6.222)
+2025-06-20 16:03:58 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:03:58 INFO  - Completed initialization in 1 ms
+2025-06-20 16:07:43 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:07:43 INFO  - Starting PharmApplication using Java 17.0.13 with PID 26404 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:07:43 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:07:44 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:07:44 INFO  - Finished Spring Data repository scanning in 55 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:07:44 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:07:44 INFO  - Root WebApplicationContext: initialization completed in 1377 ms
+2025-06-20 16:07:44 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:07:45 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:07:45 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:07:45 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:07:45 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:07:46 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:07:46 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:07:46 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:07:47 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:07:47 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:07:47 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:07:47 INFO  - Adding welcome page template: index
+2025-06-20 16:07:48 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:07:48 INFO  - Started PharmApplication in 5.489 seconds (process running for 5.784)
+2025-06-20 16:07:49 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:07:49 INFO  - Completed initialization in 1 ms
+2025-06-20 16:13:55 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:13:55 INFO  - Starting PharmApplication using Java 17.0.13 with PID 22920 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:13:55 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:13:55 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:13:55 INFO  - Finished Spring Data repository scanning in 54 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:13:56 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:13:56 INFO  - Root WebApplicationContext: initialization completed in 1603 ms
+2025-06-20 16:13:57 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:13:57 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:13:57 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:13:57 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:13:57 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:13:58 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:13:58 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:13:58 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:13:59 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:13:59 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:13:59 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:13:59 INFO  - Adding welcome page template: index
+2025-06-20 16:14:00 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:14:00 INFO  - Started PharmApplication in 5.482 seconds (process running for 5.782)
+2025-06-20 16:14:00 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:14:00 INFO  - Completed initialization in 1 ms
+2025-06-20 16:16:36 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:16:36 INFO  - Starting PharmApplication using Java 17.0.13 with PID 1072 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:16:36 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:16:37 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:16:37 INFO  - Finished Spring Data repository scanning in 49 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:16:38 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:16:38 INFO  - Root WebApplicationContext: initialization completed in 1811 ms
+2025-06-20 16:16:38 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:16:38 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:16:38 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:16:39 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:16:39 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:16:40 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:16:40 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:16:40 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:16:41 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:16:41 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:16:41 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:16:41 INFO  - Adding welcome page template: index
+2025-06-20 16:16:41 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:16:41 INFO  - Started PharmApplication in 5.904 seconds (process running for 6.26)
+2025-06-20 16:16:47 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:16:47 INFO  - Completed initialization in 1 ms
+2025-06-20 16:19:18 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:19:18 INFO  - Starting PharmApplication using Java 17.0.13 with PID 18224 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:19:18 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:19:19 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:19:19 INFO  - Finished Spring Data repository scanning in 55 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:19:19 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:19:19 INFO  - Root WebApplicationContext: initialization completed in 1492 ms
+2025-06-20 16:19:20 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:19:20 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:19:20 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:19:20 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:19:20 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:19:22 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:19:22 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:19:22 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:19:23 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:19:23 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:19:23 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:19:23 INFO  - Adding welcome page template: index
+2025-06-20 16:19:23 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:19:23 INFO  - Started PharmApplication in 5.944 seconds (process running for 6.41)
+2025-06-20 16:19:23 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:19:23 INFO  - Completed initialization in 1 ms
+2025-06-20 16:21:53 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:21:53 INFO  - Starting PharmApplication using Java 17.0.13 with PID 5464 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:21:53 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:21:53 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:21:54 INFO  - Finished Spring Data repository scanning in 51 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:21:54 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:21:54 INFO  - Root WebApplicationContext: initialization completed in 1341 ms
+2025-06-20 16:21:54 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:21:54 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:21:55 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:21:55 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:21:55 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:21:56 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:21:56 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:21:56 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:21:57 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:21:57 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:21:57 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:21:57 INFO  - Adding welcome page template: index
+2025-06-20 16:21:58 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:21:58 INFO  - Started PharmApplication in 5.316 seconds (process running for 5.604)
+2025-06-20 16:22:04 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:22:04 INFO  - Completed initialization in 1 ms
+2025-06-20 16:23:44 INFO  - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-20 16:23:44 INFO  - Starting PharmApplication using Java 17.0.13 with PID 26192 (E:\Ðñïãñáììáôéóìïò\Java\pharmapp\build\classes\java\main started by digeo in E:\Ðñïãñáììáôéóìïò\Java\pharmapp)
+2025-06-20 16:23:44 INFO  - The following 1 profile is active: "test"
+2025-06-20 16:23:45 INFO  - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-06-20 16:23:45 INFO  - Finished Spring Data repository scanning in 93 ms. Found 4 JPA repository interfaces.
+2025-06-20 16:23:45 INFO  - Tomcat initialized with port 8080 (http)
+2025-06-20 16:23:45 INFO  - Root WebApplicationContext: initialization completed in 1500 ms
+2025-06-20 16:23:46 INFO  - HHH000412: Hibernate ORM core version 6.6.15.Final
+2025-06-20 16:23:46 INFO  - HHH000026: Second-level cache disabled
+2025-06-20 16:23:46 INFO  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-06-20 16:23:46 WARN  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-20 16:23:46 INFO  - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-06-20 16:23:47 INFO  - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-06-20 16:23:47 INFO  - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-06-20 16:23:47 INFO  - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-06-20 16:23:48 INFO  - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-06-20 16:23:48 WARN  - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-06-20 16:23:48 WARN  - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-20 16:23:48 INFO  - Adding welcome page template: index
+2025-06-20 16:23:49 INFO  - Tomcat started on port 8080 (http) with context path '/'
+2025-06-20 16:23:49 INFO  - Started PharmApplication in 5.434 seconds (process running for 5.768)
+2025-06-20 16:23:54 INFO  - Initializing Servlet 'dispatcherServlet'
+2025-06-20 16:23:54 INFO  - Completed initialization in 1 ms

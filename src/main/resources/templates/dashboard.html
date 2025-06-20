@@ -5,33 +5,7 @@
     <title>PharmaTrade - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" th:href="@{/css/newstyles4.css}">
-
-    <style>
-        .trade-item-deleted {
-            opacity: 0.5;
-            text-decoration: line-through;
-            background-color: #f8d7da !important;
-        }
-
-        .trade-item-partially-deleted {
-            background-color: #fff3cd !important;
-            border-left: 3px solid #ffc107;
-        }
-
-        .deletion-indicator {
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
-        .bg-light-red {
-            background-color: #fff5f5 !important;
-        }
-
-        .bg-light-green {
-            background-color: #f0fff4 !important;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles2.css}">
 </head>
 <body>
 <!-- Navigation -->
@@ -173,12 +147,12 @@
                                         <!-- Edit/Delete buttons on the right -->
                                         <div class="btn-group btn-group-sm">
                                             <a th:href="@{/contacts/update(id=${balance.contactId})}"
-                                               class="btn btn-outline-primary btn-sm"
+                                               class="btn btn-primary btn-sm"
                                                th:if="${balance.contactId != null}">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             <a th:href="@{/contacts/delete(id=${balance.contactId})}"
-                                               class="btn btn-outline-danger btn-sm"
+                                               class="btn btn-danger btn-sm"
                                                th:if="${balance.contactId != null}"
                                                onclick="return confirm('Are you sure you want to delete this contact?')">
                                                 <i class="bi bi-trash"></i>

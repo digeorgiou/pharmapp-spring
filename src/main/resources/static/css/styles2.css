@@ -40,18 +40,13 @@ body {
     flex-direction: column;
     background-color: var(--light-color);
     min-height: 100vh;
-    /* Remove padding-bottom since footer is no longer fixed */
+    padding-bottom: var(--footer-height);
 }
 
 .wrapper {
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-.content {
-    flex: 1;
-    overflow-y: auto;
 }
 
 /* FIXED: Main content wrapper should fill available space */
@@ -133,6 +128,46 @@ body {
 
 .sidebar .nav-link i {
     margin-right: 8px;
+}
+
+
+/* ===== PHARMACY LIST FIXES ===== */
+
+/* Ensure the pharmacy list item properly handles long names */
+.sidebar .list-group-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.75rem !important;
+    min-height: 3rem; /* Ensure consistent height */
+    overflow: hidden; /* Prevent content from overflowing */
+}
+
+/* Style the pharmacy name link to be flexible and truncate when needed */
+.sidebar .list-group-item a {
+    flex: 1 1 auto; /* Allow it to grow but also shrink */
+    min-width: 0; /* Allow shrinking below content size */
+    margin-right: 0.75rem; /* Space between name and buttons */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    line-height: 1.4;
+}
+
+/* Ensure button group stays fixed width and doesn't shrink */
+.sidebar .list-group-item .btn-group {
+    flex: 0 0 auto; /* Don't grow or shrink */
+    margin-left: auto; /* Push to the right */
+    min-width: 70px; /* Minimum width for two small buttons */
+}
+
+/* Make the buttons slightly smaller for better fit */
+.sidebar .list-group-item .btn-group .btn {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    min-width: 30px;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -278,8 +313,10 @@ footer {
     color: white;
     padding: 1.5rem 0;
     width: 100%;
-    margin-top: auto; /* Push footer to bottom */
-    flex-shrink: 0; /* Prevent footer from shrinking */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     height: var(--footer-height);
 }
@@ -319,20 +356,8 @@ footer p {
     background-size: cover;
     background-position: center;
     color: white;
-    padding: 80px 0;
-    /* Remove flex: 1 to prevent it from taking all available space */
-}
-
-/* Homepage specific layout adjustments */
-.wrapper .content {
-    /* Allow content to scroll and don't force it to fill viewport */
-    flex: none;
-    /* Remove min-height constraint that was causing issues */
-}
-
-/* Features section spacing */
-#features {
-    margin-bottom: 2rem; /* Add some breathing room above footer */
+    padding: 100px 0;
+    flex: 1;
 }
 
 .hero-section h1,
@@ -595,11 +620,6 @@ nav[aria-label="Page navigation"] {
     /* FIXED: Adjust main content wrapper height calculation for mobile */
     .main-content-wrapper {
         min-height: calc(100vh - var(--footer-height) - 70px);
-    }
-
-    /* Hero section adjustments for mobile */
-    .hero-section {
-        padding: 60px 0;
     }
 
     /* Increase bottom padding on mobile for better footer clearance */

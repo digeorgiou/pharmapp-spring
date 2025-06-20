@@ -12,40 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/newstyles4.css}">
-
-    <style>
-        .trade-card-deleted {
-            opacity: 0.6;
-            border-left: 4px solid #dc3545 !important;
-        }
-
-        .trade-card-partially-deleted {
-            border-left: 4px solid #ffc107 !important;
-        }
-
-        .deletion-status {
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-        }
-
-        .bg-light-red {
-            background-color: #fff5f5 !important;
-        }
-
-        .bg-light-green {
-            background-color: #f0fff4 !important;
-        }
-
-        .badge-outgoing {
-            background-color: #dc3545 !important;
-        }
-
-        .badge-incoming {
-            background-color: #198754 !important;
-        }
-    </style>
+    <!-- Consolidated CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles2.css}">
 </head>
 <body>
 <!-- Navigation -->
@@ -294,8 +262,8 @@
                                 <div class="list-group">
                                     <div th:each="trade : ${trades}"
                                          class="list-group-item p-0 mb-3 trade-card"
-                                         th:classappend="${trade.giverName == pharmacy1Name} ? 'trade-card-outgoing bg-light-red' : 'trade-card-incoming bg-light-green'"
-                                         th:class="${(trade.deletedByGiver and trade.deletedByReceiver) ? 'trade-card-deleted' : (trade.deletedByGiver or trade.deletedByReceiver) ? 'trade-card-partially-deleted' : ''}">
+                                         th:classappend="${(trade.deletedByGiver or trade.deletedByReceiver) ? 'trade-card-partially-deleted' :
+                                        (trade.giverName == pharmacy1Name) ? 'trade-card-outgoing bg-light-red' : 'trade-card-incoming bg-light-green'}">
 
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-start">
@@ -312,13 +280,9 @@
                                                 </h4>
                                             </div>
 
-                                            <!-- Deletion Status Alert -->
-                                            <div th:if="${trade.deletedByGiver or trade.deletedByReceiver}" class="alert deletion-status mt-3 mx-4 mb-2">
-                                                <div th:if="${trade.deletedByGiver and trade.deletedByReceiver}" class="alert-danger">
-                                                    <i class="bi bi-exclamation-triangle"></i>
-                                                    <strong>Διαγραφή:</strong> Αυτή η ανταλλαγή έχει διαγραφεί από και τους δύο συμμετέχοντες και θα αφαιρεθεί μόνιμα.
-                                                </div>
-                                                <div th:unless="${trade.deletedByGiver and trade.deletedByReceiver}" class="alert-warning">
+                                            <!-- Deletion Status Alert - positioned closer to bottom -->
+                                            <div th:if="${trade.deletedByGiver or trade.deletedByReceiver}" class="alert deletion-status mt-2 mb-1 mx-4">
+                                                <div class="alert-warning">
                                                     <i class="bi bi-exclamation-circle"></i>
                                                     <strong>Εκκρεμής Διαγραφή:</strong>
                                                     <span th:if="${trade.deletedByGiver and trade.giverName == pharmacy1Name}">
@@ -343,22 +307,14 @@
                                                 </small>
                                                 <div>
                                                     <!-- Show different buttons based on deletion status -->
-                                                    <div th:if="${not (trade.deletedByGiver and trade.deletedByReceiver)}">
-                                                        <!-- Show edit button only if trade is not marked for deletion by current user -->
-                                                        <a th:if="${not ((trade.deletedByGiver and trade.giverName == pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName == pharmacy1Name))}"
-                                                           th:href="@{/trades/edit/{id}(id=${trade.id})}"
-                                                           class="btn btn-primary btn-sm me-2"
-                                                           title="Επεξεργασία ανταλλαγής">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-
+                                                    <div>
                                                         <!-- Show restore button if the OTHER party marked it for deletion -->
                                                         <form th:if="${(trade.deletedByGiver and trade.giverName != pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName != pharmacy1Name)}"
                                                               th:action="@{/trades/restore/{id}(id=${trade.id})}"
                                                               method="post"
                                                               class="d-inline">
                                                             <button type="submit"
-                                                                    class="btn btn-success btn-sm me-2"
+                                                                    class="btn btn-success btn-sm me-2 mb-2"
                                                                     title="Επαναφορά ανταλλαγής"
                                                                     onclick="return confirm('Είστε σίγουροι ότι θέλετε να επαναφέρετε αυτή την ανταλλαγή;')">
                                                                 <i class="bi bi-arrow-clockwise"></i>
@@ -371,7 +327,7 @@
                                                               method="post"
                                                               class="d-inline">
                                                             <button type="submit"
-                                                                    class="btn btn-danger btn-sm me-2"
+                                                                    class="btn btn-danger btn-sm me-2 mb-2"
                                                                     title="Επιβεβαίωση διαγραφής"
                                                                     onclick="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε οριστικά αυτή την ανταλλαγή;')">
                                                                 <i class="bi bi-trash-fill"></i>
@@ -384,7 +340,7 @@
                                                               method="post"
                                                               class="d-inline">
                                                             <button type="submit"
-                                                                    class="btn btn-outline-danger btn-sm"
+                                                                    class="btn btn-danger btn-sm mb-2"
                                                                     title="Επισήμανση για διαγραφή"
                                                                     onclick="return confirm('Είστε σίγουροι ότι θέλετε να επισημάνετε αυτή την ανταλλαγή για διαγραφή;')">
                                                                 <i class="bi bi-trash"></i>
@@ -403,13 +359,6 @@
                                                                 <i class="bi bi-arrow-counterclockwise"></i>
                                                             </button>
                                                         </form>
-                                                    </div>
-
-                                                    <!-- If both parties deleted, show a message -->
-                                                    <div th:if="${trade.deletedByGiver and trade.deletedByReceiver}">
-                                                        <span class="badge bg-danger">
-                                                            <i class="bi bi-exclamation-triangle"></i> Διαγραμμένη
-                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -465,10 +414,11 @@
                         </div>
                     </div>
 
-                    <div th:if="${pharmacy1 == null}" class="d-flex justify-content-center align-items-center" style="height: 60vh;">
+                    <div th:if="${pharmacy1 == null}"
+                         class="d-flex justify-content-center align-items-center">
                         <div class="text-center">
                             <i class="bi bi-funnel" style="font-size: 3rem; color: #6c757d;"></i>
-                            <h3 class="mt-3">Διαλέξτε ενα φαρμακείο σας για
+                            <h3 >Διαλέξτε ενα φαρμακείο σας για
                                 να δείτε τις ανταλλαγές του</h3>
                             <p class="text-muted">Χρησιμοποιείστε τα
                                 παραπάνω φίλτρα αν θέλετε να δειτε τις

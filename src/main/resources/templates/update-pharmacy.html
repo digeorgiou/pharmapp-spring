@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>PharmaTrade - Update Pharmacy</title>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" th:href="@{/css/newstyles4.css}">
+    <!-- Consolidated CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <div class="d-flex justify-content-between w-100 align-items-center ms-3 me-3">
             <a class="navbar-brand" th:href="@{/dashboard}">
-                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo">
             </a>
             <div class="position-absolute start-50 translate-middle-x">
-                <span class="navbar-text fw-bold fs-4"
-                      style="color: #343a40;">Ενημέρωση Φαρμακείου</span>
+                <span class="navbar-text fw-bold fs-4">Ενημέρωση Φαρμακείου</span>
             </div>
             <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
@@ -34,7 +36,7 @@
     </div>
 </nav>
 
-<div class="container mt-5">
+<div class="container mt-5 flex-grow-1">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card shadow">
@@ -46,11 +48,8 @@
                 <div class="card-body">
                     <!-- Display current pharmacy info -->
                     <div class="alert alert-info" th:if="${pharmacy}">
-                        <strong>Τρέχων Όνομα:</strong> <span
-                            th:text="${pharmacy.name}"></span>
+                        <strong>Τρέχων Όνομα:</strong> <span th:text="${pharmacy.name}"></span>
                     </div>
-
-
 
                     <form th:action="@{/pharmacies/update}" method="post" th:object="${pharmacyUpdateDTO}">
                         <input type="hidden" th:field="*{id}">
@@ -64,8 +63,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Νέο
-                                Όνομα Φαρμακείου *</label>
+                            <label for="name" class="form-label">Νέο Όνομα Φαρμακείου *</label>
                             <input type="text"
                                    class="form-control"
                                    id="name"
@@ -80,8 +78,7 @@
                                 <i class="bi bi-arrow-left"></i> Ακύρωση
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-circle"></i> Ενημέρωση
-                                Φαρμακείου
+                                <i class="bi bi-check-circle"></i> Ενημέρωση Φαρμακείου
                             </button>
                         </div>
                     </form>

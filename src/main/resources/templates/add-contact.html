@@ -7,13 +7,12 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" th:href="@{/css/newstyles2.css}">
+    <!-- Consolidated CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles2.css}">
 </head>
 <body>
 <!-- Navigation -->
@@ -21,11 +20,10 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between w-100 align-items-center ms-3 me-3">
             <a class="navbar-brand" th:href="@{/dashboard}">
-                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo">
             </a>
             <div class="position-absolute start-50 translate-middle-x">
-                <span class="navbar-text fw-bold fs-4"
-                      style="color: #343a40;">Προσθήκη Επαφής</span>
+                <span class="navbar-text fw-bold fs-4">Προσθήκη Επαφής</span>
             </div>
             <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
@@ -60,14 +58,12 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" th:href="@{/contacts/add}">
-                                <i class="bi bi-person-plus"></i> Προσθήκη
-                                Επαφής
+                                <i class="bi bi-person-plus"></i> Προσθήκη Επαφής
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/trades/view}">
-                                <i class="bi bi-list-check"></i> Προβολή
-                                Ανταλλαγών
+                                <i class="bi bi-list-check"></i> Προβολή Ανταλλαγών
                             </a>
                         </li>
                         <li class="nav-item">
@@ -79,120 +75,107 @@
                 </div>
             </div>
 
-                <div class="col-md-9 col-lg-10 main-content">
-                    <div class="container mt-4">
-                        <div class="row justify-content-center">
-                            <div class="col-md-8 col-lg-6">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <h3
-                                                class="card-title text-center mb-4">Προσθήκη επαφής</h3>
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="card-title text-center mb-4">Προσθήκη επαφής</h3>
 
-                                        <!-- Success/Error messages -->
-                                        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
+                                    <!-- Success/Error messages -->
+                                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
 
-                                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
+                                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
 
-                                        <!-- Search Forms -->
-                                        <div class="mb-4">
-                                            <h5>Αναζήτηση</h5>
+                                    <!-- Search Forms -->
+                                    <div class="mb-4">
+                                        <h5>Αναζήτηση</h5>
 
-                                            <div class="row">
-                                                <!-- Search by Name Form -->
-                                                <div class = "col-12 mb-3">
-                                                    <form th:action="@{/contacts/add}" method="GET">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="nameSearch"
-                                                                   placeholder="Αναζήτηση με όνομα φαρμακείου"
-                                                                   th:value="${nameSearch}">
-                                                            <button
-                                                                    class="btn btn-primary w-25" type="submit">
-                                                                <i
-                                                                        class="bi bi-search"></i> Αναζήτηση φαρμακείου
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                                <!-- Search by User Form -->
-                                                <div class="col-12">
-                                                    <form
-                                                            th:action="@{/contacts/add}" method="GET">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="userSearch"
-                                                                   placeholder="Αναζήτηση με όνομα χρήστη"
-                                                                   th:value="${userSearch}">
-                                                            <button
-                                                                    class="btn btn-primary w-25" type="submit">
-                                                                <i
-                                                                        class="bi bi-search"></i> Αναζήτηση χρήστη
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                        <div class="row">
+                                            <!-- Search by Name Form -->
+                                            <div class="col-12 mb-3">
+                                                <form th:action="@{/contacts/add}" method="GET">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="nameSearch"
+                                                               placeholder="Αναζήτηση με όνομα φαρμακείου"
+                                                               th:value="${nameSearch}">
+                                                        <button class="btn btn-primary" type="submit">
+                                                            <i class="bi bi-search"></i> Αναζήτηση φαρμακείου
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </div>
 
-                                        <!-- Search Results -->
-                                        <div th:if="${not #lists.isEmpty(searchResults)}" class="search-results">
-                                            <h5 class="mb-3">
-                                                <span th:if="${searchType == 'name'}">
-                                                    Φαρμακεία που ταιριάζουνε
-                                                    με το όνομα: "<span
-                                                        th:text="${nameSearch}"></span>"
-                                                </span>
-                                                <span th:if="${searchType == 'user'}">
-                                                    Φαρμακεία που ανήκουν σε
-                                                    χρήστη με όνομα: "<span
-                                                        th:text="${userSearch}"></span>"
-                                                </span>
-                                            </h5>
-
-                                            <div class="list-group">
-                                                <form th:each="pharmacy : ${searchResults}"
-                                                      th:action="@{/contacts/add}" method="POST"
-                                                      class="list-group-item">
-                                                    <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div>
-                                                            <h6 class="mb-1" th:text="${pharmacy.name}"></h6>
-                                                            <small
-                                                                    class="text-muted">Όνομα χρήστη:
-                                                                <span th:text="${pharmacy.ownerUsername}"></span></small>
-                                                        </div>
-                                                        <div class="input-group" style="width: 300px;">
-                                                            <input
-                                                                    type="text" class="form-control" name="contactName"
-                                                                   placeholder="Όνομα Επαφής" required>
-                                                            <button class="btn btn-success" type="submit">
-                                                                <i
-                                                                        class="bi bi-plus-circle"></i> Προσθήκη
-                                                            </button>
-                                                        </div>
+                                            <!-- Search by User Form -->
+                                            <div class="col-12">
+                                                <form th:action="@{/contacts/add}" method="GET">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="userSearch"
+                                                               placeholder="Αναζήτηση με όνομα χρήστη"
+                                                               th:value="${userSearch}">
+                                                        <button class="btn btn-primary" type="submit">
+                                                            <i class="bi bi-search"></i> Αναζήτηση χρήστη
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="d-grid gap-2 mt-4">
-                                            <a th:href="@{/dashboard}"
-                                               class="btn btn-lg btn-outline-secondary">
-                                                <i
-                                                        class="bi bi-arrow-left"></i> Επιστροφή στην Αρχική
-                                            </a>
+                                    <!-- Search Results -->
+                                    <div th:if="${not #lists.isEmpty(searchResults)}" class="search-results">
+                                        <h5 class="mb-3">
+                                                <span th:if="${searchType == 'name'}">
+                                                    Φαρμακεία που ταιριάζουνε με το όνομα: "<span th:text="${nameSearch}"></span>"
+                                                </span>
+                                            <span th:if="${searchType == 'user'}">
+                                                    Φαρμακεία που ανήκουν σε χρήστη με όνομα: "<span th:text="${userSearch}"></span>"
+                                                </span>
+                                        </h5>
+
+                                        <div class="list-group">
+                                            <form th:each="pharmacy : ${searchResults}"
+                                                  th:action="@{/contacts/add}" method="POST"
+                                                  class="list-group-item">
+                                                <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="mb-1" th:text="${pharmacy.name}"></h6>
+                                                        <small class="text-muted">Όνομα χρήστη:
+                                                            <span th:text="${pharmacy.ownerUsername}"></span>
+                                                        </small>
+                                                    </div>
+                                                    <div class="input-group" style="width: 300px;">
+                                                        <input type="text" class="form-control" name="contactName"
+                                                               placeholder="Όνομα Επαφής" required>
+                                                        <button class="btn btn-success" type="submit">
+                                                            <i class="bi bi-plus-circle"></i> Προσθήκη
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
+                                    </div>
+
+                                    <div class="d-grid gap-2 mt-4">
+                                        <a th:href="@{/dashboard}" class="btn btn-lg btn-outline-secondary">
+                                            <i class="bi bi-arrow-left"></i> Επιστροφή στην Αρχική
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
