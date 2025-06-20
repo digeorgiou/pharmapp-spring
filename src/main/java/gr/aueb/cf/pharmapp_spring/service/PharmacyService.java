@@ -260,6 +260,7 @@ public class PharmacyService implements IPharmacyService{
             balanceList.add(new BalanceDTO(
                     contact.getContactName() != null ?
                             contact.getContactName() : "Contact",
+                    contact.getId(),
                     contactPharmacy.getName() != null ?
                             contactPharmacy.getName() : "Pharmacy",
                     pharmacyId,
@@ -317,6 +318,7 @@ public class PharmacyService implements IPharmacyService{
             balanceList.add(new BalanceDTO(
                     contact.getContactName() != null ?
                             contact.getContactName() : "Contact",
+                    contact.getId(),
                     contactPharmacy.getName() != null ?
                             contactPharmacy.getName() : "Pharmacy",
                     pharmacyId,

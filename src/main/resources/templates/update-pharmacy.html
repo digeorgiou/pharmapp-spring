@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PharmaTrade - Update Pharmacy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/newstyles4.css}">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between w-100 align-items-center ms-3 me-3">
+            <a class="navbar-brand" th:href="@{/dashboard}">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
+            </a>
+            <div class="position-absolute start-50 translate-middle-x">
+                <span class="navbar-text fw-bold fs-4"
+                      style="color: #343a40;">Ενημέρωση Φαρμακείου</span>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">
+                        <i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-pencil-square"></i> Ενημέρωση Φαρμακείου
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <!-- Display current pharmacy info -->
+                    <div class="alert alert-info" th:if="${pharmacy}">
+                        <strong>Τρέχων Όνομα:</strong> <span
+                            th:text="${pharmacy.name}"></span>
+                    </div>
+
+
+
+                    <form th:action="@{/pharmacies/update}" method="post" th:object="${pharmacyUpdateDTO}">
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{userId}">
+
+                        <!-- Display errors -->
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                            <ul class="mb-0">
+                                <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Νέο
+                                Όνομα Φαρμακείου *</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="name"
+                                   th:field="*{name}"
+                                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
+                                   placeholder="Enter pharmacy name">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a th:href="@{/dashboard}" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-arrow-left"></i> Ακύρωση
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Ενημέρωση
+                                Φαρμακείου
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="mt-auto">
+    <div class="container text-center">
+        <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

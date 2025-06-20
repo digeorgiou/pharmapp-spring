@@ -15,10 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
@@ -272,5 +269,43 @@ public class TradeController {
     @GetMapping("/record-success")
     public String showTradeRecordSuccess(){
         return "record-trade-success";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteTrade(
+            @PathVariable Long id,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            UserReadOnlyDTO user = userService.getUserByUsername(authentication.getName());
+            tradeRecordService.deleteRecord(id, user.getId());
+            redirectAttributes.addFlashAttribute("successMessage", "Trade marked for deletion successfully");
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", "Trade not found");
+        } catch (EntityNotAuthorizedException e) {
+            redirectAttributes.addFlashAttribute("error", "You are not authorized to delete this trade");
+        }
+
+        return "redirect:/trades/view";
+    }
+
+    @PostMapping("/restore/{id}")
+    public String restoreTrade(
+            @PathVariable Long id,
+            Authentication authentication,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            UserReadOnlyDTO user = userService.getUserByUsername(authentication.getName());
+            tradeRecordService.restoreTradeRecord(id, user.getId());
+            redirectAttributes.addFlashAttribute("successMessage", "Trade restored successfully");
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", "Trade not found");
+        } catch (EntityNotAuthorizedException e) {
+            redirectAttributes.addFlashAttribute("error", "You are not authorized to restore this trade");
+        }
+
+        return "redirect:/trades/view";
     }
 }

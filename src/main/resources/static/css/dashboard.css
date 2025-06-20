@@ -8,6 +8,7 @@ html, body {
             display: flex;
             flex-direction: column;
             background-color: #f8f9fa;
+            padding-bottom: 70px;
         }
 
         .navbar {
@@ -44,7 +45,23 @@ html, body {
         .main-content {
             padding: 20px;
             background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+            padding-bottom: 120px; /* Extra padding at bottom to avoid footer overlap */
+        }
+
+        .trade-list-container {
+            max-height: 65vh;
+            overflow-y: auto;
+            margin-bottom: 100px !important;
+            padding-bottom: 20px;
+        }
+
+        .pagination {
+            margin-bottom: 100px !important; /* Extra space to clear the fixed footer */
         }
 
         footer {
@@ -79,10 +96,11 @@ html, body {
 
         .balance-card {
             background-color: #b9dae1;
-                border-radius: 10px;
-                padding: 20px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                height: 400px;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            height: 400px;
+            margin-bottom: 20px;
         }
 
         .recent-trades {
@@ -112,4 +130,22 @@ html, body {
             flex: 1;
             margin: 0 2px;
             white-space: nowrap;
+        }
+
+        .balance-cards-wrapper {
+            max-height: calc(100vh - 300px); /* Adjust based on your header/navbar height */
+            overflow-y: auto;
+            margin-bottom: 100px !important;
+            padding-bottom: 20px;
+        }
+
+
+        .row.balance-cards-row {
+            margin-bottom: 100px !important; /* Space before footer */
+        }
+
+
+
+        .mt-auto {
+            margin-top: auto !important;
         }

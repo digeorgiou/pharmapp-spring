@@ -5,6 +5,7 @@ import java.util.List;
 public record BalanceDTO (
 
         String contactName,
+        Long contactId,
         String pharmacyName,
         Long ownerPharmacyId,
         Long contactPharmacyId,
