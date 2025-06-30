@@ -10,6 +10,8 @@ public record TradeRecordReadOnlyDTO(
         Double amount,
         String giverName,
         String receiverName,
+        Long giverPharmacyId,
+        Long receiverPharmacyId,
         String recorderUsername,
         LocalDateTime transactionDate,
         Boolean deletedByGiver,

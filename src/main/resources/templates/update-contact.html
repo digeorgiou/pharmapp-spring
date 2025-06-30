@@ -1,178 +1,191 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PharmaTrade - Add Contact</title>
+    <title>PharmaTrade - Update Contact</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Consolidated CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/tailwind-config.js}"></script>
 </head>
-<body>
+<body class="bg-gray-50 flex flex-col min-h-screen">
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between w-100 align-items-center ms-3 me-3">
-            <a class="navbar-brand" th:href="@{/dashboard}">
-                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo">
+<nav class="bg-pharma-blue shadow-md sticky top-0 z-20 h-16 flex-shrink-0">
+    <div class="container-fluid h-full">
+        <div class="flex justify-between items-center w-full h-full px-6">
+            <a th:href="@{/dashboard}" class="flex-shrink-0">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" class="h-12 transition-transform hover:scale-105">
             </a>
-            <div class="position-absolute start-50 translate-middle-x">
-                <span class="navbar-text fw-bold fs-4">Προσθήκη Επαφής</span>
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <span class="text-gray-800 font-bold text-xl">Ενημέρωση Επαφής</span>
             </div>
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
-                    <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" th:href="@{/logout}">
-                        <i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                </ul>
+            <div class="relative">
+                <div class="group inline-block">
+                    <button class="flex items-center px-3 py-2 border border-gray-400 rounded-md bg-white hover:bg-gray-50 focus:outline-none">
+                        <i class="bi bi-person-circle mr-2"></i>
+                        <span th:text="${#authentication.name}">User</span>
+                        <i class="bi bi-chevron-down ml-2"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-30">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md no-underline">
+                            <i class="bi bi-gear mr-2"></i>Settings
+                        </a>
+                        <hr class="border-gray-200">
+                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-md no-underline">
+                            <i class="bi bi-box-arrow-right mr-2"></i>Logout
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 
-<div class="main-content-wrapper">
-    <div class="container-fluid px-0">
-        <div class="row content-row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 sidebar">
-                <div class="sidebar-sticky pt-3">
-                    <h5 class="px-3">Τα φαρμακεία μου</h5>
-                    <div class="list-group list-group-flush mb-3">
-                        <a th:each="pharmacy : ${user.pharmacies}"
-                           th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
-                           th:text="${pharmacy.name}"
-                           class="list-group-item list-group-item-action">
-                        </a>
-                    </div>
-                    <hr>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/contacts/add}">
-                                <i class="bi bi-person-plus"></i> Προσθήκη Επαφής
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/trades/view}">
-                                <i class="bi bi-list-check"></i> Προβολή Ανταλλαγών
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/pharmacies/add}">
-                                <i class="bi bi-shop"></i> Προσθήκη Φαρμακείου
-                            </a>
-                        </li>
-                    </ul>
+<div class="flex flex-1 min-h-0">
+    <!-- Mobile menu overlay -->
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed lg:relative inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 w-80 lg:w-64 xl:w-80 bg-pharma-light shadow-lg overflow-y-auto flex-shrink-0 z-40 transition-transform duration-300 ease-in-out">
+        <div class="p-4">
+            <!-- Close button for mobile -->
+            <div class="flex justify-between items-center lg:hidden mb-4">
+                <h5 class="text-lg font-semibold">Menu</h5>
+                <button id="closeSidebar" class="p-2 rounded-md hover:bg-gray-200">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <h5 class="text-lg font-semibold mb-4 px-3 hidden lg:block">Τα φαρμακεία μου</h5>
+            <h6 class="text-base font-semibold mb-4 px-3 lg:hidden">Τα φαρμακεία μου</h6>
+
+            <!-- Pharmacy List -->
+            <div class="space-y-2 mb-6">
+                <div th:each="pharmacy : ${user.pharmacies}" class="bg-white border rounded-lg p-3 hover:bg-gray-50">
+                    <a th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
+                       th:text="${pharmacy.name}"
+                       class="block text-gray-800 truncate no-underline">
+                    </a>
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 main-content">
-                <div class="container mt-4">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 col-lg-6">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h3 class="card-title text-center mb-4">Προσθήκη επαφής</h3>
+            <hr class="border-gray-300 mb-4">
 
-                                    <!-- Success/Error messages -->
-                                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
+            <!-- Navigation Links -->
+            <ul class="space-y-2">
+                <li>
+                    <a th:href="@{/contacts/add}" class="flex items-center px-3 py-2 text-gray-700 rounded-md bg-blue-100 border-l-4 border-blue-500 font-medium no-underline">
+                        <i class="bi bi-person-plus mr-3"></i>
+                        Ενημέρωση Επαφής
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/trades/view}" class="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-200 transition-colors no-underline">
+                        <i class="bi bi-list-check mr-3"></i>
+                        Προβολή Ανταλλαγών
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/pharmacies/add}" class="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-200 transition-colors no-underline">
+                        <i class="bi bi-shop mr-3"></i>
+                        Προσθήκη Φαρμακείου
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
+    <!-- Main Content -->
+    <div class="flex-1 overflow-y-auto bg-white lg:ml-0">
+        <!-- Mobile menu button -->
+        <div class="lg:hidden bg-white border-b border-gray-200 p-4">
+            <button id="openSidebar" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+                <i class="bi bi-list text-xl"></i>
+                <span>Menu</span>
+            </button>
+        </div>
 
-                                    <!-- Search Forms -->
-                                    <div class="mb-4">
-                                        <h5>Αναζήτηση</h5>
+        <div class="p-4 lg:p-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Ενημέρωση επαφής</h3>
 
-                                        <div class="row">
-                                            <!-- Search by Name Form -->
-                                            <div class="col-12 mb-3">
-                                                <form th:action="@{/contacts/add}" method="GET">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="nameSearch"
-                                                               placeholder="Αναζήτηση με όνομα φαρμακείου"
-                                                               th:value="${nameSearch}">
-                                                        <button class="btn btn-primary" type="submit">
-                                                            <i class="bi bi-search"></i> Αναζήτηση φαρμακείου
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                        <!-- Success/Error messages -->
+                        <div th:if="${successMessage}" class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                            <i class="bi bi-check-circle-fill mr-2"></i>
+                            <span th:text="${successMessage}"></span>
+                            <button type="button" class="ml-auto text-green-500 hover:text-green-700" onclick="this.parentElement.style.display='none'">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
 
-                                            <!-- Search by User Form -->
-                                            <div class="col-12">
-                                                <form th:action="@{/contacts/add}" method="GET">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" name="userSearch"
-                                                               placeholder="Αναζήτηση με όνομα χρήστη"
-                                                               th:value="${userSearch}">
-                                                        <button class="btn btn-primary" type="submit">
-                                                            <i class="bi bi-search"></i> Αναζήτηση χρήστη
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div th:if="${error}" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                            <i class="bi bi-exclamation-triangle-fill mr-2"></i>
+                            <span th:text="${error}"></span>
+                            <button type="button" class="ml-auto text-red-500 hover:text-red-700" onclick="this.parentElement.style.display='none'">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
 
-                                    <!-- Search Results -->
-                                    <div th:if="${not #lists.isEmpty(searchResults)}" class="search-results">
-                                        <h5 class="mb-3">
-                                                <span th:if="${searchType == 'name'}">
-                                                    Φαρμακεία που ταιριάζουνε με το όνομα: "<span th:text="${nameSearch}"></span>"
-                                                </span>
-                                            <span th:if="${searchType == 'user'}">
-                                                    Φαρμακεία που ανήκουν σε χρήστη με όνομα: "<span th:text="${userSearch}"></span>"
-                                                </span>
-                                        </h5>
-
-                                        <div class="list-group">
-                                            <form th:each="pharmacy : ${searchResults}"
-                                                  th:action="@{/contacts/add}" method="POST"
-                                                  class="list-group-item">
-                                                <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h6 class="mb-1" th:text="${pharmacy.name}"></h6>
-                                                        <small class="text-muted">Όνομα χρήστη:
-                                                            <span th:text="${pharmacy.ownerUsername}"></span>
-                                                        </small>
-                                                    </div>
-                                                    <div class="input-group" style="width: 300px;">
-                                                        <input type="text" class="form-control" name="contactName"
-                                                               placeholder="Όνομα Επαφής" required>
-                                                        <button class="btn btn-success" type="submit">
-                                                            <i class="bi bi-plus-circle"></i> Προσθήκη
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-grid gap-2 mt-4">
-                                        <a th:href="@{/dashboard}" class="btn btn-lg btn-outline-secondary">
-                                            <i class="bi bi-arrow-left"></i> Επιστροφή στην Αρχική
-                                        </a>
-                                    </div>
-                                </div>
+                        <!-- Display current contact info -->
+                        <div th:if="${contact}" class="bg-blue-50 border border-blue-200 rounded-md p-4 mb-6">
+                            <div class="text-blue-800">
+                                <strong>Τρέχουσα Επαφή:</strong>
+                                <span th:text="${contact.contactName}" class="text-blue-700"></span>
+                                <br>
+                                <strong>Φαρμακείο:</strong>
+                                <span th:text="${contact.pharmacyName}" class="text-blue-700"></span>
                             </div>
                         </div>
+
+                        <!-- Update Form -->
+                        <form th:action="@{/contacts/update}" method="POST" th:object="${contactUpdateDTO}" class="space-y-6">
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{userId}">
+                            <input type="hidden" th:field="*{pharmacyId}">
+
+                            <!-- Display errors -->
+                            <div th:if="${#fields.hasErrors('*')}" class="bg-red-50 border border-red-200 rounded-md p-4">
+                                <ul class="list-disc list-inside text-red-700 space-y-1">
+                                    <li th:each="error : ${#fields.errors('*')}" th:text="${error}"></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <label for="contactName" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Νέο Όνομα Επαφής *
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="bi bi-person text-gray-400"></i>
+                                    </div>
+                                    <input type="text"
+                                           th:class="${#fields.hasErrors('contactName')} ? 'w-full pl-10 pr-4 py-3 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500' : 'w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'"
+                                           id="contactName"
+                                           th:field="*{contactName}"
+                                           placeholder="Εισάγετε νέο όνομα επαφής"
+                                           required>
+                                </div>
+                                <div th:if="${#fields.hasErrors('contactName')}" class="mt-2 text-red-600 text-sm flex items-center">
+                                    <i class="bi bi-exclamation-circle-fill mr-1"></i>
+                                    <span th:errors="*{contactName}"></span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="space-y-3 pt-4">
+                                <button type="submit" class="w-full flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-lg">
+                                    <i class="bi bi-check-circle mr-2"></i> Ενημέρωση Επαφής
+                                </button>
+                                <a th:href="@{/dashboard}" class="w-full flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors text-lg no-underline">
+                                    <i class="bi bi-arrow-left mr-2"></i> Επιστροφή στην Αρχική
+                                </a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -181,13 +194,61 @@
 </div>
 
 <!-- Footer -->
-<footer>
-    <div class="container text-center">
+<footer class="bg-gray-800 text-white py-4 flex-shrink-0">
+    <div class="container mx-auto text-center">
         <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
     </div>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Mobile sidebar functionality
+    const openSidebarBtn = document.getElementById('openSidebar');
+    const closeSidebarBtn = document.getElementById('closeSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('mobileMenuOverlay');
+
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+        overlay.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    if (openSidebarBtn) {
+        openSidebarBtn.addEventListener('click', openSidebar);
+    }
+
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
+
+    // Close sidebar when clicking on a link (mobile)
+    const sidebarLinks = sidebar.querySelectorAll('a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 1024) { // Only on mobile
+                closeSidebar();
+            }
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+            closeSidebar();
+        }
+    });
+</script>
 </body>
 </html>

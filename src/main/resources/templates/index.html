@@ -4,93 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PharmaTrade - Pharmacy Trading Platform</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Consolidated CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/tailwind-config.js}"></script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('/img/pillsimage.jpg') center/cover;
+        }
+    </style>
 </head>
-<body>
-<div class="wrapper">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo">
+<body class="bg-gray-50 flex flex-col min-h-screen">
+<!-- Navigation -->
+<nav class="bg-pharma-blue shadow-md sticky top-0 z-20 h-16 flex-shrink-0">
+    <div class="container mx-auto h-full">
+        <div class="flex justify-between items-center w-full h-full px-6">
+            <a th:href="@{/}" class="flex-shrink-0">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" class="h-12 transition-transform hover:scale-105">
             </a>
-            <div class="ms-auto">
-                <a th:href="@{/login}" class="btn btn-primary btn-login">Log In</a>
+            <div class="flex items-center">
+                <a th:href="@{/login}" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors no-underline">
+                    Log In
+                </a>
             </div>
         </div>
-    </nav>
-
-    <!-- Content Area -->
-    <div class="content">
-        <!-- Hero Section -->
-        <section class="hero-section text-center">
-            <div class="container">
-                <h2 class="display-4 fw-bold mb-4">Διαχείριση ανταλλαγών φαρμακείων</h2>
-                <p class="lead mb-5">Ασφαλής πλατφόρμα για την καθημερινη διαχείριση ανταλλαγών μεταξύ φαρμακείων</p>
-                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                    <a th:href="@{/login}" class="btn btn-primary btn-lg px-5">Είσοδος</a>
-                    <a href="#features" class="btn btn-outline-light btn-lg px-4">Μάθετε περισσότερα</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="py-3 bg-light">
-            <div class="container">
-                <h2 class="text-center mb-5">Βασικές Λειτουργείες</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-body text-center">
-                                <div class="feature-icon">
-                                    <i class="bi bi-arrow-left-right"></i>
-                                </div>
-                                <h3 class="h4">Διαχείριση ανταλλαγών</h3>
-                                <p class="text-muted">Κρατείστε εύκολα πλήρες ιστορικό των ανταλλαγών σας</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-body text-center">
-                                <div class="feature-icon">
-                                    <i class="bi bi-shield-lock"></i>
-                                </div>
-                                <h3 class="h4">Ασφαλής Πλατφόρμα</h3>
-                                <p class="text-muted">Η Role-based πρόσβαση εξασφαλίζει την ασφάλεια των δεδομένων σας</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="card-body text-center">
-                                <div class="feature-icon">
-                                    <i class="bi bi-graph-up"></i>
-                                </div>
-                                <h3 class="h4">Balance Tracking</h3>
-                                <p class="text-muted">Υπολογίζεται αυτόματα το τρέχων υπόλοιπο μεταξύ δυο συνεργατών</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
+</nav>
 
-    <!-- Footer -->
-    <footer class="text-center mt-auto">
-        <div class="container">
-            <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
+<!-- Content Area -->
+<div class="flex-1">
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20 lg:py-32">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl lg:text-6xl font-bold mb-6" style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                Διαχείριση ανταλλαγών φαρμακείων
+            </h2>
+            <p class="text-lg lg:text-xl mb-8 max-w-3xl mx-auto" style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                Ασφαλής πλατφόρμα για την καθημερινη διαχείριση ανταλλαγών μεταξύ φαρμακείων
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a th:href="@{/login}" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-lg no-underline">
+                    Είσοδος
+                </a>
+                <a href="#features" class="px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-gray-800 transition-colors text-lg no-underline">
+                    Μάθετε περισσότερα
+                </a>
+            </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-12">Βασικές Λειτουργείες</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+                    <div class="text-5xl text-blue-600 mb-6">
+                        <i class="bi bi-arrow-left-right"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Διαχείριση ανταλλαγών</h3>
+                    <p class="text-gray-600">Κρατείστε εύκολα πλήρες ιστορικό των ανταλλαγών σας</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+                    <div class="text-5xl text-blue-600 mb-6">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Ασφαλής Πλατφόρμα</h3>
+                    <p class="text-gray-600">Η Role-based πρόσβαση εξασφαλίζει την ασφάλεια των δεδομένων σας</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
+                    <div class="text-5xl text-blue-600 mb-6">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Balance Tracking</h3>
+                    <p class="text-gray-600">Υπολογίζεται αυτόματα το τρέχων υπόλοιπο μεταξύ δυο συνεργατών</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!-- Bootstrap JS Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-6 flex-shrink-0">
+    <div class="container mx-auto text-center">
+        <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

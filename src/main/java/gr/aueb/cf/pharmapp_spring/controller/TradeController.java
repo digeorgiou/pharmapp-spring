@@ -21,6 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/trades")
@@ -198,7 +201,18 @@ public class TradeController {
                     model.addAttribute("trades", tradesPage.getContent());
                     model.addAttribute("currentPage", tradesPage.getNumber());
                     model.addAttribute("totalPages", tradesPage.getTotalPages());
+                    model.addAttribute("totalItems", tradesPage.getTotalElements());
                     model.addAttribute("pageSize", size);
+
+                    List<Long> pharmacyIds = tradesPage.getContent().stream()
+                            .flatMap(trade -> Stream.of(trade.giverPharmacyId()
+                                    , trade.receiverPharmacyId())).toList();
+
+                    Map<Long, String> contactNames =
+                            userService.getContactNamesMap(user.getId(),
+                                    pharmacyIds);
+
+                    model.addAttribute("contactNames", contactNames);
 
                     Integer tradeCount = tradeRecordService.getTradeCountBetweenPharmacies(pharmacy1, pharmacy2);
                     Double balance = tradeRecordService.calculateBalanceBetweenPharmacies(pharmacy1, pharmacy2);
@@ -213,7 +227,17 @@ public class TradeController {
                     model.addAttribute("totalPages", tradesPage.getTotalPages());
                     model.addAttribute("totalItems", tradesPage.getTotalElements());
                     model.addAttribute("pageSize", size);
+                    List<Long> pharmacyIds = tradesPage.getContent().stream()
+                            .flatMap(trade -> Stream.of(trade.giverPharmacyId()
+                                    , trade.receiverPharmacyId())).toList();
+
+                    Map<Long, String> contactNames =
+                            userService.getContactNamesMap(user.getId(),
+                                    pharmacyIds);
+
+                    model.addAttribute("contactNames", contactNames);
                 }
+
             }
 
             // Add date filters to model

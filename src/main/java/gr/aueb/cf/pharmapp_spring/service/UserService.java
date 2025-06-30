@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -202,6 +203,40 @@ public class UserService implements IUserService{
         return contacts.stream()
                 .map(mapper::mapToPharmacyContactReadOnlyDTO)
                 .collect(Collectors.toList());
+    }
+
+    // Add this method to your UserService class
+
+    @Override
+    @Transactional
+    public Map<Long, String> getContactNamesMap(Long userId, List<Long> pharmacyIds) throws EntityNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow
+                (() -> new EntityNotFoundException("User",
+                        "User with id " + userId + " not found"));
+
+        return pharmacyIds.stream()
+                .distinct()
+                .collect(Collectors.toMap(
+                        pharmacyId -> pharmacyId,
+                        pharmacyId -> {
+                            try {
+                                // Try to get contact name first
+                                return contactRepository.findByUserIdAndPharmacyId(userId, pharmacyId)
+                                        .map(PharmacyContact::getContactName)
+                                        .orElse(getPharmacyNameById(pharmacyId));
+                            } catch (Exception e) {
+                                return getPharmacyNameById(pharmacyId);
+                            }
+                        }
+                ));
+    }
+
+    // Helper method
+    private String getPharmacyNameById(Long pharmacyId) {
+        return pharmacyRepository.findById(pharmacyId)
+                .map(Pharmacy::getName)
+                .orElse("Unknown Pharmacy");
     }
 
     @Override

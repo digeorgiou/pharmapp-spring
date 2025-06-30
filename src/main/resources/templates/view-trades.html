@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,424 +7,407 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Consolidated CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles2.css}">
+    <script th:src="@{/js/tailwind-config.js}"></script>
 </head>
-<body>
+<body class="bg-gray-50 flex flex-col min-h-screen">
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between w-100 align-items-center ms-3 me-3">
-            <a class="navbar-brand" th:href="@{/dashboard}">
-                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" style="height: 50px;">
+<nav class="bg-pharma-blue shadow-md sticky top-0 z-20 h-16 flex-shrink-0">
+    <div class="container-fluid h-full">
+        <div class="flex justify-between items-center w-full h-full px-6">
+            <a th:href="@{/dashboard}" class="flex-shrink-0">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" class="h-12 transition-transform hover:scale-105">
             </a>
-            <div class="position-absolute start-50 translate-middle-x">
-                <span class="navbar-text fw-bold fs-4"
-                      style="color: #343a40;">Προβολή Ανταλλαγών</span>
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <span class="text-gray-800 font-bold text-xl">Προβολή Ανταλλαγών</span>
             </div>
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
-                    <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" th:href="@{/logout}">
-                        <i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                </ul>
+            <div class="relative">
+                <div class="group inline-block">
+                    <button class="flex items-center px-3 py-2 border border-gray-400 rounded-md bg-white hover:bg-gray-50 focus:outline-none">
+                        <i class="bi bi-person-circle mr-2"></i>
+                        <span th:text="${#authentication.name}">User</span>
+                        <i class="bi bi-chevron-down ml-2"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-30">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md no-underline">
+                            <i class="bi bi-gear mr-2"></i>Settings
+                        </a>
+                        <hr class="border-gray-200">
+                        <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-md no-underline">
+                            <i class="bi bi-box-arrow-right mr-2"></i>Logout
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 
-<div class="main-content-wrapper">
-    <div class="container-fluid px-0">
-        <div class="row content-row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 sidebar">
-                <div class="sidebar-sticky pt-3">
-                    <h5 class="px-3">Τα φαρμακεία μου</h5>
-                    <div class="list-group list-group-flush mb-3">
-                        <a th:each="pharmacy : ${user.pharmacies}"
-                           th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
-                           th:text="${pharmacy.name}"
-                           class="list-group-item list-group-item-action">
-                        </a>
-                    </div>
-                    <hr>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/contacts/add}">
-                                <i class="bi bi-person-plus"></i> Προσθήκη
-                                Επαφής
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/trades/view}">
-                                <i class="bi bi-list-check"></i> Προβολή
-                                Ανταλλαγών
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/pharmacies/add}">
-                                <i class="bi bi-shop"></i> Προσθήκη Φαρμακείου
-                            </a>
-                        </li>
-                    </ul>
+<div class="flex flex-1 min-h-0">
+    <!-- Mobile menu overlay -->
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed lg:relative inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 w-80 lg:w-64 xl:w-80 bg-pharma-light shadow-lg overflow-y-auto flex-shrink-0 z-40 transition-transform duration-300 ease-in-out">
+        <div class="p-4">
+            <!-- Close button for mobile -->
+            <div class="flex justify-between items-center lg:hidden mb-4">
+                <h5 class="text-lg font-semibold">Menu</h5>
+                <button id="closeSidebar" class="p-2 rounded-md hover:bg-gray-200">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <h5 class="text-lg font-semibold mb-4 px-3 hidden lg:block">Τα φαρμακεία μου</h5>
+            <h6 class="text-base font-semibold mb-4 px-3 lg:hidden">Τα φαρμακεία μου</h6>
+
+            <!-- Pharmacy List -->
+            <div class="space-y-2 mb-6">
+                <div th:each="pharmacy : ${user.pharmacies}" class="bg-white border rounded-lg p-3 hover:bg-gray-50">
+                    <a th:href="@{/dashboard(pharmacyId=${pharmacy.id})}"
+                       th:text="${pharmacy.name}"
+                       class="block text-gray-800 truncate no-underline">
+                    </a>
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 main-content">
-                <div class="container-fluid mt-4">
+            <hr class="border-gray-300 mb-4">
 
-                    <!-- Alert Messages -->
-                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle"></i> <span th:text="${successMessage}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+            <!-- Navigation Links -->
+            <ul class="space-y-2">
+                <li>
+                    <a th:href="@{/contacts/add}" class="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-200 transition-colors no-underline">
+                        <i class="bi bi-person-plus mr-3"></i>
+                        Προσθήκη Επαφής
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/trades/view}" class="flex items-center px-3 py-2 text-gray-700 rounded-md bg-blue-100 border-l-4 border-blue-500 font-medium no-underline">
+                        <i class="bi bi-list-check mr-3"></i>
+                        Προβολή Ανταλλαγών
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/pharmacies/add}" class="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-200 transition-colors no-underline">
+                        <i class="bi bi-shop mr-3"></i>
+                        Προσθήκη Φαρμακείου
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle"></i> <span th:text="${error}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+    <!-- Main Content -->
+    <div class="flex-1 overflow-y-auto bg-white lg:ml-0">
+        <!-- Mobile menu button -->
+        <div class="lg:hidden bg-white border-b border-gray-200 p-4">
+            <button id="openSidebar" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
+                <i class="bi bi-list text-xl"></i>
+                <span>Menu</span>
+            </button>
+        </div>
 
-                    <div th:if="${info}" class="alert alert-info alert-dismissible fade show" role="alert">
-                        <i class="bi bi-info-circle"></i> <span th:text="${info}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+        <div class="p-4 lg:p-6">
+            <!-- Alert Messages -->
+            <div th:if="${successMessage}" class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                <i class="bi bi-check-circle mr-2"></i>
+                <span th:text="${successMessage}"></span>
+                <button type="button" class="ml-auto text-green-500 hover:text-green-700" onclick="this.parentElement.style.display='none'">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
 
-                    <!-- Filter Section -->
-                    <div class="card filter-card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Filter Trades</h5>
-                            <form th:action="@{/trades/view}" method="GET">
-                                <div class="row g-3">
-                                    <!-- Pharmacy Selection -->
-                                    <div class="col-md-6">
-                                        <label for="pharmacy1"
-                                               class="form-label">Φαρμακείο μου
-                                        </label>
-                                        <select class="form-select" id="pharmacy1" name="pharmacy1" required>
-                                            <option value="">Διαλέξτε
-                                                το φαρμακείο σας</option>
-                                            <option th:each="pharmacy : ${user.pharmacies}"
-                                                    th:value="${pharmacy.id}"
-                                                    th:text="${pharmacy.name}"
-                                                    th:selected="${pharmacy1 != null and pharmacy1 == pharmacy.id}">
-                                            </option>
-                                        </select>
-                                    </div>
+            <div th:if="${error}" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                <i class="bi bi-exclamation-triangle mr-2"></i>
+                <span th:text="${error}"></span>
+                <button type="button" class="ml-auto text-red-500 hover:text-red-700" onclick="this.parentElement.style.display='none'">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
 
-                                    <!-- Contact Pharmacy Selection -->
-                                    <div class="col-md-6">
-                                        <label for="pharmacy2"
-                                               class="form-label">Άλλο
-                                            Φαρμακείο</label>
-                                        <select class="form-select" id="pharmacy2" name="pharmacy2">
-                                            <option value="">Επαφές</option>
-                                            <optgroup label="Τα φαρμακεία μου"
-                                                      th:if="${#lists.size(user.pharmacies) > 1}">
-                                                <option th:each="pharmacy : ${user.pharmacies}"
-                                                        th:if="${pharmacy.id != pharmacy1}"
-                                                        th:value="${pharmacy.id}"
-                                                        th:text="${pharmacy.name}"
-                                                        th:selected="${pharmacy2 != null and pharmacy2 == pharmacy.id}">
-                                                </option>
-                                            </optgroup>
-                                            <optgroup label="Επαφές">
-                                                <option th:each="contact : ${contacts}"
-                                                        th:value="${contact.pharmacyId}"
-                                                        th:text="${contact.pharmacyName} + (${contact.contactName != null} ? ' (' + ${contact.contactName} + ')' : '')"
-                                                        th:selected="${pharmacy2 != null and pharmacy2 == contact.pharmacyId}">
-                                                </option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
+            <div th:if="${info}" class="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                <i class="bi bi-info-circle mr-2"></i>
+                <span th:text="${info}"></span>
+                <button type="button" class="ml-auto text-blue-500 hover:text-blue-700" onclick="this.parentElement.style.display='none'">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
 
-                                    <!-- Date Range -->
-                                    <div class="col-md-6">
-                                        <label for="startDate"
-                                               class="form-label">Από : </label>
-                                        <input type="date" class="form-control" id="startDate" name="startDate"
-                                               th:value="${startDate}">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="endDate"
-                                               class="form-label">Μέχρι</label>
-                                        <input type="date" class="form-control" id="endDate" name="endDate"
-                                               th:value="${endDate}">
-                                    </div>
+            <!-- Filter Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h5 class="text-lg font-semibold text-gray-800 mb-4">Filter Trades</h5>
+                <form th:action="@{/trades/view}" method="GET">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Pharmacy Selection -->
+                        <div>
+                            <label for="pharmacy1" class="block text-sm font-medium text-gray-700 mb-2">Φαρμακείο μου</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="pharmacy1" name="pharmacy1" required>
+                                <option value="">Διαλέξτε το φαρμακείο σας</option>
+                                <option th:each="pharmacy : ${user.pharmacies}"
+                                        th:value="${pharmacy.id}"
+                                        th:text="${pharmacy.name}"
+                                        th:selected="${pharmacy1 != null and pharmacy1 == pharmacy.id}">
+                                </option>
+                            </select>
+                        </div>
 
-                                    <!-- Action Buttons -->
-                                    <div class="col-12">
-                                        <div class="d-flex justify-content-between">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-funnel"></i>
-                                                Εφαρμογή Φίλτρων
-                                            </button>
-                                            <a th:href="@{/trades/view}"
-                                               class="btn btn-outline-secondary">
-                                                <i
-                                                        class="bi bi-x-circle"></i> Καθαρισμός Φίλτρων
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                        <!-- Contact Pharmacy Selection -->
+                        <div>
+                            <label for="pharmacy2" class="block text-sm font-medium text-gray-700 mb-2">Άλλο Φαρμακείο</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="pharmacy2" name="pharmacy2">
+                                <option value="">Επαφές</option>
+                                <optgroup label="Τα φαρμακεία μου" th:if="${#lists.size(user.pharmacies) > 1}">
+                                    <option th:each="pharmacy : ${user.pharmacies}"
+                                            th:if="${pharmacy.id != pharmacy1}"
+                                            th:value="${pharmacy.id}"
+                                            th:text="${pharmacy.name}"
+                                            th:selected="${pharmacy2 != null and pharmacy2 == pharmacy.id}">
+                                    </option>
+                                </optgroup>
+                                <optgroup label="Επαφές">
+                                    <option th:each="contact : ${contacts}"
+                                            th:value="${contact.pharmacyId}"
+                                            th:text="${contact.pharmacyName} + (${contact.contactName != null} ? ' (' + ${contact.contactName} + ')' : '')"
+                                            th:selected="${pharmacy2 != null and pharmacy2 == contact.pharmacyId}">
+                                    </option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- Date Range -->
+                        <div>
+                            <label for="startDate" class="block text-sm font-medium text-gray-700 mb-2">Από:</label>
+                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="startDate" name="startDate" th:value="${startDate}">
+                        </div>
+                        <div>
+                            <label for="endDate" class="block text-sm font-medium text-gray-700 mb-2">Μέχρι:</label>
+                            <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="endDate" name="endDate" th:value="${endDate}">
                         </div>
                     </div>
 
-                    <!-- Results Section -->
-                    <div class="flex-grow-1 d-flex flex-column">
-                        <div th:if="${pharmacy1 != null}">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4>
-                                    <span th:text="${pharmacy1Name}"></span>
-                                    <span th:if="${pharmacy2 != null}">
-                                        <i class="bi bi-arrow-left-right mx-2"></i>
-                                        <span th:text="${pharmacy2Name}"></span>
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row justify-between gap-3 mt-6">
+                        <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="bi bi-funnel mr-2"></i>Εφαρμογή Φίλτρων
+                        </button>
+                        <a th:href="@{/trades/view}" class="px-6 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-center no-underline">
+                            <i class="bi bi-x-circle mr-2"></i>Καθαρισμός Φίλτρων
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="flex-1 flex flex-col">
+                <div th:if="${pharmacy1 != null}">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
+                        <h4 class="text-xl font-semibold text-gray-800">
+                            <span th:text="${pharmacy1Name}"></span>
+                            <span th:if="${pharmacy2 != null}">
+                                    <i class="bi bi-arrow-left-right mx-2"></i>
+                                    <span th:text="${pharmacy2Name}"></span>
+                                </span>
+                            <span th:if="${pharmacy2 == null}"> - Όλες οι ανταλλαγές</span>
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <a th:href="@{/trades/record(giverId=${pharmacy1}, receiverId=${pharmacy2})}"
+                               class="px-3 py-2 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 transition-colors no-underline">
+                                <i class="bi bi-plus-circle mr-1"></i> Νέα ανταλλαγή
+                            </a>
+                            <button type="button"
+                                    class="px-3 py-2 bg-green-500 text-white text-sm rounded-md hover:bg-green-600 transition-colors"
+                                    onclick="openSettleModal()"
+                                    th:if="${balance != 0}">
+                                <i class="bi bi-cash-stack mr-1"></i>Μηδενισμός χρέους
+                            </button>
+                            <a th:href="@{/trades/view(pharmacy1=${pharmacy1}, pharmacy2=${pharmacy2}, startDate=${startDate}, endDate=${endDate})}"
+                               class="px-3 py-2 border border-gray-300 text-gray-700 text-sm rounded-md hover:bg-gray-50 transition-colors no-underline">
+                                <i class="bi bi-arrow-repeat mr-1"></i>Ανανέωση
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div th:if="${pharmacy2 != null}" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-white rounded-lg shadow p-6 text-center">
+                            <h6 class="text-sm text-gray-600 mb-2">Σύνολο ανταλλαγών</h6>
+                            <h4 th:text="${tradeCount}" class="text-2xl font-bold text-gray-800"></h4>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 text-center">
+                            <h6 class="text-sm text-gray-600 mb-2">Χρωστάμε</h6>
+                            <h4 th:if="${balance > 0}" class="text-2xl font-bold text-red-600">
+                                €<span th:text="${#numbers.formatDecimal(balance, 1, 2)}"></span>
+                            </h4>
+                            <h4 th:if="${balance <= 0}" class="text-2xl font-bold text-green-600">€0.00</h4>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 text-center">
+                            <h6 class="text-sm text-gray-600 mb-2">Χρωστάνε</h6>
+                            <h4 th:if="${balance < 0}" class="text-2xl font-bold text-green-600">
+                                €<span th:text="${#numbers.formatDecimal(-balance, 1, 2)}"></span>
+                            </h4>
+                            <h4 th:if="${balance >= 0}" class="text-2xl font-bold text-red-600">€0.00</h4>
+                        </div>
+                    </div>
+
+                    <!-- Trades List -->
+                    <div th:if="${not #lists.isEmpty(trades)}" class="space-y-4 mb-8">
+                        <div th:each="trade : ${trades}"
+                             th:class="${(trade.deletedByGiver or trade.deletedByReceiver) ? 'bg-yellow-50 border-l-4 border-yellow-400 rounded-lg p-6 shadow-md' :
+                                        (trade.giverName == pharmacy1Name) ? 'bg-red-50 border-l-4 border-red-500 rounded-lg p-6 shadow-md' : 'bg-green-50 border-l-4 border-green-500 rounded-lg p-6 shadow-md'}">
+
+                            <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                                <!-- LEFT COLUMN - Badge, Description, Date -->
+                                <div class="sm:flex-1">
+        <span th:class="${trade.giverName == pharmacy1Name} ? 'inline-block px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full mb-2' : 'inline-block px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full mb-2'">
+            <span th:text="${trade.giverName == pharmacy1Name} ? 'ΕΞΕΡΧΟΜΕΝΗ' : 'ΕΙΣΕΡΧΟΜΕΝΗ'"></span>
+        </span>
+                                    <h4 class="text-lg font-semibold text-gray-800 mb-1" th:text="${trade.description}"></h4>
+                                    <p class="text-gray-600 text-sm" th:text="${trade.transactionDate}"></p>
+                                </div>
+
+                                <!-- CENTER COLUMN - Contact Names -->
+                                <div class="sm:flex-1 text-center flex flex-col justify-center">
+                                    <div class="text-sm text-gray-600">
+                                        <div th:if="${trade.giverName == pharmacy1Name}">
+                                            <span class="text-xs text-gray-500">Προς:</span><br>
+                                            <span class="font-medium" th:text="${contactNames[trade.receiverPharmacyId] ?: trade.receiverName}"></span>
+                                        </div>
+                                        <div th:if="${trade.giverName != pharmacy1Name}">
+                                            <span class="text-xs text-gray-500">Από:</span><br>
+                                            <span class="font-medium" th:text="${contactNames[trade.giverPharmacyId] ?: trade.giverName}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- RIGHT COLUMN - Amount -->
+                                <div class="sm:flex-1 text-right flex flex-col justify-center">
+                                    <h4 class="text-xl font-bold text-gray-800">
+                                        €<span th:text="${#numbers.formatDecimal(trade.amount, 1, 2)}"></span>
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <!-- Deletion Status Alert -->
+                            <div th:if="${trade.deletedByGiver or trade.deletedByReceiver}" class="bg-yellow-100 border border-yellow-300 rounded-md p-3 mt-4">
+                                <div class="flex items-start">
+                                    <i class="bi bi-exclamation-circle text-yellow-600 mr-2 mt-0.5"></i>
+                                    <div class="text-yellow-800 text-sm">
+                                        <strong>Εκκρεμής Διαγραφή:</strong>
+                                        <span th:if="${trade.deletedByGiver and trade.giverName == pharmacy1Name}">
+                                                Έχετε επισημάνει αυτή την ανταλλαγή προς διαγραφή. Περιμένει επιβεβαίωση από το άλλο φαρμακείο.
+                                            </span>
+                                        <span th:if="${trade.deletedByReceiver and trade.receiverName == pharmacy1Name}">
+                                                Έχετε επισημάνει αυτή την ανταλλαγή προς διαγραφή. Περιμένει επιβεβαίωση από το άλλο φαρμακείο.
+                                            </span>
+                                        <span th:if="${trade.deletedByGiver and trade.giverName != pharmacy1Name}">
+                                                Το άλλο φαρμακείο έχει επισημάνει αυτή την ανταλλαγή προς διαγραφή.
+                                            </span>
+                                        <span th:if="${trade.deletedByReceiver and trade.receiverName != pharmacy1Name}">
+                                                Το άλλο φαρμακείο έχει επισημάνει αυτή την ανταλλαγή προς διαγραφή.
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4 pt-4 border-t border-gray-200 gap-3">
+                                <small class="text-gray-500">
+                                    Καταγράφηκε από: <span th:text="${trade.recorderUsername}" class="font-medium"></span>
+                                    on <span th:text="${trade.createdAt}"></span>
+                                </small>
+                                <div class="flex flex-wrap gap-2">
+                                    <!-- Show different buttons based on deletion status -->
+                                    <!-- Restore button if OTHER party marked it for deletion -->
+                                    <form th:if="${(trade.deletedByGiver and trade.giverName != pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName != pharmacy1Name)}"
+                                          th:action="@{/trades/restore/{id}(id=${trade.id})}"
+                                          method="post"
+                                          class="inline">
+                                        <button type="submit"
+                                                class="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"
+                                                title="Επαναφορά ανταλλαγής"
+                                                onclick="return confirm('Είστε σίγουροι ότι θέλετε να επαναφέρετε αυτή την ανταλλαγή;')">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                        </button>
+                                    </form>
+
+                                    <!-- Confirm deletion button if OTHER party marked it for deletion -->
+                                    <form th:if="${(trade.deletedByGiver and trade.giverName != pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName != pharmacy1Name)}"
+                                          th:action="@{/trades/delete/{id}(id=${trade.id})}"
+                                          method="post"
+                                          class="inline">
+                                        <button type="submit"
+                                                class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors"
+                                                title="Επιβεβαίωση διαγραφής"
+                                                onclick="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε οριστικά αυτή την ανταλλαγή;')">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+
+                                    <!-- Regular delete button if trade is not marked for deletion -->
+                                    <form th:if="${not (trade.deletedByGiver or trade.deletedByReceiver)}"
+                                          th:action="@{/trades/delete/{id}(id=${trade.id})}"
+                                          method="post"
+                                          class="inline">
+                                        <button type="submit"
+                                                class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors"
+                                                title="Επισήμανση για διαγραφή"
+                                                onclick="return confirm('Είστε σίγουροι ότι θέλετε να επισημάνετε αυτή την ανταλλαγή για διαγραφή;')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+
+                                    <!-- Restore button if current user marked it for deletion -->
+                                    <form th:if="${(trade.deletedByGiver and trade.giverName == pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName == pharmacy1Name)}"
+                                          th:action="@{/trades/restore/{id}(id=${trade.id})}"
+                                          method="post"
+                                          class="inline">
+                                        <button type="submit"
+                                                class="px-3 py-1 bg-yellow-500 text-white text-sm rounded hover:bg-yellow-600 transition-colors"
+                                                title="Ακύρωση διαγραφής"
+                                                onclick="return confirm('Είστε σίγουροι ότι θέλετε να ακυρώσετε τη διαγραφή;')">
+                                            <i class="bi bi-arrow-counterclockwise"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div th:if="${totalPages > 1}" class="flex justify-center mt-8">
+                            <nav class="flex items-center space-x-2">
+                                <a th:if="${currentPage > 0}"
+                                   th:href="@{'/trades/view'(pharmacy1=${pharmacy1}, pharmacy2=${pharmacy2}, startDate=${startDate}, endDate=${endDate}, page=${currentPage - 1}, size=${pageSize})}"
+                                   class="px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors no-underline">
+                                    Προηγούμενη
+                                </a>
+                                <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                                      th:class="${i == currentPage} ? 'px-3 py-2 bg-blue-600 text-white rounded-md' : 'px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50'">
+                                        <a th:if="${i != currentPage}"
+                                           th:href="@{'/trades/view'(pharmacy1=${pharmacy1}, pharmacy2=${pharmacy2}, startDate=${startDate}, endDate=${endDate}, page=${i}, size=${pageSize})}"
+                                           th:text="${i + 1}"
+                                           class="no-underline text-inherit"></a>
+                                        <span th:if="${i == currentPage}" th:text="${i + 1}"></span>
                                     </span>
-                                    <span th:if="${pharmacy2 == null}"> -
-                                        Όλες οι ανταλλαγές</span>
-                                </h4>
-                                <div>
-                                    <a th:href="@{/trades/record(giverId=${pharmacy1}, receiverId=${pharmacy2})}"
-                                       class="btn btn-sm btn-outline-primary me-2">
-                                        <i class="bi bi-plus-circle"></i> Νέα
-                                        ανταλλαγή
-                                    </a>
-                                    <button type="button"
-                                            class="btn btn-sm btn-outline-success me-2"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#settleBalanceModal"
-                                            th:if="${balance != 0}">
-                                        <i class="bi bi-cash-stack"></i>
-                                        Μηδενισμός χρέους
-                                    </button>
-                                    <a th:href="@{/trades/view(pharmacy1=${pharmacy1}, pharmacy2=${pharmacy2}, startDate=${startDate}, endDate=${endDate})}"
-                                       class="btn btn-sm btn-outline-secondary">
-                                        <i class="bi bi-arrow-repeat"></i>
-                                        Ανανέωση
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Summary Cards -->
-                            <div class="row mb-4" th:if="${pharmacy2 != null}">
-                                <div class="col-md-4">
-                                    <div class="card text-center">
-                                        <div class="card-body">
-                                            <h6
-                                                    class="card-subtitle mb-2 text-muted">Σύνολο ανταλλαγών</h6>
-                                            <h4 th:text="${tradeCount}" class="card-title"></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card text-center">
-                                        <div class="card-body">
-                                            <h6
-                                                    class="card-subtitle mb-2 text-muted">Χρωστάμε</h6>
-                                            <h4 class="card-title text-danger" th:if="${balance > 0}">
-                                                €<span th:text="${#numbers.formatDecimal(balance, 1, 2)}"></span>
-                                            </h4>
-                                            <h4 class="card-title text-success" th:if="${balance <= 0}">
-                                                €0.00
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card text-center">
-                                        <div class="card-body">
-                                            <h6
-                                                    class="card-subtitle mb-2 text-muted">Χρωστάνε</h6>
-                                            <h4 class="card-title text-success" th:if="${balance < 0}">
-                                                €<span th:text="${#numbers.formatDecimal(-balance, 1, 2)}"></span>
-                                            </h4>
-                                            <h4 class="card-title text-danger" th:if="${balance >= 0}">
-                                                €0.00
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Trades List -->
-                            <div th:if="${not #lists.isEmpty(trades)}"
-                                 class="trades-list-container">
-                                <div class="list-group">
-                                    <div th:each="trade : ${trades}"
-                                         class="list-group-item p-0 mb-3 trade-card"
-                                         th:classappend="${(trade.deletedByGiver or trade.deletedByReceiver) ? 'trade-card-partially-deleted' :
-                                        (trade.giverName == pharmacy1Name) ? 'trade-card-outgoing bg-light-red' : 'trade-card-incoming bg-light-green'}">
-
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <span class="badge rounded-pill ms-4 mt-2"
-                                                      th:classappend="${trade.giverName == pharmacy1Name} ? 'badge-outgoing' : 'badge-incoming'">
-                                                    <span th:text="${trade.giverName == pharmacy1Name} ? 'ΕΞΕΡΧΟΜΕΝΗ' : 'ΕΙΣΕΡΧΟΜΕΝΗ'" class="h5"></span>
-                                                    <span class="text-muted h6 ms-4 mt-2" th:text="${trade.transactionDate}"></span>
-                                                </span>
-
-                                                <h4 class="mt-2" th:text="${trade.description}"></h4>
-
-                                                <h4 class="me-4 mt-2">
-                                                    €<span th:text="${#numbers.formatDecimal(trade.amount, 1, 2)}"></span>
-                                                </h4>
-                                            </div>
-
-                                            <!-- Deletion Status Alert - positioned closer to bottom -->
-                                            <div th:if="${trade.deletedByGiver or trade.deletedByReceiver}" class="alert deletion-status mt-2 mb-1 mx-4">
-                                                <div class="alert-warning">
-                                                    <i class="bi bi-exclamation-circle"></i>
-                                                    <strong>Εκκρεμής Διαγραφή:</strong>
-                                                    <span th:if="${trade.deletedByGiver and trade.giverName == pharmacy1Name}">
-                                                        Έχετε επισημάνει αυτή την ανταλλαγή προς διαγραφή. Περιμένει επιβεβαίωση από το άλλο φαρμακείο.
-                                                    </span>
-                                                    <span th:if="${trade.deletedByReceiver and trade.receiverName == pharmacy1Name}">
-                                                        Έχετε επισημάνει αυτή την ανταλλαγή προς διαγραφή. Περιμένει επιβεβαίωση από το άλλο φαρμακείο.
-                                                    </span>
-                                                    <span th:if="${trade.deletedByGiver and trade.giverName != pharmacy1Name}">
-                                                        Το άλλο φαρμακείο έχει επισημάνει αυτή την ανταλλαγή προς διαγραφή.
-                                                    </span>
-                                                    <span th:if="${trade.deletedByReceiver and trade.receiverName != pharmacy1Name}">
-                                                        Το άλλο φαρμακείο έχει επισημάνει αυτή την ανταλλαγή προς διαγραφή.
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex justify-content-between align-items-center mt-2 ms-4 me-4">
-                                                <small class="text-muted">
-                                                    Καταγράφηκε από: <span th:text="${trade.recorderUsername}"></span>
-                                                    on <span th:text="${trade.createdAt}"></span>
-                                                </small>
-                                                <div>
-                                                    <!-- Show different buttons based on deletion status -->
-                                                    <div>
-                                                        <!-- Show restore button if the OTHER party marked it for deletion -->
-                                                        <form th:if="${(trade.deletedByGiver and trade.giverName != pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName != pharmacy1Name)}"
-                                                              th:action="@{/trades/restore/{id}(id=${trade.id})}"
-                                                              method="post"
-                                                              class="d-inline">
-                                                            <button type="submit"
-                                                                    class="btn btn-success btn-sm me-2 mb-2"
-                                                                    title="Επαναφορά ανταλλαγής"
-                                                                    onclick="return confirm('Είστε σίγουροι ότι θέλετε να επαναφέρετε αυτή την ανταλλαγή;')">
-                                                                <i class="bi bi-arrow-clockwise"></i>
-                                                            </button>
-                                                        </form>
-
-                                                        <!-- Show confirm deletion button if the OTHER party marked it for deletion -->
-                                                        <form th:if="${(trade.deletedByGiver and trade.giverName != pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName != pharmacy1Name)}"
-                                                              th:action="@{/trades/delete/{id}(id=${trade.id})}"
-                                                              method="post"
-                                                              class="d-inline">
-                                                            <button type="submit"
-                                                                    class="btn btn-danger btn-sm me-2 mb-2"
-                                                                    title="Επιβεβαίωση διαγραφής"
-                                                                    onclick="return confirm('Είστε σίγουροι ότι θέλετε να διαγράψετε οριστικά αυτή την ανταλλαγή;')">
-                                                                <i class="bi bi-trash-fill"></i>
-                                                            </button>
-                                                        </form>
-
-                                                        <!-- Show regular delete button if trade is not marked for deletion by anyone -->
-                                                        <form th:if="${not (trade.deletedByGiver or trade.deletedByReceiver)}"
-                                                              th:action="@{/trades/delete/{id}(id=${trade.id})}"
-                                                              method="post"
-                                                              class="d-inline">
-                                                            <button type="submit"
-                                                                    class="btn btn-danger btn-sm mb-2"
-                                                                    title="Επισήμανση για διαγραφή"
-                                                                    onclick="return confirm('Είστε σίγουροι ότι θέλετε να επισημάνετε αυτή την ανταλλαγή για διαγραφή;')">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </form>
-
-                                                        <!-- Show restore button if current user marked it for deletion -->
-                                                        <form th:if="${(trade.deletedByGiver and trade.giverName == pharmacy1Name) or (trade.deletedByReceiver and trade.receiverName == pharmacy1Name)}"
-                                                              th:action="@{/trades/restore/{id}(id=${trade.id})}"
-                                                              method="post"
-                                                              class="d-inline">
-                                                            <button type="submit"
-                                                                    class="btn btn-warning btn-sm"
-                                                                    title="Ακύρωση διαγραφής"
-                                                                    onclick="return confirm('Είστε σίγουροι ότι θέλετε να ακυρώσετε τη διαγραφή;')">
-                                                                <i class="bi bi-arrow-counterclockwise"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Pagination -->
-                                <div th:if="${pharmacy2 == null and totalPages > 1}" class="d-flex justify-content-center mt-4">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination">
-                                            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                                                <a class="page-link"
-                                                   th:href="@{'/trades/view'(
-                                                   pharmacy1=${pharmacy1},
-                                                   startDate=${startDate},
-                                                   endDate=${endDate},
-                                                   page=${currentPage - 1},
-                                                   size=${pageSize})}">
-                                                    Προηγούμενη
-                                                </a>
-                                            </li>
-                                            <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                                                class="page-item" th:classappend="${i == currentPage} ? 'active'">
-                                                <a class="page-link"
-                                                   th:href="@{'/trades/view'(pharmacy1=${pharmacy1},
-                                                   startDate=${startDate},
-                                                   endDate=${endDate},
-                                                   page=${i},
-                                                   size=${pageSize})}"
-                                                   th:text="${i + 1}"></a>
-                                            </li>
-                                            <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
-                                                <a class="page-link"
-                                                   th:href="@{'/trades/view'(pharmacy1=${pharmacy1},
-                                                   startDate=${startDate},
-                                                   endDate=${endDate},
-                                                   page=${currentPage + 1},
-                                                   size=${pageSize})}">
-                                                    Επόμενη
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-
-                            <div th:if="${#lists.isEmpty(trades)}" class="alert alert-info">
-                                <i class="bi bi-info-circle"></i> Δεν
-                                βρέθηκαν ανταλλαγές που να ταιριάζουν στα
-                                κριτήρια που βάλατε
-                            </div>
+                                <a th:if="${currentPage < totalPages - 1}"
+                                   th:href="@{'/trades/view'(pharmacy1=${pharmacy1}, pharmacy2=${pharmacy2}, startDate=${startDate}, endDate=${endDate}, page=${currentPage + 1}, size=${pageSize})}"
+                                   class="px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors no-underline">
+                                    Επόμενη
+                                </a>
+                            </nav>
                         </div>
                     </div>
 
-                    <div th:if="${pharmacy1 == null}"
-                         class="d-flex justify-content-center align-items-center">
-                        <div class="text-center">
-                            <i class="bi bi-funnel" style="font-size: 3rem; color: #6c757d;"></i>
-                            <h3 >Διαλέξτε ενα φαρμακείο σας για
-                                να δείτε τις ανταλλαγές του</h3>
-                            <p class="text-muted">Χρησιμοποιείστε τα
-                                παραπάνω φίλτρα αν θέλετε να δειτε τις
-                                ανταλλαγές σε συγκεκριμένο διάστημα ή με
-                                συγκεκριμένο φαρμακείο</p>
-                        </div>
+                    <div th:if="${#lists.isEmpty(trades)}" class="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+                        <i class="bi bi-info-circle text-blue-500 text-2xl mb-2"></i>
+                        <p class="text-blue-700">Δεν βρέθηκαν ανταλλαγές που να ταιριάζουν στα κριτήρια που βάλατε</p>
+                    </div>
+                </div>
+
+                <div th:if="${pharmacy1 == null}" class="flex justify-center items-center py-16">
+                    <div class="text-center">
+                        <i class="bi bi-funnel text-6xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2">Διαλέξτε ενα φαρμακείο σας για να δείτε τις ανταλλαγές του</h3>
+                        <p class="text-gray-500">Χρησιμοποιείστε τα παραπάνω φίλτρα αν θέλετε να δειτε τις ανταλλαγές σε συγκεκριμένο διάστημα ή με συγκεκριμένο φαρμακείο</p>
                     </div>
                 </div>
             </div>
@@ -433,43 +416,105 @@
 </div>
 
 <!-- Footer -->
-<footer class="mt-auto">
-    <div class="container text-center">
+<footer class="bg-gray-800 text-white py-4 flex-shrink-0">
+    <div class="container mx-auto text-center">
         <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
     </div>
 </footer>
 
 <!-- Settle Balance Modal -->
-<div class="modal fade" id="settleBalanceModal" tabindex="-1" aria-labelledby="settleBalanceModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"
-                    id="settleBalanceModalLabel">Μηδενισμός χρέους
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form th:action="@{/trades/settle}" method="GET">
-                <div class="modal-body">
-                    <input type="hidden" name="pharmacy1" th:value="${pharmacy1}">
-                    <input type="hidden" name="pharmacy2" th:value="${pharmacy2}">
-                    <div class="mb-3">
-                        <label for="settleDescription" class="form-label">Description (optional)</label>
-                        <textarea class="form-control" id="settleDescription"
-                                  name="description" rows="3"
-                                  placeholder="πχ κανονισμός υπολοίπου Ιούνιος 2025"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Confirm Settlement</button>
-                </div>
-            </form>
+<div id="settleBalanceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+        <div class="flex justify-between items-center mb-4">
+            <h5 class="text-lg font-semibold">Μηδενισμός χρέους</h5>
+            <button onclick="closeSettleModal()" class="text-gray-400 hover:text-gray-600">
+                <i class="bi bi-x-lg"></i>
+            </button>
         </div>
+        <form th:action="@{/trades/settle}" method="GET">
+            <input type="hidden" name="pharmacy1" th:value="${pharmacy1}">
+            <input type="hidden" name="pharmacy2" th:value="${pharmacy2}">
+            <div class="mb-4">
+                <label for="settleDescription" class="block text-sm font-medium text-gray-700 mb-2">Description (optional)</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          id="settleDescription"
+                          name="description"
+                          rows="3"
+                          placeholder="πχ κανονισμός υπολοίπου Ιούνιος 2025"></textarea>
+            </div>
+            <div class="flex space-x-3">
+                <button type="button" onclick="closeSettleModal()" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">Cancel</button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Confirm Settlement</button>
+            </div>
+        </form>
     </div>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Mobile sidebar functionality
+    const openSidebarBtn = document.getElementById('openSidebar');
+    const closeSidebarBtn = document.getElementById('closeSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('mobileMenuOverlay');
+
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+        overlay.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    if (openSidebarBtn) {
+        openSidebarBtn.addEventListener('click', openSidebar);
+    }
+
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
+
+    // Close sidebar when clicking on a link (mobile)
+    const sidebarLinks = sidebar.querySelectorAll('a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 1024) {
+                closeSidebar();
+            }
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+            closeSidebar();
+        }
+    });
+
+    // Modal functionality
+    function openSettleModal() {
+        document.getElementById('settleBalanceModal').classList.remove('hidden');
+    }
+
+    function closeSettleModal() {
+        document.getElementById('settleBalanceModal').classList.add('hidden');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('settleBalanceModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeSettleModal();
+        }
+    });
+</script>
 </body>
 </html>

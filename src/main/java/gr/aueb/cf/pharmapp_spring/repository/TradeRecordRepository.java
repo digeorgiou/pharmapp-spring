@@ -50,4 +50,18 @@ public interface TradeRecordRepository extends JpaRepository<TradeRecord,
             Pageable pageable
     );
 
+    @Query("SELECT t FROM TradeRecord t WHERE " +
+            "((t.giver.id = :pharmacy1Id AND t.receiver.id = :pharmacy2Id) OR " +
+            "(t.giver.id = :pharmacy2Id AND t.receiver.id = :pharmacy1Id)) AND " +
+            "t.transactionDate BETWEEN :startDate AND :endDate " +
+            "ORDER BY t.transactionDate DESC")
+    Page<TradeRecord> findTradesBetweenTwoPharmaciesAndDateRange(
+            @Param("pharmacy1Id") Long pharmacy1Id,
+            @Param("pharmacy2Id") Long pharmacy2Id,
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate,
+            Pageable pageable
+    );
+
+
 }

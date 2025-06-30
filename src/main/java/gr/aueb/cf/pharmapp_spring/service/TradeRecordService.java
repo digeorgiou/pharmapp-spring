@@ -276,6 +276,7 @@ public class TradeRecordService implements ITradeRecordService{
                 .orElseThrow(() -> new EntityNotFoundException("Pharmacy",
                         "Pharmacy with id " + pharmacy2Id + " was not found"));
 
+
         // Get trades in both directions within date range
         List<TradeRecord> direction1 = tradeRecordRepository.findByGiverIdAndReceiverIdAndTransactionDateBetween(
                 pharmacy1Id, pharmacy2Id, startDate, endDate);
@@ -313,28 +314,16 @@ public class TradeRecordService implements ITradeRecordService{
         PageRequest pageable = PageRequest.of(page,size, Sort.by(
                 "transactionDate").descending());
 
-        // Get trades in both directions within date range
-        Page<TradeRecord> direction1 =
-                tradeRecordRepository.findByGiverIdAndReceiverIdAndTransactionDateBetween(
-                pharmacy1Id, pharmacy2Id, effectiveStartDate, effectiveEndDate, pageable);
+        Page<TradeRecord> tradesPage = tradeRecordRepository
+                .findTradesBetweenTwoPharmaciesAndDateRange(
+                        pharmacy1Id,
+                        pharmacy2Id,
+                        effectiveStartDate,
+                        effectiveEndDate,
+                        pageable
+                );
 
-        Page<TradeRecord> direction2 =
-                tradeRecordRepository.findByGiverIdAndReceiverIdAndTransactionDateBetween(
-                pharmacy2Id, pharmacy1Id, effectiveStartDate, effectiveEndDate, pageable);
-
-        List<TradeRecord> allRecords = new ArrayList<>();
-        allRecords.addAll(direction1.getContent());
-        allRecords.addAll(direction2.getContent());
-
-        allRecords.sort(Comparator.comparing(TradeRecord::getTransactionDate).reversed());
-
-        return new PageImpl<>(
-                allRecords.stream()
-                        .map(mapper::mapToTradeRecordReadOnlyDTO)
-                        .collect(Collectors.toList()),
-                pageable,
-                direction1.getTotalElements() + direction2.getTotalElements()
-        );
+        return tradesPage.map(mapper::mapToTradeRecordReadOnlyDTO);
     }
 
     @Override
@@ -479,7 +468,7 @@ public class TradeRecordService implements ITradeRecordService{
         TradeRecordInsertDTO dto = new TradeRecordInsertDTO(
                 description != null? description : "Balance settlement",
                 Math.abs(balance),
-                LocalDateTime.now(),
+                LocalDateTime.now().withSecond(0).withNano(0),
                 (balance > 0) ? pharmacy1Id : pharmacy2Id, //giver
                 (balance > 0) ? pharmacy2Id : pharmacy1Id, //receiver
                 userId

@@ -108,6 +108,8 @@ public class Mapper {
                 tradeRecord.getAmount(),
                 tradeRecord.getGiver().getName(),
                 tradeRecord.getReceiver().getName(),
+                tradeRecord.getGiver().getId(),
+                tradeRecord.getReceiver().getId(),
                 tradeRecord.getRecorder().getUsername(),
                 tradeRecord.getTransactionDate(),
                 tradeRecord.isDeletedByGiver(),

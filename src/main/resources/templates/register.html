@@ -4,179 +4,302 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PharmaTrade - Register</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Consolidated CSS -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/tailwind-config.js}"></script>
+    <style>
+        .password-strength {
+            height: 6px;
+            margin-top: 6px;
+            background-color: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="bg-gray-50 flex flex-col min-h-screen">
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid d-flex justify-content-between align-items-center px-4">
-        <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo">
-        </a>
-        <div class="position-absolute start-50 translate-middle-x">
-            <span class="navbar-text fw-bold fs-4">Καλώς ήρθατε στην Εφαρμογή</span>
+<nav class="bg-pharma-blue shadow-md sticky top-0 z-20 h-16 flex-shrink-0">
+    <div class="container-fluid h-full">
+        <div class="flex justify-between items-center w-full h-full px-6">
+            <a th:href="@{/}" class="flex-shrink-0">
+                <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" class="h-12 transition-transform hover:scale-105">
+            </a>
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <span class="text-gray-800 font-bold text-xl">Καλώς ήρθατε στην Εφαρμογή</span>
+            </div>
         </div>
     </div>
 </nav>
 
 <!-- Main Registration Form -->
-<div class="container flex-grow-1 d-flex align-items-center">
-    <div class="auth-container">
-        <h2 class="text-center mb-4">Δημιουργία Λογαριασμού</h2>
+<div class="flex-1 flex items-center justify-center py-8 px-4">
+    <div class="w-full max-w-md">
+        <div class="bg-pharma-blue rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Δημιουργία Λογαριασμού</h2>
 
-        <!-- Error Message -->
-        <div th:if="${error}" class="alert alert-danger">
-            <i class="bi bi-exclamation-triangle-fill"></i> <span th:text="${error}"></span>
+            <!-- Error Message -->
+            <div th:if="${error}" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                <i class="bi bi-exclamation-triangle-fill mr-2"></i>
+                <span th:text="${error}"></span>
+            </div>
+
+            <form id="registerForm" th:action="@{/users/register}" method="POST" th:object="${userInsertDTO}" class="space-y-4">
+                <!-- Username Field -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Όνομα Χρήστη</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-person-fill text-gray-400"></i>
+                        </div>
+                        <input type="text"
+                               th:class="${#fields.hasErrors('username')} ? 'w-full pl-10 pr-4 py-3 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white' : 'w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white'"
+                               id="username"
+                               th:field="*{username}"
+                               required>
+                    </div>
+                    <div th:if="${#fields.hasErrors('username')}" class="mt-2 text-red-600 text-sm flex items-center">
+                        <i class="bi bi-exclamation-circle-fill mr-1"></i>
+                        <small th:errors="*{username}"></small>
+                    </div>
+                    <div th:unless="${#fields.hasErrors('username')}" class="mt-1 text-sm text-gray-600">
+                        Τουλάχιστον 5 χαρακτήρες
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-envelope-fill text-gray-400"></i>
+                        </div>
+                        <input type="email"
+                               th:class="${#fields.hasErrors('email')} ? 'w-full pl-10 pr-4 py-3 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white' : 'w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white'"
+                               id="email"
+                               th:field="*{email}"
+                               required>
+                    </div>
+                    <div th:if="${#fields.hasErrors('email')}" class="mt-2 text-red-600 text-sm flex items-center">
+                        <i class="bi bi-exclamation-circle-fill mr-1"></i>
+                        <small th:errors="*{email}"></small>
+                    </div>
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Κωδικός</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-lock-fill text-gray-400"></i>
+                        </div>
+                        <input type="password"
+                               th:class="${#fields.hasErrors('password')} ? 'w-full pl-10 pr-12 py-3 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white' : 'w-full pl-10 pr-12 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white'"
+                               id="password"
+                               th:field="*{password}"
+                               required>
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center toggle-password" onclick="togglePassword('password')">
+                            <i class="bi bi-eye-fill text-gray-400 hover:text-gray-600"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                    </div>
+                    <div th:if="${#fields.hasErrors('password')}" class="mt-2 text-red-600 text-sm flex items-center">
+                        <i class="bi bi-exclamation-circle-fill mr-1"></i>
+                        <small th:errors="*{password}"></small>
+                    </div>
+                    <div th:unless="${#fields.hasErrors('password')}" class="mt-1 text-sm text-gray-600">
+                        Τουλάχιστον 5 χαρακτήρες
+                    </div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div>
+                    <label for="confirmedPassword" class="block text-sm font-medium text-gray-700 mb-2">Επιβεβαίωση Κωδικού</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="bi bi-lock-fill text-gray-400"></i>
+                        </div>
+                        <input type="password"
+                               th:class="${#fields.hasErrors('confirmedPassword')} ? 'w-full pl-10 pr-12 py-3 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-white' : 'w-full pl-10 pr-12 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white'"
+                               id="confirmedPassword"
+                               name="confirmedPassword"
+                               required>
+                        <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center toggle-password" onclick="togglePassword('confirmedPassword')">
+                            <i class="bi bi-eye-fill text-gray-400 hover:text-gray-600"></i>
+                        </button>
+                    </div>
+                    <div th:if="${#fields.hasErrors('confirmedPassword')}" class="mt-2 text-red-600 text-sm flex items-center">
+                        <i class="bi bi-exclamation-circle-fill mr-1"></i>
+                        <small th:errors="*{confirmedPassword}"></small>
+                    </div>
+                    <div th:unless="${#fields.hasErrors('confirmedPassword')}">
+                        <div class="mt-1 text-green-600 text-sm hidden" id="passwordMatch">
+                            <i class="bi bi-check-circle-fill mr-1"></i> Οι κωδικοί ταιριάζουν
+                        </div>
+                        <div class="mt-1 text-red-600 text-sm hidden" id="passwordMismatch">
+                            <i class="bi bi-exclamation-circle-fill mr-1"></i> Οι κωδικοί δεν ταιριάζουν
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div>
+                    <label class="flex items-start space-x-3">
+                        <input type="checkbox"
+                               th:class="${#fields.hasErrors('termsAccepted')} ? 'w-4 h-4 text-blue-600 border-red-300 rounded focus:ring-blue-500 focus:ring-2 mt-1' : 'w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mt-1'"
+                               id="terms"
+                               th:field="*{termsAccepted}"
+                               required>
+                        <span class="text-sm text-gray-700">
+                                Συμφωνώ με
+                                <button type="button" class="text-blue-600 hover:text-blue-800 underline" onclick="openTermsModal()">
+                                    Όροι και Προϋποθέσεις
+                                </button>
+                            </span>
+                    </label>
+                    <div th:if="${#fields.hasErrors('termsAccepted')}" class="mt-2 text-red-600 text-sm flex items-center">
+                        <i class="bi bi-exclamation-circle-fill mr-1"></i>
+                        <small th:errors="*{termsAccepted}"></small>
+                    </div>
+                </div>
+
+                <!-- Register Button -->
+                <div class="pt-4">
+                    <button type="submit" class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-lg">
+                        Εγγραφή
+                    </button>
+                </div>
+
+                <!-- Login Link -->
+                <div class="text-center pt-4">
+                    <span class="text-sm text-gray-600">Έχετε ήδη λογαριασμό</span>
+                    <a th:href="@{/login}" class="text-sm text-blue-600 hover:text-blue-800 ml-1 no-underline">Συνδεθείτε εδώ</a>
+                </div>
+            </form>
         </div>
-
-        <form id="registerForm" th:action="@{/users/register}" method="POST" th:object="${userInsertDTO}">
-            <!-- Username Field -->
-            <div class="mb-3">
-                <label for="username" class="form-label">Όνομα Χρήστη</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                    <input type="text" class="form-control" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''"
-                           id="username" th:field="*{username}" required>
-                </div>
-                <div th:if="${#fields.hasErrors('username')}" class="invalid-feedback d-block">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <small th:errors="*{username}"></small>
-                </div>
-                <div th:unless="${#fields.hasErrors('username')}" class="form-text">
-                    Τουλάχιστον 5 χαρακτήρες
-                </div>
-            </div>
-
-            <!-- Email Field -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                    <input type="email" class="form-control" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
-                           id="email" th:field="*{email}" required>
-                </div>
-                <div th:if="${#fields.hasErrors('email')}" class="invalid-feedback d-block">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <small th:errors="*{email}"></small>
-                </div>
-            </div>
-
-            <!-- Password Field -->
-            <div class="mb-3">
-                <label for="password" class="form-label">Κωδικός</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input type="password" class="form-control" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"
-                           id="password" th:field="*{password}" required>
-                    <button class="btn btn-outline-secondary toggle-password" type="button">
-                        <i class="bi bi-eye-fill"></i>
-                    </button>
-                </div>
-                <div class="password-strength">
-                    <div class="password-strength-bar"></div>
-                </div>
-                <div th:if="${#fields.hasErrors('password')}" class="invalid-feedback d-block">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <small th:errors="*{password}"></small>
-                </div>
-                <div th:unless="${#fields.hasErrors('password')}" class="form-text">
-                    Τουλάχιστον 5 χαρακτήρες
-                </div>
-            </div>
-
-            <!-- Confirm Password Field -->
-            <div class="mb-3">
-                <label for="confirmedPassword" class="form-label">Επιβεβαίωση Κωδικού</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input type="password" class="form-control"
-                           th:classappend="${#fields.hasErrors('confirmedPassword')} ? 'is-invalid' : ''"
-                           id="confirmedPassword" name="confirmedPassword" required>
-                    <button class="btn btn-outline-secondary toggle-password" type="button">
-                        <i class="bi bi-eye-fill"></i>
-                    </button>
-                </div>
-                <div th:if="${#fields.hasErrors('confirmedPassword')}" class="invalid-feedback d-block">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <small th:errors="*{confirmedPassword}"></small>
-                </div>
-                <div th:unless="${#fields.hasErrors('confirmedPassword')}">
-                    <div class="password-match text-success" id="passwordMatch" style="display: none;">
-                        <i class="bi bi-check-circle-fill"></i> Οι κωδικοί ταιριάζουν
-                    </div>
-                    <div class="password-match text-danger" id="passwordMismatch" style="display: none;">
-                        <i class="bi bi-exclamation-circle-fill"></i> Οι κωδικοί δεν ταιριάζουν
-                    </div>
-                </div>
-            </div>
-
-            <!-- Terms and Conditions -->
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" th:classappend="${#fields.hasErrors('termsAccepted')} ? 'is-invalid' : ''"
-                       id="terms" th:field="*{termsAccepted}" required>
-                <label class="form-check-label" for="terms">
-                    Συμφωνώ με <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Όροι και Προϋποθέσεις</a>
-                </label>
-                <div th:if="${#fields.hasErrors('termsAccepted')}" class="invalid-feedback d-block">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <small th:errors="*{termsAccepted}"></small>
-                </div>
-            </div>
-
-            <!-- Register Button -->
-            <div class="d-grid mb-3">
-                <button type="submit" class="btn btn-primary btn-lg">Εγγραφή</button>
-            </div>
-
-            <!-- Login Link -->
-            <div class="text-center auth-links">
-                <span class="text-muted">Έχετε ήδη λογαριασμό</span>
-                <a th:href="@{/login}" class="text-decoration-none ms-1">Συνδεθείτε εδώ</a>
-            </div>
-        </form>
     </div>
 </div>
 
 <!-- Footer -->
-<footer class="mt-auto">
-    <div class="container text-center">
+<footer class="bg-gray-800 text-white py-4 flex-shrink-0">
+    <div class="container mx-auto text-center">
         <p class="mb-0">© 2025 Coding Factory. All rights reserved.</p>
     </div>
 </footer>
 
 <!-- Terms and Conditions Modal -->
-<div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Terms and Conditions</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h6>1. Αποδοχή Όρων</h6>
+<div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-4 max-h-96 overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+            <h5 class="text-lg font-semibold">Terms and Conditions</h5>
+            <button onclick="closeTermsModal()" class="text-gray-400 hover:text-gray-600">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="space-y-4 text-sm text-gray-700">
+            <div>
+                <h6 class="font-semibold">1. Αποδοχή Όρων</h6>
                 <p>Ολοκληρώνοντας την εγγραφή σας συμφωνείτε με τους παρακάτω όρους και προϋποθέσεις</p>
-
-                <h6>2. Ευθύνη Χρήστη</h6>
+            </div>
+            <div>
+                <h6 class="font-semibold">2. Ευθύνη Χρήστη</h6>
                 <p>Είστε υπεύθυνοι για την διατήρηση της εμπιστευτικότητας του λογαριασμού και του κωδικού πρόσβασης σας</p>
-
-                <h6>3. Απαγορευμένες δραστηριότητες</h6>
+            </div>
+            <div>
+                <h6 class="font-semibold">3. Απαγορευμένες δραστηριότητες</h6>
                 <p>Συμφωνείτε να μην χρησιμοποιείται την εφαρμογή για παράνομους σκοπούς</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Κατάλαβα</button>
-            </div>
+        </div>
+        <div class="flex justify-end mt-6">
+            <button onclick="closeTermsModal()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                Κατάλαβα
+            </button>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap JS Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JS -->
-<script th:src="@{/js/register.js}"></script>
+<script>
+    function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const icon = event.target;
+
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.className = 'bi bi-eye-slash-fill text-gray-400 hover:text-gray-600';
+        } else {
+            field.type = 'password';
+            icon.className = 'bi bi-eye-fill text-gray-400 hover:text-gray-600';
+        }
+    }
+
+    function openTermsModal() {
+        document.getElementById('termsModal').classList.remove('hidden');
+    }
+
+    function closeTermsModal() {
+        document.getElementById('termsModal').classList.add('hidden');
+    }
+
+    // Password strength indicator
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const strengthBar = document.getElementById('passwordStrengthBar');
+        let strength = 0;
+
+        if (password.length >= 5) strength += 25;
+        if (password.match(/[a-z]/)) strength += 25;
+        if (password.match(/[A-Z]/)) strength += 25;
+        if (password.match(/[0-9]/)) strength += 25;
+
+        strengthBar.style.width = strength + '%';
+
+        if (strength < 50) {
+            strengthBar.style.backgroundColor = '#ef4444';
+        } else if (strength < 75) {
+            strengthBar.style.backgroundColor = '#f59e0b';
+        } else {
+            strengthBar.style.backgroundColor = '#10b981';
+        }
+
+        checkPasswordMatch();
+    });
+
+    // Password matching
+    function checkPasswordMatch() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmedPassword').value;
+        const matchDiv = document.getElementById('passwordMatch');
+        const mismatchDiv = document.getElementById('passwordMismatch');
+
+        if (confirmPassword.length > 0) {
+            if (password === confirmPassword) {
+                matchDiv.classList.remove('hidden');
+                mismatchDiv.classList.add('hidden');
+            } else {
+                matchDiv.classList.add('hidden');
+                mismatchDiv.classList.remove('hidden');
+            }
+        } else {
+            matchDiv.classList.add('hidden');
+            mismatchDiv.classList.add('hidden');
+        }
+    }
+
+    document.getElementById('confirmedPassword').addEventListener('input', checkPasswordMatch);
+
+    // Close modal when clicking outside
+    document.getElementById('termsModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeTermsModal();
+        }
+    });
+</script>
 </body>
 </html>

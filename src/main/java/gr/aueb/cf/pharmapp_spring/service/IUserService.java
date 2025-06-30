@@ -7,6 +7,7 @@ import gr.aueb.cf.pharmapp_spring.dto.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserService {
 
@@ -19,6 +20,7 @@ public interface IUserService {
     UserReadOnlyDTO getUserByUsername(String username) throws EntityNotFoundException;
     List<PharmacyReadOnlyDTO> getUserPharmacies(Long userId) throws EntityNotFoundException;
     List<ContactReadOnlyDTO> getUserContacts(Long userId) throws EntityNotFoundException;
+    Map<Long, String> getContactNamesMap(Long userId, List<Long> pharmacyIds) throws EntityNotFoundException;
     Page<PharmacyReadOnlyDTO> getUserPharmaciesPaginated(Long userId,
                                                          int page, int size) throws EntityNotFoundException;
     Page<ContactReadOnlyDTO> getUserContactsPaginated(Long userId, int page,
