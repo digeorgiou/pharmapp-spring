@@ -189,9 +189,20 @@ public class PharmacyController {
             redirectAttributes.addFlashAttribute("pharmacy", updatedPharmacy);
             redirectAttributes.addFlashAttribute("user", user);
             return "redirect:/pharmacies/update-success";
-        } catch (EntityNotFoundException | EntityAlreadyExistsException | EntityNotAuthorizedException e) {
+        } catch (EntityNotFoundException | EntityNotAuthorizedException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/dashboard";
+        } catch (EntityAlreadyExistsException ex) {
+            bindingResult.rejectValue("name", "pharmacy.exists", ex.getMessage());
+            String username = authentication.getName();
+            try {
+                UserReadOnlyDTO user = userService.getUserByUsername(username);
+                model.addAttribute("user", user);
+                return "update-pharmacy";
+            } catch (EntityNotFoundException e) {
+                redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
+                return "redirect:/logout";
+            }
         }
     }
 

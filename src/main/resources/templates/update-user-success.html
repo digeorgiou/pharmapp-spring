@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PharmaTrade - Add Pharmacy</title>
+    <title>PharmaTrade - Profile Updated</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -20,7 +20,7 @@
                 <img th:src="@{/img/pharmalogo.png}" alt="PharmaTrade Logo" class="h-12 transition-transform hover:scale-105">
             </a>
             <div class="absolute left-1/2 transform -translate-x-1/2">
-                <span class="text-gray-800 font-bold text-xl">Προσθήκη Νέου Φαρμακείου</span>
+                <span class="text-gray-800 font-bold text-xl">Επιτυχής Ενημέρωση</span>
             </div>
             <div class="relative">
                 <div class="group inline-block">
@@ -89,9 +89,15 @@
                     </a>
                 </li>
                 <li>
-                    <a th:href="@{/pharmacies/add}" class="flex items-center px-3 py-2 text-gray-700 rounded-md bg-blue-100 border-l-4 border-blue-500 font-medium no-underline">
+                    <a th:href="@{/pharmacies/add}" class="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-200 transition-colors no-underline">
                         <i class="bi bi-shop mr-3"></i>
                         Προσθήκη Φαρμακείου
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/users/update}" class="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-200 transition-colors no-underline">
+                        <i class="bi bi-gear mr-3"></i>
+                        Ρυθμίσεις Προφίλ
                     </a>
                 </li>
             </ul>
@@ -111,48 +117,45 @@
         <div class="p-4 lg:p-8">
             <div class="max-w-2xl mx-auto">
                 <div class="bg-white rounded-lg shadow-lg">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Προσθήκη Νέου Φαρμακείου</h3>
-
-                        <!-- Success Message -->
-                        <div th:if="${successMessage}" class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md mb-4 flex items-center">
-                            <i class="bi bi-check-circle-fill mr-2"></i>
-                            <span th:text="${successMessage}"></span>
-                            <button type="button" class="ml-auto text-green-500 hover:text-green-700" onclick="this.parentElement.style.display='none'">
-                                <i class="bi bi-x-lg"></i>
-                            </button>
+                    <div class="p-6 text-center">
+                        <!-- Success Icon -->
+                        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+                            <i class="bi bi-check-circle-fill text-green-600 text-3xl"></i>
                         </div>
 
-                        <form th:action="@{/pharmacies/add}" method="POST" th:object="${pharmacyInsertDTO}" class="space-y-6">
-                            <!-- Pharmacy Name Field -->
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Όνομα φαρμακείου</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <i class="bi bi-shop text-gray-400"></i>
-                                    </div>
-                                    <input type="text"
-                                           th:class="${#fields.hasErrors('name')} ? 'w-full pl-10 pr-4 py-3 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500' : 'w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'"
-                                           id="name"
-                                           th:field="*{name}"
-                                           required>
-                                </div>
-                                <div th:if="${#fields.hasErrors('name')}" class="mt-2 text-red-600 text-sm flex items-center">
-                                    <i class="bi bi-exclamation-circle-fill mr-1"></i>
-                                    <span th:each="error : ${#fields.errors('name')}" th:text="${error}"></span>
-                                </div>
-                            </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Επιτυχής Ενημέρωση Προφίλ!</h3>
 
-                            <!-- Submit Button -->
-                            <div class="space-y-3 pt-4">
-                                <button type="submit" class="w-full flex items-center justify-center px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors text-lg">
-                                    <i class="bi bi-plus-circle mr-2"></i> Προσθήκη
-                                </button>
-                                <a th:href="@{/dashboard}" class="w-full flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors text-lg no-underline">
-                                    <i class="bi bi-arrow-left mr-2"></i> Επιστροφή στην Αρχική
-                                </a>
+                        <!-- Success Message -->
+                        <div th:if="${successMessage}" class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md mb-6">
+                            <span th:text="${successMessage}"></span>
+                        </div>
+
+                        <!-- User Details Summary -->
+                        <div th:if="${user}" class="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+                            <h4 class="font-semibold text-gray-800 mb-3">Στοιχεία Προφίλ:</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <i class="bi bi-person text-gray-500 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Όνομα χρήστη:</span>
+                                    <span class="ml-2 font-medium" th:text="${user.username}">Username</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="bi bi-envelope text-gray-500 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Email:</span>
+                                    <span class="ml-2 font-medium" th:text="${user.email}">Email</span>
+                                </div>
                             </div>
-                        </form>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="space-y-3">
+                            <a th:href="@{/dashboard}" class="w-full flex items-center justify-center px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors text-lg no-underline">
+                                <i class="bi bi-house mr-2"></i> Επιστροφή στην Αρχική
+                            </a>
+                            <a th:href="@{/users/update}" class="w-full flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors text-lg no-underline">
+                                <i class="bi bi-gear mr-2"></i> Ρυθμίσεις Προφίλ
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

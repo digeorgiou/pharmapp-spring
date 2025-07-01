@@ -72,17 +72,24 @@ public class UserService implements IUserService{
         User existingUser = userRepository.findById(dto.getId()).orElseThrow(()-> new EntityNotFoundException("User",
             "User with id " + dto.getId() + " was not found"));
 
-        if(userRepository.existsByEmail(dto.getEmail())){
+        // Check if email already exists (but allow same user to keep their email)
+        if (!existingUser.getEmail().equals(dto.getEmail()) && userRepository.existsByEmail(dto.getEmail())){
             throw new EntityAlreadyExistsException("User",
-                    "Email " + dto.getEmail() + " already exists");
+                    "Το email " + dto.getEmail() + " χρησιμοποιείται ήδη");
         }
 
-        if(userRepository.existsByUsername(dto.getUsername())){
+        // Check if username already exists (but allow same user to keep their username)
+        if (!existingUser.getUsername().equals(dto.getUsername()) && userRepository.existsByUsername(dto.getUsername())){
             throw new EntityAlreadyExistsException("User",
-                    "Username " + dto.getUsername() + " already exists");
+                    "Το όνομα χρήστη " + dto.getUsername() + " χρησιμοποιείται ήδη");
         }
 
         User updatedUser = mapper.mapUserUpdateToModel(dto, existingUser);
+
+        // Encode the new password
+        updatedUser.setPassword(passwordEncoder.encode(dto.getPassword()));
+        updatedUser.setLastUpdater(existingUser);
+
         User savedUser = userRepository.save(updatedUser);
 
         LOGGER.info("User with id={}, username={}, email={}, " +

@@ -8,6 +8,7 @@ import gr.aueb.cf.pharmapp_spring.service.PharmacyContactService;
 import gr.aueb.cf.pharmapp_spring.service.PharmacyService;
 import gr.aueb.cf.pharmapp_spring.service.TradeRecordService;
 import gr.aueb.cf.pharmapp_spring.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,8 @@ public class DashboardController {
             @RequestParam(required = false) Long pharmacyId,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String sort,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int size,
             Model model,
             Authentication authentication) {
 
@@ -60,24 +63,67 @@ public class DashboardController {
                 if (pharmacyId != null && pharmacyService.isPharmacyOwnedByUser(pharmacyId, user.getId())) {
                     PharmacyReadOnlyDTO selectedPharmacy = pharmacyService.getById(pharmacyId);
                     model.addAttribute("selectedPharmacy", selectedPharmacy);
+                    try {
+                        // Get balance list with search and sort
+                        Page<BalanceDTO> balancePage =
+                                pharmacyService.getBalanceListPaginated(pharmacyId,
+                                        search, sort, page, size);
+                        // Debug logging
+                        System.out.println("BalancePage created: " + (balancePage != null));
+                        if (balancePage != null) {
+                            System.out.println("BalancePage size: " + balancePage.getSize());
+                            System.out.println("BalancePage content size: " + balancePage.getContent().size());
+                            System.out.println("BalancePage total elements: " + balancePage.getTotalElements());
+                            System.out.println("BalancePage number of elements: " + balancePage.getNumberOfElements());
+                        }
 
-                    // Get balance list with optional search and sort
-                    List<BalanceDTO> balanceList = pharmacyService.getBalanceList(pharmacyId, sort);
-                    model.addAttribute("balanceList", balanceList);
-                    model.addAttribute("currentSort", sort);
+
+                        model.addAttribute("balancePage", balancePage);
+                        model.addAttribute("pageSize", size);
+                        model.addAttribute("currentSort", sort);
+                        model.addAttribute("searchTerm", search);
+                    } catch (Exception e) {
+                        System.err.println("Error getting balance page: " + e.getMessage());
+                        e.printStackTrace();
+                        // Create empty page as fallback
+                        Page<BalanceDTO> emptyPage = Page.empty();
+                        model.addAttribute("balancePage", emptyPage);
+                        model.addAttribute("pageSize", size);
+                        model.addAttribute("currentSort", sort);
+                        model.addAttribute("searchTerm", search);
+                        model.addAttribute("error", "Error loading contacts: " + e.getMessage());
+                    }
                 } else {
                     // If invalid pharmacy selected, reset to first pharmacy
                     pharmacyId = user.getPharmacies().get(0).id();
                     PharmacyReadOnlyDTO selectedPharmacy = pharmacyService.getById(pharmacyId);
                     model.addAttribute("selectedPharmacy", selectedPharmacy);
 
-                    List<BalanceDTO> balanceList = pharmacyService.getBalanceList(pharmacyId, sort);
-                    model.addAttribute("balanceList", balanceList);
-                    model.addAttribute("currentSort", sort);
+                    try {
+                        Page<BalanceDTO> balancePage =
+                                pharmacyService.getBalanceListPaginated(pharmacyId,
+                                        search, sort, page, size);
+                        model.addAttribute("balancePage", balancePage);
+                        model.addAttribute("pageSize", size);
+                        model.addAttribute("currentSort", sort);
+                        model.addAttribute("searchTerm", search);
+                    } catch (Exception e) {
+                        System.err.println("Error getting balance page: " + e.getMessage());
+                        e.printStackTrace();
+                        Page<BalanceDTO> emptyPage = Page.empty();
+                        model.addAttribute("balancePage", emptyPage);
+                        model.addAttribute("pageSize", size);
+                        model.addAttribute("currentSort", sort);
+                        model.addAttribute("searchTerm", search);
+                        model.addAttribute("error", "Error loading contacts: " + e.getMessage());
+                    }
                 }
             }
         } catch (EntityNotFoundException e) {
             model.addAttribute("error", "User not found");
+
+            Page<BalanceDTO> emptyPage = Page.empty();
+            model.addAttribute("balancePage", emptyPage);
         }
         return "dashboard";
 

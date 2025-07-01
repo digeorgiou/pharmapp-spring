@@ -4,6 +4,7 @@ import gr.aueb.cf.pharmapp_spring.core.exceptions.AppServerException;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityAlreadyExistsException;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityNotAuthorizedException;
 import gr.aueb.cf.pharmapp_spring.core.exceptions.EntityNotFoundException;
+import gr.aueb.cf.pharmapp_spring.core.specifications.PharmacyContactSpecification;
 import gr.aueb.cf.pharmapp_spring.dto.*;
 import gr.aueb.cf.pharmapp_spring.mapper.Mapper;
 import gr.aueb.cf.pharmapp_spring.model.Pharmacy;
@@ -16,10 +17,8 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -222,73 +221,31 @@ public class PharmacyService implements IPharmacyService{
         return pharmacyPage.map(mapper::mapToPharmacyReadOnlyDTO);
     }
 
-    @Override
-    @Transactional
-    public List<BalanceDTO> getBalanceList(Long pharmacyId, String sortBy) throws EntityNotFoundException {
-
-        Pharmacy selectedPharmacy = pharmacyRepository.findById(pharmacyId)
-                .orElseThrow(() -> new EntityNotFoundException("Pharmacy",
-                        "Pharmacy with id = " + pharmacyId + " not found"));
-
-        List<PharmacyContact> contacts =
-                contactRepository.findByUserId(selectedPharmacy.getUser().getId());
-
-        List<BalanceDTO> balanceList = new ArrayList<>();
-
-        for(PharmacyContact contact : contacts) {
-            Pharmacy contactPharmacy = contact.getPharmacy();
-            if(contactPharmacy == null) continue;
-
-            double balance = tradeRecordService.calculateBalanceBetweenPharmacies(
-                    selectedPharmacy.getId(),
-                    contactPharmacy.getId()
-            );
-
-            Integer tradeCount =
-                    tradeRecordService.getTradeCountBetweenPharmacies(
-                            selectedPharmacy.getId(),
-                            contactPharmacy.getId()
-                    );
-
-            List<TradeRecordReadOnlyDTO> recentTrades =
-                    tradeRecordService.getRecentTradesBetweenPharmacies(
-                            selectedPharmacy.getId(),
-                            contactPharmacy.getId(),
-                            5
-                    );
-
-            balanceList.add(new BalanceDTO(
-                    contact.getContactName() != null ?
-                            contact.getContactName() : "Contact",
-                    contact.getId(),
-                    contactPharmacy.getName() != null ?
-                            contactPharmacy.getName() : "Pharmacy",
-                    pharmacyId,
-                    contactPharmacy.getId(),
-                    balance,
-                    recentTrades,
-                    tradeCount,
-                    contactPharmacy.isActive()
-            ));
-        }
-
-        return sortBalanceList(balanceList, sortBy);
-    }
 
     @Override
     public Page<BalanceDTO> getBalanceListPaginated(Long pharmacyId,
-                                                    String sortBy, int page,
+                                                    String searchTerm,
+                                                    String sortBy,
+                                                    int page,
                                                     int size) throws EntityNotFoundException{
 
         Pharmacy selectedPharmacy = pharmacyRepository.findById(pharmacyId)
                 .orElseThrow(() -> new EntityNotFoundException("Pharmacy",
                         "Pharmacy with id = " + pharmacyId + " not found"));
 
-        PageRequest pageable = PageRequest.of(page, size);
+        // Build specification
+        Specification<PharmacyContact> spec = Specification
+                .where(PharmacyContactSpecification.hasUser(selectedPharmacy.getUser()));
+
+        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+            spec = spec.and(PharmacyContactSpecification.searchByTerm(searchTerm.trim()));
+        }
+
+        Sort sort = buildSort(sortBy);
+        PageRequest pageable = PageRequest.of(page, size, sort);
 
         Page<PharmacyContact> contactPage =
-                contactRepository.findByUser(selectedPharmacy.getUser(),
-                        pageable);
+                contactRepository.findAll(spec,pageable);
 
         List<PharmacyContact> contacts = contactPage.getContent();
         List<BalanceDTO> balanceList = new ArrayList<>();
@@ -330,10 +287,6 @@ public class PharmacyService implements IPharmacyService{
             ));
         }
 
-        // Sort if needed
-        if (sortBy != null && !sortBy.isEmpty()) {
-            balanceList = sortBalanceList(balanceList, sortBy);
-        }
 
         return new PageImpl<>(
                 balanceList,
@@ -342,31 +295,22 @@ public class PharmacyService implements IPharmacyService{
         );
     }
 
-    private List<BalanceDTO> sortBalanceList(List<BalanceDTO> balanceList,
-                                             String sortBy){
 
-        if(sortBy == null || sortBy.isEmpty()){
-            return balanceList; // Return unsorted if no sorting specified
+    private Sort buildSort(String sortBy) {
+        if (sortBy == null || sortBy.isEmpty()) {
+            return Sort.by("contactName").ascending(); // Default sort
         }
 
-        boolean ascending = !sortBy.startsWith("-");
-        String sortField = ascending ? sortBy : sortBy.substring(1);
+        boolean descending = sortBy.endsWith("-desc");
+        String sortField = descending ? sortBy.replace("-desc", "") : sortBy;
 
-        Comparator<BalanceDTO> comparator = switch (sortField.toLowerCase()){
-            case "contactname" -> Comparator.comparing(BalanceDTO::contactName,String.CASE_INSENSITIVE_ORDER);
-            case "tradecount" -> Comparator.comparing(BalanceDTO::tradeCount);
-            case "balance" -> Comparator.comparingDouble(BalanceDTO::balance);
-            default -> (a,b) -> 0; //No sorting if field is invalid
+        Sort.Direction direction = descending ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        return switch (sortField.toLowerCase()) {
+            case "name" -> Sort.by(direction, "contactName");
+            case "pharmacy" -> Sort.by(direction, "pharmacy.name");
+            default -> Sort.by("contactName").ascending(); // Fallback
         };
-
-        // Reverse for descending order
-        if (!ascending) {
-            comparator = comparator.reversed();
-        }
-
-        return balanceList.stream()
-                .sorted(comparator)
-                .collect(Collectors.toList());
     }
 
     @Override

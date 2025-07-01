@@ -31,8 +31,10 @@ public interface IPharmacyService {
             , int page, int size);
     List<PharmacyReadOnlyDTO> getAllPharmacies() throws AppServerException;
     Page<PharmacyReadOnlyDTO> getAllPharmaciesPaginated(int page, int size);
-    List<BalanceDTO> getBalanceList(Long pharmacyId, String sortBy) throws EntityNotFoundException;
-    Page<BalanceDTO> getBalanceListPaginated(Long pharmacyId, String sortBy,
-                                             int page, int size) throws EntityNotFoundException;
+    Page<BalanceDTO> getBalanceListPaginated(Long pharmacyId,
+                                             String searchTerm,
+                                             String sortBy,
+                                             int page,
+                                             int size) throws EntityNotFoundException;
     boolean isPharmacyOwnedByUser(Long pharmacyId, Long userId) throws EntityNotFoundException;
 }

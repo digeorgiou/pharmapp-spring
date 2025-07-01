@@ -30,7 +30,7 @@
                         <i class="bi bi-chevron-down ml-2"></i>
                     </button>
                     <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-30">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md no-underline">
+                        <a th:href="@{/users/update}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md no-underline">
                             <i class="bi bi-gear mr-2"></i>Settings
                         </a>
                         <hr class="border-gray-200">
@@ -131,6 +131,15 @@
                             </button>
                         </div>
 
+                        <!-- Global validation error display -->
+                        <div th:if="${validationError}" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4 flex items-center">
+                            <i class="bi bi-exclamation-triangle-fill mr-2"></i>
+                            <span th:text="${validationError}"></span>
+                            <button type="button" class="ml-auto text-red-500 hover:text-red-700" onclick="this.parentElement.style.display='none'">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+
                         <!-- Search Forms -->
                         <div class="mb-8">
                             <h5 class="text-lg font-semibold text-gray-800 mb-4">Αναζήτηση</h5>
@@ -182,36 +191,38 @@
                             </h5>
 
                             <div class="space-y-3 max-h-96 overflow-y-auto border border-gray-200 rounded-lg p-4">
-                                <form th:each="pharmacy : ${searchResults}"
-                                      th:action="@{/contacts/add}"
-                                      method="POST"
-                                      class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                                    <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
+                                <div th:each="pharmacy : ${searchResults}" class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                                    <form th:action="@{/contacts/add}" method="POST">
+                                        <input type="hidden" name="pharmacyId" th:value="${pharmacy.id}">
+                                        <!-- Preserve search parameters -->
+                                        <input type="hidden" name="nameSearch" th:value="${nameSearch}">
+                                        <input type="hidden" name="userSearch" th:value="${userSearch}">
 
-                                    <!-- Mobile: Stack vertically, Desktop: Side by side -->
-                                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                                        <div class="flex-1 min-w-0">
-                                            <h6 class="font-semibold text-gray-800 mb-1 truncate" th:text="${pharmacy.name}"></h6>
-                                            <small class="text-gray-600">
-                                                Όνομα χρήστη: <span th:text="${pharmacy.ownerUsername}" class="font-medium"></span>
-                                            </small>
-                                        </div>
+                                        <!-- Mobile: Stack vertically, Desktop: Side by side -->
+                                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                                            <div class="flex-1 min-w-0">
+                                                <h6 class="font-semibold text-gray-800 mb-1 truncate" th:text="${pharmacy.name}"></h6>
+                                                <small class="text-gray-600">
+                                                    Όνομα χρήστη: <span th:text="${pharmacy.ownerUsername}" class="font-medium"></span>
+                                                </small>
+                                            </div>
 
-                                        <!-- Button group that works on all screen sizes -->
-                                        <div class="flex flex-col sm:flex-row gap-2 lg:w-80">
-                                            <input type="text"
-                                                   name="contactName"
-                                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-md lg:rounded-l-md lg:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 min-w-0"
-                                                   placeholder="Όνομα Επαφής"
-                                                   required>
-                                            <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md lg:rounded-l-none lg:rounded-r-md hover:bg-green-600 transition-colors font-medium whitespace-nowrap">
-                                                <i class="bi bi-plus-circle mr-1"></i>
-                                                <span class="hidden sm:inline">Προσθήκη</span>
-                                                <span class="sm:hidden">Προσθήκη</span>
-                                            </button>
+                                            <!-- Button group that works on all screen sizes -->
+                                            <div class="flex flex-col sm:flex-row gap-2 lg:w-80">
+                                                <input type="text"
+                                                       name="contactName"
+                                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-md lg:rounded-l-md lg:rounded-r-none focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 min-w-0"
+                                                       placeholder="Όνομα Επαφής"
+                                                       required>
+                                                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md lg:rounded-l-none lg:rounded-r-md hover:bg-green-600 transition-colors font-medium whitespace-nowrap">
+                                                    <i class="bi bi-plus-circle mr-1"></i>
+                                                    <span class="hidden sm:inline">Προσθήκη</span>
+                                                    <span class="sm:hidden">Προσθήκη</span>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
 

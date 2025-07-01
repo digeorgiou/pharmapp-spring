@@ -37,17 +37,20 @@ public class ContactController {
             @RequestParam(required = false) String nameSearch,
             @RequestParam(required = false) String userSearch,
             Authentication authentication,
-            Model model) {
+            Model model,
+            RedirectAttributes redirectAttributes) {
 
         try {
             String username = authentication.getName();
-
             UserReadOnlyDTO user = userService.getUserByUsername(username);
 
             model.addAttribute("user", user);
             model.addAttribute("username", username);
-            model.addAttribute("contactInsertDTO", new ContactInsertDTO(null,
-                    null, null));
+
+            // Add contactInsertDTO if not already present (for validation errors)
+            if (!model.containsAttribute("contactInsertDTO")) {
+                model.addAttribute("contactInsertDTO", new ContactInsertDTO(null, null, null));
+            }
 
             if (nameSearch != null && !nameSearch.isEmpty()) {
                 List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByName(nameSearch);
@@ -62,39 +65,93 @@ public class ContactController {
             }
 
             return "add-contact";
-        }catch (EntityNotFoundException e){
-            return "redirect:/dashboard";
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
+            return "redirect:/logout";
         }
     }
 
     @PostMapping("/add")
     public String addContact(
             @RequestParam Long pharmacyId,
-            @RequestParam String contactName,
+            @Valid @ModelAttribute("contactInsertDTO") ContactInsertDTO contactInsertDTO,
+            BindingResult bindingResult,
+            @RequestParam(required = false) String nameSearch,
+            @RequestParam(required = false) String userSearch,
             Authentication authentication,
+            Model model,
             RedirectAttributes redirectAttributes) {
 
         String username = authentication.getName();
+
         try {
             UserReadOnlyDTO user = userService.getUserByUsername(username);
+
+            // If validation errors exist, reload the form with search results
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("user", user);
+                model.addAttribute("username", username);
+
+                // Add validation error message
+                String errorMessage = bindingResult.getFieldError("contactName") != null
+                        ? bindingResult.getFieldError("contactName").getDefaultMessage()
+                        : "Validation error occurred";
+                model.addAttribute("validationError", errorMessage);
+
+                // Reload search results
+                reloadSearchResults(nameSearch, userSearch, model);
+                return "add-contact";
+            }
+
             PharmacyReadOnlyDTO pharmacy = pharmacyService.getById(pharmacyId);
 
+            // Create DTO with user ID from authenticated user
             ContactInsertDTO dto = new ContactInsertDTO(
                     user.getId(),
                     pharmacyId,
-                    contactName
+                    contactInsertDTO.contactName()
             );
 
             ContactReadOnlyDTO contact = contactService.createContact(dto);
             redirectAttributes.addFlashAttribute("successMessage",
                     "Contact with " + pharmacy.name() + " added successfully!");
-            redirectAttributes.addFlashAttribute("pharmacy",pharmacy);
+            redirectAttributes.addFlashAttribute("pharmacy", pharmacy);
             redirectAttributes.addFlashAttribute("user", user);
             redirectAttributes.addFlashAttribute("contact", contact);
             return "redirect:/contacts/add-success";
-        } catch (EntityNotFoundException | EntityAlreadyExistsException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/dashboard";
+
+        } catch (EntityNotFoundException e) {
+            redirectAttributes.addFlashAttribute("error", "User or pharmacy not found. Log in again");
+            return "redirect:/logout";
+        } catch (EntityAlreadyExistsException e) {
+            // Handle service layer exceptions
+            try {
+                UserReadOnlyDTO user = userService.getUserByUsername(username);
+                model.addAttribute("user", user);
+                model.addAttribute("username", username);
+                model.addAttribute("validationError", e.getMessage());
+
+                // Reload search results
+                reloadSearchResults(nameSearch, userSearch, model);
+                return "add-contact";
+            } catch (EntityNotFoundException ex) {
+                redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
+                return "redirect:/logout";
+            }
+        }
+    }
+
+    private void reloadSearchResults(String nameSearch, String userSearch, Model model) {
+        if (nameSearch != null && !nameSearch.isEmpty()) {
+            List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByName(nameSearch);
+            model.addAttribute("searchResults", searchResults);
+            model.addAttribute("searchType", "name");
+            model.addAttribute("nameSearch", nameSearch);
+        } else if (userSearch != null && !userSearch.isEmpty()) {
+            List<PharmacyReadOnlyDTO> searchResults = pharmacyService.searchPharmaciesByUser(userSearch);
+            model.addAttribute("searchResults", searchResults);
+            model.addAttribute("searchType", "user");
+            model.addAttribute("userSearch", userSearch);
         }
     }
 
@@ -177,6 +234,17 @@ public class ContactController {
         } catch (EntityNotFoundException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/dashboard";
+        } catch (EntityAlreadyExistsException ex) {
+            bindingResult.rejectValue("contactName", "contact.exists", ex.getMessage());
+            String username = authentication.getName();
+            try {
+                UserReadOnlyDTO user = userService.getUserByUsername(username);
+                model.addAttribute("user", user);
+                return "update-contact";
+            } catch (EntityNotFoundException e) {
+                redirectAttributes.addFlashAttribute("error", "User not found. Log in again");
+                return "redirect:/logout";
+            }
         }
     }
 

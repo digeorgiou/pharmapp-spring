@@ -51,7 +51,13 @@ public class PharmacyContactService implements IPharmacyContactService{
 
         if (contactRepository.existsByUserIdAndPharmacyId(dto.userId(), pharmacy.getId())){
             throw new EntityAlreadyExistsException("Contact",
-                    "Contact already exists");
+                    "Το φαρμακείο με όνομα " + pharmacy.getName() +
+                            " βρίσκεται ήδη στις επαφές σας");
+        }
+
+        if(contactRepository.existsByUserIdAndContactName(dto.userId(), dto.contactName())){
+            throw new EntityAlreadyExistsException("Contact",
+                    "Έχετε ήδη επαφή με όνομα " + dto.contactName());
         }
 
         PharmacyContact contact = mapper.mapPharmacyContactInsertToModel(dto);
@@ -73,10 +79,20 @@ public class PharmacyContactService implements IPharmacyContactService{
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public ContactReadOnlyDTO updateContact(ContactUpdateDTO dto) throws EntityNotFoundException {
+    public ContactReadOnlyDTO updateContact(ContactUpdateDTO dto) throws EntityNotFoundException, EntityAlreadyExistsException {
 
         PharmacyContact existingContact = contactRepository.findById(dto.id())
                 .orElseThrow(() -> new EntityNotFoundException("Contact", "Contact with id " + dto.id() + " not found"));
+
+        Pharmacy pharmacy = pharmacyRepository.findById(dto.pharmacyId()).orElseThrow(()-> new EntityNotFoundException("Pharmacy",
+                "Pharmacy with id " + dto.pharmacyId() + " was " +
+                        "not found"));
+
+        if(!dto.contactName().equals(existingContact.getContactName()) && contactRepository.existsByUserIdAndContactName(dto.userId(),
+                dto.contactName())){
+            throw new EntityAlreadyExistsException("Contact",
+                    "Έχετε ήδη επαφή με όνομα " + dto.contactName());
+        }
 
         PharmacyContact updatedContact =
                 mapper.mapPharmacyContactUpdateToModel(dto, existingContact);

@@ -27,7 +27,8 @@
                         <i class="bi bi-chevron-down ml-2"></i>
                     </button>
                     <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-30">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md">
+                        <a th:href="@{/users/update}"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-md">
                             <i class="bi bi-gear mr-2"></i>Settings
                         </a>
                         <hr class="border-gray-200">
@@ -125,56 +126,66 @@
             <h2 class="text-2xl font-bold mb-6" th:text="${selectedPharmacy.name} + ' - Κατάσταση'"></h2>
 
             <!-- Search and Sort Controls -->
-            <div class="flex flex-col lg:flex-row gap-4 mb-6">
-                <!-- Search -->
-                <div class="flex-1">
-                    <form th:action="@{/dashboard}" method="GET" class="flex">
-                        <input type="hidden" name="pharmacyId" th:value="${selectedPharmacy.id}">
-                        <input type="text" name="search"
-                               th:value="${searchTerm}"
-                               class="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0"
-                               placeholder="Αναζήτηση στις επαφές">
-                        <button type="submit" class="px-3 sm:px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 flex-shrink-0">
-                            <i class="bi bi-search"></i>
-                            <span class="hidden sm:inline ml-1">Αναζήτηση</span>
-                        </button>
-                        <a th:if="${searchTerm != null and searchTerm != ''}"
-                           th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id})}"
-                           class="px-2 sm:px-3 py-2 bg-gray-500 text-white rounded-r-md hover:bg-gray-600 flex items-center no-underline flex-shrink-0">
-                            <i class="bi bi-x"></i>
-                        </a>
-                    </form>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h5 class="text-lg font-semibold text-gray-800 mb-4">Αναζήτηση και Ταξινόμηση</h5>
+
+                <div class="flex flex-col lg:flex-row gap-4">
+                    <!-- Search Form -->
+                    <div class="flex-1">
+                        <form th:action="@{/dashboard}" method="GET" class="flex">
+                            <input type="hidden" name="pharmacyId" th:value="${selectedPharmacy.id}">
+                            <input type="hidden" name="sort" th:value="${currentSort}">
+                            <input type="hidden" name="size" th:value="${pageSize ?: 9}">
+                            <input type="text" name="search"
+                                   th:value="${searchTerm}"
+                                   class="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0"
+                                   placeholder="Αναζήτηση στις επαφές">
+                            <button type="submit" class="px-3 sm:px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 flex-shrink-0">
+                                <i class="bi bi-search"></i>
+                                <span class="hidden sm:inline ml-1">Αναζήτηση</span>
+                            </button>
+                            <a th:if="${searchTerm != null and searchTerm != ''}"
+                               th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, sort=${currentSort}, size=${pageSize ?: 9})}"
+                               class="px-2 sm:px-3 py-2 bg-gray-500 text-white rounded-r-md hover:bg-gray-600 flex items-center no-underline flex-shrink-0">
+                                <i class="bi bi-x"></i>
+                            </a>
+                        </form>
+                    </div>
+
+                    <!-- Sort Buttons -->
+                    <div class="flex justify-center lg:justify-end">
+                        <div class="grid grid-cols-2 lg:flex border border-gray-300 rounded-md overflow-hidden">
+                            <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort='name', size=${pageSize ?: 9})}"
+                               th:class="${currentSort == 'name'} ? 'px-2 sm:px-3 py-2 bg-blue-500 text-white text-xs sm:text-sm hover:bg-blue-600 no-underline text-center' : 'px-2 sm:px-3 py-2 bg-white text-gray-700 text-xs sm:text-sm hover:bg-gray-50 no-underline text-center'">A-Z</a>
+                            <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort='name-desc', size=${pageSize ?: 9})}"
+                               th:class="${currentSort == 'name-desc'} ? 'px-2 sm:px-3 py-2 bg-blue-500 text-white text-xs sm:text-sm hover:bg-blue-600 border-l border-gray-300 no-underline text-center' : 'px-2 sm:px-3 py-2 bg-white text-gray-700 text-xs sm:text-sm hover:bg-gray-50 border-l border-gray-300 no-underline text-center'">Z-A</a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Sort Buttons -->
-                <div class="flex justify-center lg:justify-end">
-                    <div class="grid grid-cols-2 lg:flex border border-gray-300 rounded-md overflow-hidden">
-                        <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort='name')}"
-                           th:class="${currentSort == 'name'} ? 'px-2 sm:px-3 py-2 bg-blue-500 text-white text-xs sm:text-sm hover:bg-blue-600 no-underline text-center' : 'px-2 sm:px-3 py-2 bg-white text-gray-700 text-xs sm:text-sm hover:bg-gray-50 no-underline text-center'">A-Z</a>
-                        <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort='name-desc')}"
-                           th:class="${currentSort == 'name-desc'} ? 'px-2 sm:px-3 py-2 bg-blue-500 text-white text-xs sm:text-sm hover:bg-blue-600 border-l border-gray-300 no-underline text-center' : 'px-2 sm:px-3 py-2 bg-white text-gray-700 text-xs sm:text-sm hover:bg-gray-50 border-l border-gray-300 no-underline text-center'">Z-A</a>
-                        <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort='trades')}"
-                           th:class="${currentSort == 'trades'} ? 'px-2 sm:px-3 py-2 bg-blue-500 text-white text-xs sm:text-sm hover:bg-blue-600 border-l border-gray-300 no-underline text-center' : 'px-2 sm:px-3 py-2 bg-white text-gray-700 text-xs sm:text-sm hover:bg-gray-50 border-l border-gray-300 no-underline text-center'">
-                            <span class="hidden sm:inline">Most Trades</span>
-                            <span class="sm:hidden">Most</span>
-                        </a>
-                        <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort='trades-desc')}"
-                           th:class="${currentSort == 'trades-desc'} ? 'px-2 sm:px-3 py-2 bg-blue-500 text-white text-xs sm:text-sm hover:bg-blue-600 border-l border-gray-300 no-underline text-center' : 'px-2 sm:px-3 py-2 bg-white text-gray-700 text-xs sm:text-sm hover:bg-gray-50 border-l border-gray-300 no-underline text-center'">
-                            <span class="hidden sm:inline">Fewest Trades</span>
-                            <span class="sm:hidden">Fewest</span>
-                        </a>
-                    </div>
+                <!-- Clear Filters Button -->
+                <div th:if="${searchTerm != null and searchTerm != ''}" class="mt-4">
+                    <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, size=${pageSize ?: 9})}"
+                       class="inline-flex items-center px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 no-underline text-sm">
+                        <i class="bi bi-x-circle mr-2"></i>Καθαρισμός Φίλτρων
+                    </a>
+                </div>
+
+                <!-- Results Summary -->
+                <div th:if="${balancePage != null}" class="mt-4 text-sm text-gray-600">
+                    <span th:text="|Εμφάνιση ${balancePage.numberOfElements} από ${balancePage.totalElements} επαφές|"></span>
+                    <span th:if="${searchTerm != null and searchTerm != ''}" th:text="| για &quot;${searchTerm}&quot;|"></span>
                 </div>
             </div>
 
             <p class="text-gray-600 mb-6">Τρέχουσα ισορροπία με τις επαφές σας</p>
 
             <!-- Balance Cards -->
-            <div th:if="${not #lists.isEmpty(balanceList)}" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
-                <div th:each="balance : ${balanceList}" class="bg-pharma-blue rounded-lg p-4 sm:p-5 shadow-md hover:shadow-lg transition-shadow h-96 flex flex-col">
+            <div th:if="${balancePage != null and not balancePage.empty}" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
+                <div th:each="balance : ${balancePage.content}" class="bg-pharma-blue rounded-lg p-4 sm:p-5 shadow-md hover:shadow-lg transition-shadow h-96 flex flex-col">
                     <div class="flex justify-between items-center mb-3">
-                        <h2 class=" text-2xl font-bold"
-                           th:text="${balance.contactName != null} ? ${balance.contactName} : 'No contact name'"></h2>
+                        <h2 class="text-2xl font-bold"
+                            th:text="${balance.contactName != null} ? ${balance.contactName} : 'No contact name'"></h2>
                         <div class="mb-4">
                             <h4 th:class="${balance.balance < 0} ? 'text-lg font-bold text-green-600 mt-1' : (${balance.balance > 0} ? 'text-lg font-bold text-red-600 mt-1' : 'text-lg font-bold text-gray-800 mt-1')">
                                 <span th:if="${balance.balance < 0}">
@@ -203,8 +214,6 @@
                             </a>
                         </div>
                     </div>
-
-
 
                     <!-- Recent Trades -->
                     <div class="flex-1 overflow-hidden">
@@ -280,16 +289,48 @@
                 </div>
             </div>
 
+            <!-- Pagination -->
+            <div th:if="${balancePage != null and balancePage.totalPages > 1}" class="flex justify-center mt-8">
+                <nav class="flex items-center space-x-2">
+                    <a th:if="${balancePage.number > 0}"
+                       th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort=${currentSort}, page=${balancePage.number - 1}, size=${pageSize ?: 9})}"
+                       class="px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors no-underline">
+                        Προηγούμενη
+                    </a>
+                    <span th:each="i : ${#numbers.sequence(0, balancePage.totalPages - 1)}"
+                          th:class="${i == balancePage.number} ? 'px-3 py-2 bg-blue-600 text-white rounded-md' : 'px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50'">
+                            <a th:if="${i != balancePage.number}"
+                               th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort=${currentSort}, page=${i}, size=${pageSize ?: 9})}"
+                               th:text="${i + 1}"
+                               class="no-underline text-inherit"></a>
+                            <span th:if="${i == balancePage.number}" th:text="${i + 1}"></span>
+                        </span>
+                    <a th:if="${balancePage.number < balancePage.totalPages - 1}"
+                       th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, search=${searchTerm}, sort=${currentSort}, page=${balancePage.number + 1}, size=${pageSize ?: 9})}"
+                       class="px-3 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors no-underline">
+                        Επόμενη
+                    </a>
+                </nav>
+            </div>
+
             <!-- No contacts message -->
-            <div th:if="${#lists.isEmpty(balanceList)}" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div th:if="${balancePage == null or balancePage.empty}" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <div class="flex items-center">
                     <i class="bi bi-info-circle text-blue-500 mr-2"></i>
                     <span class="text-blue-700">
-                            Δεν έχετε ακόμα καμία επαφή
-                            <a th:href="@{/contacts/add}" class="text-blue-600 underline hover:text-blue-800">
-                                Προσθέστε επαφές
-                            </a>
-                            για να αρχίσετε να καταγράφετε τις ανταλλαγές σας
+                            <span th:if="${searchTerm != null and searchTerm != ''}">
+                                Δεν βρέθηκαν επαφές που να ταιριάζουν στην αναζήτηση "<span th:text="${searchTerm}"></span>".
+                                <a th:href="@{/dashboard(pharmacyId=${selectedPharmacy.id}, size=${pageSize ?: 9})}" class="text-blue-600 underline hover:text-blue-800">
+                                    Καθαρισμός αναζήτησης
+                                </a>
+                            </span>
+                            <span th:unless="${searchTerm != null and searchTerm != ''}">
+                                Δεν έχετε ακόμα καμία επαφή
+                                <a th:href="@{/contacts/add}" class="text-blue-600 underline hover:text-blue-800">
+                                    Προσθέστε επαφές
+                                </a>
+                                για να αρχίσετε να καταγράφετε τις ανταλλαγές σας
+                            </span>
                         </span>
                 </div>
             </div>

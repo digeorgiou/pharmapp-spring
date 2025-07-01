@@ -9,7 +9,7 @@ import gr.aueb.cf.pharmapp_spring.dto.ContactUpdateDTO;
 public interface IPharmacyContactService {
 
     ContactReadOnlyDTO createContact(ContactInsertDTO dto) throws EntityNotFoundException, EntityAlreadyExistsException;
-    ContactReadOnlyDTO updateContact(ContactUpdateDTO dto) throws EntityNotFoundException;
+    ContactReadOnlyDTO updateContact(ContactUpdateDTO dto) throws EntityNotFoundException, EntityAlreadyExistsException;
     void deleteContact(Long contactId) throws EntityNotFoundException;
     ContactReadOnlyDTO findById(Long contactId) throws EntityNotFoundException;
     boolean contactExists(Long userId, Long pharmacyId);
